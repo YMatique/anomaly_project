@@ -153,8 +153,71 @@ class AnomalyDetectionSystem:
             logger.error(f"Erro na detecção por arquivo: {e}")
             return False
     
-    def start_training_mode(self, camera_index: int = 0, 
-                          duration_minutes: int = 10) -> bool:
+    def start_batch_training(self, video_sources: Union[List[str], str],
+                           epochs_cae: int = 30, epochs_convlstm: int = 20) -> bool:
+        """
+        Inicia treinamento com múltiplos vídeos
+        
+        Args:
+            video_sources: Lista de arquivos ou diretório com vídeos
+            epochs_cae: Épocas para CAE
+            epochs_convlstm: Épocas para ConvLSTM
+            
+        Returns:
+            True se treinamento foi bem-sucedido
+        """
+        logger.info("Iniciando treinamento em lote")
+        
+        try:
+            # Determinar se é lista de arquivos ou diretório
+            if isinstance(video_sources, str):
+                # É um diretório
+                if os.path.isdir(video_sources):
+                    logger.info(f"Treinando com vídeos do diretório: {video_sources}")
+                    training_results = self.processing_engine.train_models(
+                        video_directory=video_sources,
+                        epochs_cae=epochs_cae,
+                        epochs_convlstm=epochs_convlstm
+                    )
+                else:
+                    logger.error(f"Diretório não encontrado: {video_sources}")
+                    return False
+            else:
+                # É uma lista de arquivos
+                logger.info(f"Treinando com {len(video_sources)} arquivos de vídeo:")
+                for i, video in enumerate(video_sources):
+                    logger.info(f"  {i+1}. {os.path.basename(video)}")
+                
+                training_results = self.processing_engine.train_with_video_batch(
+                    video_sources, epochs_cae, epochs_convlstm
+                )
+            
+            if "error" not in training_results:
+                # Salvar modelos
+                self.processing_engine.save_models()
+                
+                # Mostrar resumo
+                if "training_summary" in training_results:
+                    summary = training_results["training_summary"]
+                    logger.info("="*50)
+                    logger.info("RESUMO DO TREINAMENTO")
+                    logger.info("="*50)
+                    logger.info(f"Total de frames: {summary.get('total_frames', 0)}")
+                    logger.info(f"Frames para CAE: {summary.get('cae_frames', 0)}")
+                    logger.info(f"Sequências ConvLSTM: {summary.get('convlstm_sequences', 0)}")
+                    logger.info(f"Vídeos processados: {summary.get('video_files_processed', 0)}")
+                    logger.info("="*50)
+                
+                logger.info("✅ Treinamento em lote concluído com sucesso!")
+                logger.info("Modelos salvos e prontos para uso")
+                return True
+            else:
+                logger.error(f"❌ Erro no treinamento: {training_results['error']}")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Erro no treinamento em lote: {e}")
+            return False
         """
         Inicia modo de treinamento
         
@@ -443,7 +506,7 @@ def main():
     )
     
     # Argumentos principais
-    parser.add_argument("--mode", choices=["webcam", "video", "train"],
+    parser.add_argument("--mode", choices=["webcam", "video", "train", "batch-train"],
                        default="webcam", help="Modo de operação")
     parser.add_argument("--camera", type=int, default=0,
                        help="Índice da câmera (padrão: 0)")
@@ -459,6 +522,16 @@ def main():
     # Argumentos para treinamento
     parser.add_argument("--train-duration", type=int, default=10,
                        help="Duração do treinamento em minutos")
+    
+    # NOVOS: Argumentos para treinamento em lote
+    parser.add_argument("--video-list", type=str, nargs="+",
+                       help="Lista de arquivos de vídeo para treinamento")  
+    parser.add_argument("--video-dir", type=str,
+                       help="Diretório contendo vídeos para treinamento")
+    parser.add_argument("--epochs-cae", type=int, default=30,
+                       help="Épocas para treinamento do CAE")
+    parser.add_argument("--epochs-convlstm", type=int, default=20,  
+                       help="Épocas para treinamento do ConvLSTM")
     
     # Argumentos para vídeo
     parser.add_argument("--loop", action="store_true",
@@ -533,6 +606,73 @@ def main():
             print("IMPORTANTE: Execute apenas com comportamento NORMAL!")
             input("Pressione ENTER para continuar...")
             success = system.start_training_mode(args.camera, args.train_duration)
+            
+        elif args.mode == "batch-train":
+            print("🎓 Iniciando treinamento em lote com múltiplos vídeos")
+            
+            # Determinar fonte dos vídeos
+            if args.video_dir:
+                if not os.path.exists(args.video_dir):
+                    print(f"❌ Erro: Diretório não encontrado: {args.video_dir}")
+                    return 1
+                print(f"📁 Usando vídeos do diretório: {args.video_dir}")
+                video_source = args.video_dir
+                
+            elif args.video_list:
+                # Verificar se todos os arquivos existem
+                missing_files = [v for v in args.video_list if not os.path.exists(v)]
+                if missing_files:
+                    print("❌ Arquivos não encontrados:")
+                    for file in missing_files:
+                        print(f"   - {file}")
+                    return 1
+                print(f"📼 Usando {len(args.video_list)} arquivos de vídeo:")
+                for i, video in enumerate(args.video_list):
+                    print(f"   {i+1}. {os.path.basename(video)}")
+                video_source = args.video_list
+                
+            else:
+                print("❌ Erro: Especifique --video-dir ou --video-list para treinamento em lote")
+                print("Exemplos:")
+                print("  python main.py --mode batch-train --video-dir ./videos/treinamento/")
+                print("  python main.py --mode batch-train --video-list video1.mp4 video2.mp4 video3.mp4")
+                return 1
+            
+            print("⚠️  IMPORTANTE: Use apenas vídeos com comportamento NORMAL!")
+            print("⚠️  Evite vídeos com anomalias durante o treinamento!")
+            input("Pressione ENTER para continuar...")
+            
+            
+        else:
+            print(f"❌ Modo não reconhecido: {args.mode}")
+            return 1
+        
+        if success:
+            print("✓ Sistema executado com sucesso")
+            return 0
+        else:
+            print("❌ Erro na execução do sistema")
+            return 1)} arquivos de vídeo:")
+                for i, video in enumerate(args.video_list):
+                    print(f"   {i+1}. {os.path.basename(video)}")
+                video_source = args.video_list
+                
+            else:
+                print("❌ Erro: Especifique --video-dir ou --video-list para treinamento em lote")
+                print("Exemplos:")
+                print("  python main.py --mode batch-train --video-dir ./videos/treinamento/")
+                print("  python main.py --mode batch-train --video-list video1.mp4 video2.mp4 video3.mp4")
+                return 1
+            
+            print("⚠️  IMPORTANTE: Use apenas vídeos com comportamento NORMAL!")
+            print("⚠️  Evite vídeos com anomalias durante o treinamento!")
+            input("Pressione ENTER para continuar...")
+            
+            success = system.start_batch_training(
+                video_source, 
+                args.epochs_cae, 
+                args.epochs_convlstm
+            )
         
         else:
             print(f"❌ Modo não reconhecido: {args.mode}")
@@ -664,9 +804,10 @@ if __name__ == "__main__":
 SISTEMA DE DETECÇÃO DE ANOMALIAS - AJUDA COMPLETA
 
 MODOS DE OPERAÇÃO:
-  webcam  - Detecção em tempo real usando câmera
-  video   - Análise de arquivo de vídeo
-  train   - Treinamento de modelos com dados normais
+  webcam      - Detecção em tempo real usando câmera
+  video       - Análise de arquivo de vídeo
+  train       - Treinamento online com câmera (comportamento normal)
+  batch-train - Treinamento com múltiplos vídeos em lote
 
 EXEMPLOS DE USO:
 
@@ -676,24 +817,46 @@ EXEMPLOS DE USO:
 2. Análise de vídeo:
    python main.py --mode video --video meu_video.mp4 --loop
 
-3. Treinamento de modelos:
+3. Treinamento online (câmera):
    python main.py --mode train --train-duration 15
 
-4. Carregando modelos treinados:
+4. 🆕 TREINAMENTO EM LOTE - Múltiplos vídeos:
+   # Usando diretório com vídeos
+   python main.py --mode batch-train --video-dir ./videos/normais/
+   
+   # Usando lista específica de vídeos
+   python main.py --mode batch-train --video-list video1.mp4 video2.mp4 video3.mp4
+   
+   # Com configurações personalizadas
+   python main.py --mode batch-train --video-dir ./videos/ --epochs-cae 40 --epochs-convlstm 25
+
+5. Carregando modelos treinados:
    python main.py --mode webcam --load-models models/meu_modelo
 
-5. Com alertas por email:
+6. Com alertas por email:
    python main.py --mode webcam \\
      --email-server smtp.gmail.com \\
      --email-user usuario@gmail.com \\
      --email-pass senha \\
      --email-recipients admin@empresa.com seguranca@empresa.com
 
-6. Modo demonstração:
-   python main.py demo
+TREINAMENTO EM LOTE - VANTAGENS:
+✅ Processa múltiplos vídeos automaticamente
+✅ Extração inteligente de frames (evita redundância)
+✅ Divide automaticamente treino/validação (80/20)
+✅ Otimizado para memória (processa vídeos grandes)
+✅ Barra de progresso para acompanhar processamento
+✅ Suporta vários formatos (.mp4, .avi, .mov, .mkv, etc.)
 
-7. Criar configuração padrão:
-   python main.py create-config
+ESTRUTURA RECOMENDADA PARA TREINAMENTO:
+videos/
+├── normais/           # Vídeos com comportamento normal
+│   ├── escritorio_1.mp4
+│   ├── casa_normal.avi
+│   └── corredor_vazio.mp4
+└── teste/             # Vídeos para teste (opcional)
+    ├── com_pessoas.mp4
+    └── ambiente_teste.mp4
 
 COMANDOS DURANTE EXECUÇÃO:
   q/ESC  - Sair
@@ -725,10 +888,20 @@ HARDWARE RECOMENDADO:
   - CPU: i5 11Gen ou superior
   - RAM: 16GB ou mais
   - Câmera: USB/integrada funcional
+  - Armazenamento: 5GB+ livres
   - OS: Windows 10/11, Linux Ubuntu 20+
 
-Para mais informações: consulte a documentação
+DICAS DE TREINAMENTO:
+🎯 Use vídeos com comportamento 100% NORMAL
+🎯 Inclua diferentes condições (dia, noite, clima)
+🎯 Varie ângulos de câmera se possível
+🎯 Mínimo 10-15 minutos de vídeo total
+🎯 Evite vídeos com anomalias/acidentes
+🎯 Mais dados = melhor precisão
+
+Para mais informações: consulte README.md
             """)
+            sys.exit(0)
             sys.exit(0)
     
     # Execução normal
