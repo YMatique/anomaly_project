@@ -1100,4 +1100,4 @@ class WebIntegration:
     def unregister_websocket_client(self, client_id: str):
         """Remove cliente websocket"""
         if client_id in self.websocket_clients:
-            self.websocket_clients.remove(client_id)"""
+            self.websocket_clients.remove(client_id)
