@@ -1427,3 +1427,4 @@
 2025-08-01 09:21:51 | AnomalyDetection | INFO     | info:90 | Cliente web desconectado
 2025-08-01 09:21:51 | AnomalyDetection | INFO     | info:90 | Cliente web conectado
 2025-08-01 09:22:08 | AnomalyDetection | INFO     | info:90 | Cliente web desconectado
+2025-08-01 09:24:41 | AnomalyDetection | INFO     | info:90 | Iniciando servidor web em http://127.0.0.1:5000

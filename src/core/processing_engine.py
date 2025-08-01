@@ -233,7 +233,7 @@ class ProcessingEngine:
             "anomalies_detected": 0,
             "avg_processing_time": 0.0
         }
-      # Controle de pipeline adaptativo
+    # Controle de pipeline adaptativo
         self.adaptive_processing = True
         self.processing_load = 0.0
         self.skip_deep_learning = False
@@ -686,9 +686,79 @@ class ProcessingEngine:
         logger.info("Modo de treinamento parado no ProcessingEngine")
     
     def train_models(self, external_data: Optional[np.ndarray] = None, 
-                    epochs_cae: int = 50, epochs_convlstm: int = 30) -> Dict:
-        """Treina modelos de deep learning"""
-        return self.deep_learning_detector.train_models(external_data, epochs_cae, epochs_convlstm)
+                    epochs_cae: int = 50, epochs_convlstm: int = 30,
+                    video_files: Optional[List[str]] = None,
+                    video_directory: Optional[str] = None) -> Dict:
+        """
+        Treina modelos de deep learning com suporte a múltiplos vídeos
+        
+        Args:
+            external_data: Dados externos
+            epochs_cae: Épocas para CAE
+            epochs_convlstm: Épocas para ConvLSTM  
+            video_files: Lista de arquivos de vídeo
+            video_directory: Diretório com vídeos
+        """
+        if video_directory:
+            return self.deep_learning_detector.train_from_video_directory(
+                video_directory, epochs_cae=epochs_cae, epochs_convlstm=epochs_convlstm
+            )
+        else:
+            return self.deep_learning_detector.train_models(
+                external_data, epochs_cae, epochs_convlstm, video_files
+            )
+    
+    def train_with_video_batch(self, video_paths: List[str], 
+                              epochs_cae: int = 30, epochs_convlstm: int = 20,
+                              progress_callback: Optional[Callable] = None) -> Dict:
+        """
+        Treina modelos com lote de vídeos mostrando progresso
+        
+        Args:
+            video_paths: Lista de caminhos para vídeos
+            epochs_cae: Épocas para CAE
+            epochs_convlstm: Épocas para ConvLSTM
+            progress_callback: Função para callback de progresso
+        """
+        logger.info(f"Iniciando treinamento em lote com {len(video_paths)} vídeos")
+        
+        # Validar arquivos
+        valid_videos = []
+        for video_path in video_paths:
+            if os.path.exists(video_path):
+                valid_videos.append(video_path)
+                logger.info(f"✅ {os.path.basename(video_path)}")
+            else:
+                logger.warning(f"❌ Arquivo não encontrado: {video_path}")
+        
+        if not valid_videos:
+            return {"error": "Nenhum vídeo válido encontrado"}
+        
+        logger.info(f"Processando {len(valid_videos)} vídeos válidos...")
+        
+        # Ativar modo de treinamento
+        self.deep_learning_detector.start_training_mode()
+        
+        try:
+            # Treinar com todos os vídeos
+            if progress_callback:
+                progress_callback("Iniciando treinamento com múltiplos vídeos...")
+            
+            results = self.deep_learning_detector.train_models(
+                video_files=valid_videos,
+                epochs_cae=epochs_cae,
+                epochs_convlstm=epochs_convlstm
+            )
+            
+            # Salvar modelos
+            if "error" not in results:
+                self.deep_learning_detector.save_models()
+                logger.info("Modelos salvos com sucesso!")
+            
+            return results
+            
+        finally:
+            self.deep_learning_detector.stop_training_mode()
     
     def save_models(self, base_path: str = None):
         """Salva modelos treinados"""
