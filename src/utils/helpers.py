@@ -446,25 +446,33 @@ class ModelUtils:
         return float(mse)
     
     @staticmethod
-    def normalize_batch(batch: np.ndarray) -> Tuple[np.ndarray, Dict]:
+    def normalize_batch(data: np.ndarray, params: Dict = None) -> Tuple[np.ndarray, Dict]:
         """
-        Normaliza batch de dados
+        Normaliza um batch de dados
+        
+        Args:
+            data: Array de dados para normalizar
+            params: Parâmetros de normalização (se None, calcula novos)
         
         Returns:
-            normalized_batch, normalization_params
+            Tuple (dados_normalizados, parâmetros)
         """
-        mean = np.mean(batch, axis=0, keepdims=True)
-        std = np.std(batch, axis=0, keepdims=True)
+        if params is None:
+            # Calcular novos parâmetros
+            mean = np.mean(data, axis=0)
+            std = np.std(data, axis=0)
+            std = np.where(std == 0, 1, std)  # Evitar divisão por zero
+            
+            params = {
+                "mean": mean,
+                "std": std
+            }
+        else:
+            mean = params["mean"]
+            std = params["std"]
         
-        # Evitar divisão por zero
-        std = np.where(std == 0, 1, std)
-        
-        normalized = (batch - mean) / std
-        
-        params = {
-            "mean": mean,
-            "std": std
-        }
+        # Normalizar
+        normalized = (data - mean) / std
         
         return normalized, params
     
