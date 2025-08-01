@@ -29,7 +29,7 @@
         "optical_flow_method": "farneback",
         "flow_threshold": 2.0,
         "anomaly_threshold": 0.7,
-        "movement_threshold": 15.0
+        "movement_threshold": 11
     },
     "system": {
         "max_threads": 4,

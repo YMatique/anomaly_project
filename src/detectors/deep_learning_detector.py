@@ -16,6 +16,7 @@ from collections import deque
 import time
 import threading
 from queue import Queue
+from tqdm import tqdm
 
 from ..utils.helpers import time_function, ModelUtils, VideoProcessor
 from ..utils.logger import logger

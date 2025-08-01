@@ -1857,3 +1857,1538 @@
 2025-08-01 09:39:24 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 251 - Optical Flow
 2025-08-01 09:39:24 | AnomalyDetection | DEBUG    | debug:85 | Frame 247 - Pulando Deep Learning
 2025-08-01 09:39:24 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 252 - Optical Flow
+2025-08-01 21:46:40 | AnomalyDetection | INFO     | info:90 | Iniciando servidor web em http://127.0.0.1:5000
+2025-08-01 21:46:44 | AnomalyDetection | INFO     | info:90 | Iniciando servidor web em http://127.0.0.1:5000
+2025-08-01 21:46:47 | AnomalyDetection | INFO     | info:90 | Cliente web conectado
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | ProcessingEngine inicializado
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | AlertSystem inicializado
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | OutputManager inicializado
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | Callback adicionado - total: 1
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | Callback de resultado adicionado - total: 1
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | Callback de anomalia adicionado - total: 1
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | SISTEMA INICIADO | {'platform': 'Windows', 'python_version': '3.10.0rc2', 'cpu_count': 8, 'memory_gb': '15.7', 'timestamp': '2025-08-01T21:48:24.941669'}
+2025-08-01 21:48:24 | AnomalyDetection | INFO     | info:90 | Sistema de Detecção de Anomalias inicializado
+2025-08-01 21:48:30 | AnomalyDetection | INFO     | info:90 | Iniciando modo de treinamento - 5 minutos
+2025-08-01 21:48:30 | AnomalyDetection | INFO     | info:90 | Inicializando webcam 0 - resolução: [640, 480]
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Webcam 0 inicializada - [640, 480]
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Webcam inicializada com sucesso
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Thread de captura iniciada
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Captura de vídeo iniciada
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Modo de treinamento iniciado
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Modo de treinamento iniciado no ProcessingEngine
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Iniciando processamento com 3 threads
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Thread de processamento 0 iniciada
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Thread de processamento 1 iniciada
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Thread de processamento 2 iniciada
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Monitor de performance iniciado
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Processamento iniciado
+2025-08-01 21:48:32 | AnomalyDetection | DEBUG    | debug:85 | Performance - Carga: 0.00, Frames: 0, Anomalias: 0
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Iniciando display visual
+2025-08-01 21:48:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 1 - Optical Flow
+2025-08-01 21:48:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 1 - Pulando Deep Learning
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Thread de display iniciada
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Display visual iniciado
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Coletando dados de treinamento... (comportamento NORMAL apenas)
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Evite movimentos anômalos durante este período
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Modo de treinamento parado - 0 frames coletados
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Modo de treinamento parado no ProcessingEngine
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Coleta de dados concluída. Iniciando treinamento dos modelos...
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Iniciando treinamento dos modelos
+2025-08-01 21:48:32 | AnomalyDetection | ERROR    | error:101 | Nenhum dado disponível para treinamento
+2025-08-01 21:48:32 | AnomalyDetection | ERROR    | error:101 | Erro no treinamento: Sem dados para treinamento
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Parando componentes do sistema...
+2025-08-01 21:48:32 | AnomalyDetection | INFO     | info:90 | Parando display visual
+2025-08-01 21:48:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 2 - Optical Flow
+2025-08-01 21:48:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 3 - Optical Flow
+2025-08-01 21:48:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 2 - Deep Learning
+2025-08-01 21:48:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 4 - Optical Flow
+2025-08-01 21:48:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 3 - Deep Learning
+2025-08-01 21:48:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 4 - Deep Learning
+2025-08-01 21:48:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 4: 'deep_learning_detections'
+2025-08-01 21:48:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 3: 'deep_learning_detections'
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 5 - Optical Flow
+2025-08-01 21:48:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 2: 'deep_learning_detections'
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 6 - Optical Flow
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 7 - Optical Flow
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 5 - Deep Learning
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 6 - Deep Learning
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 7 - Deep Learning
+2025-08-01 21:48:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 5: 'deep_learning_detections'
+2025-08-01 21:48:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 6: 'deep_learning_detections'
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 8 - Optical Flow
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 9 - Optical Flow
+2025-08-01 21:48:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 7: 'deep_learning_detections'
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 10 - Optical Flow
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 8 - Deep Learning
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 9 - Deep Learning
+2025-08-01 21:48:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 10 - Deep Learning
+2025-08-01 21:48:33 | AnomalyDetection | INFO     | info:90 | Thread de display finalizada
+2025-08-01 21:48:33 | AnomalyDetection | INFO     | info:90 | Display visual parado
+2025-08-01 21:48:33 | AnomalyDetection | INFO     | info:90 | Parando processamento...
+2025-08-01 21:48:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 8: 'deep_learning_detections'
+2025-08-01 21:48:33 | AnomalyDetection | INFO     | info:90 | Thread de processamento 0 finalizada
+2025-08-01 21:48:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 9: 'deep_learning_detections'
+2025-08-01 21:48:33 | AnomalyDetection | INFO     | info:90 | Thread de processamento 2 finalizada
+2025-08-01 21:48:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 10: 'deep_learning_detections'
+2025-08-01 21:48:33 | AnomalyDetection | INFO     | info:90 | Thread de processamento 1 finalizada
+2025-08-01 21:48:33 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:33 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:33 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Processamento parado
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Thread de captura finalizada
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Captura de vídeo parada
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Todos os componentes parados
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do sistema...
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Parando componentes do sistema...
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Todos os componentes parados
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Webcam 0 liberada
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do ProcessingEngine
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector resetado
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Detectores resetados
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | ProcessingEngine limpo
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do OutputManager
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | OutputManager limpo
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Sistema limpo e finalizado
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-01 21:48:35 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-01 21:55:09 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-01 21:55:09 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-01 21:55:09 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-01 21:55:09 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-01 21:55:10 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-01 21:55:10 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-01 21:55:10 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-01 21:55:10 | AnomalyDetection | INFO     | info:90 | ProcessingEngine inicializado
+2025-08-01 21:55:10 | AnomalyDetection | INFO     | info:90 | AlertSystem inicializado
+2025-08-01 21:55:10 | AnomalyDetection | INFO     | info:90 | OutputManager inicializado
+2025-08-01 21:55:10 | AnomalyDetection | INFO     | info:90 | Callback adicionado - total: 1
+2025-08-01 21:55:10 | AnomalyDetection | INFO     | info:90 | Callback de resultado adicionado - total: 1
+2025-08-01 21:55:10 | AnomalyDetection | INFO     | info:90 | Callback de anomalia adicionado - total: 1
+2025-08-01 21:55:10 | AnomalyDetection | INFO     | info:90 | WebSystemManager inicializado
+2025-08-01 21:55:10 | AnomalyDetection | INFO     | info:90 | Inicializando webcam 0 - resolução: [640, 480]
+2025-08-01 21:55:11 | AnomalyDetection | INFO     | info:90 | Webcam 0 inicializada - [640, 480]
+2025-08-01 21:55:11 | AnomalyDetection | INFO     | info:90 | Webcam inicializada com sucesso
+2025-08-01 21:55:11 | AnomalyDetection | INFO     | info:90 | Thread de captura iniciada
+2025-08-01 21:55:11 | AnomalyDetection | INFO     | info:90 | Captura de vídeo iniciada
+2025-08-01 21:55:11 | AnomalyDetection | INFO     | info:90 | Iniciando processamento com 3 threads
+2025-08-01 21:55:11 | AnomalyDetection | INFO     | info:90 | Thread de processamento 0 iniciada
+2025-08-01 21:55:11 | AnomalyDetection | INFO     | info:90 | Thread de processamento 1 iniciada
+2025-08-01 21:55:11 | AnomalyDetection | INFO     | info:90 | Thread de processamento 2 iniciada
+2025-08-01 21:55:11 | AnomalyDetection | INFO     | info:90 | Monitor de performance iniciado
+2025-08-01 21:55:11 | AnomalyDetection | INFO     | info:90 | Processamento iniciado
+2025-08-01 21:55:11 | AnomalyDetection | DEBUG    | debug:85 | Performance - Carga: 0.00, Frames: 0, Anomalias: 0
+2025-08-01 21:55:11 | AnomalyDetection | INFO     | info:90 | Webcam 0 iniciada via web
+2025-08-01 21:55:11 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 1 - Optical Flow
+2025-08-01 21:55:11 | AnomalyDetection | DEBUG    | debug:85 | Frame 1 - Pulando Deep Learning
+2025-08-01 21:55:11 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 2 - Optical Flow
+2025-08-01 21:55:11 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 3 - Optical Flow
+2025-08-01 21:55:11 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 4 - Optical Flow
+2025-08-01 21:55:11 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 2 - Deep Learning
+2025-08-01 21:55:11 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 3 - Deep Learning
+2025-08-01 21:55:11 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 4 - Deep Learning
+2025-08-01 21:55:12 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 2: 'deep_learning_detections'
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 5 - Optical Flow
+2025-08-01 21:55:12 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 3: 'deep_learning_detections'
+2025-08-01 21:55:12 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 4: 'deep_learning_detections'
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 6 - Optical Flow
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 7 - Optical Flow
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 6 - Deep Learning
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 7 - Deep Learning
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 5 - Deep Learning
+2025-08-01 21:55:12 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:12 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 6: 'deep_learning_detections'
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 8 - Optical Flow
+2025-08-01 21:55:12 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 5: 'deep_learning_detections'
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 9 - Optical Flow
+2025-08-01 21:55:12 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 7: 'deep_learning_detections'
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 10 - Optical Flow
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 8 - Deep Learning
+2025-08-01 21:55:12 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 9 - Deep Learning
+2025-08-01 21:55:12 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 10 - Deep Learning
+2025-08-01 21:55:12 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 8: 'deep_learning_detections'
+2025-08-01 21:55:13 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 11 - Optical Flow
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 10: 'deep_learning_detections'
+2025-08-01 21:55:13 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 12 - Optical Flow
+2025-08-01 21:55:13 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 9: 'deep_learning_detections'
+2025-08-01 21:55:13 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 13 - Optical Flow
+2025-08-01 21:55:13 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 11 - Deep Learning
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 12 - Deep Learning
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 13 - Deep Learning
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:13 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:14 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:15 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | DEBUG    | debug:85 | Carga alta - pulando deep learning
+2025-08-01 21:55:16 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:16 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:16 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 14 - Optical Flow
+2025-08-01 21:55:16 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:16 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 15 - Optical Flow
+2025-08-01 21:55:16 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:16 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 16 - Optical Flow
+2025-08-01 21:55:16 | AnomalyDetection | DEBUG    | debug:85 | Frame 14 - Pulando Deep Learning
+2025-08-01 21:55:16 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:16 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 17 - Optical Flow
+2025-08-01 21:55:16 | AnomalyDetection | DEBUG    | debug:85 | Frame 16 - Pulando Deep Learning
+2025-08-01 21:55:16 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:16 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 19 - Optical Flow
+2025-08-01 21:55:16 | AnomalyDetection | DEBUG    | debug:85 | Frame 15 - Pulando Deep Learning
+2025-08-01 21:55:16 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:16 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 20 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 17 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 19 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 21 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 25 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 20 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 27 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 25 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 28 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 21 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 80 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 27 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 81 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 28 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 82 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 80 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 83 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 81 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 84 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 83 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 85 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 82 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 86 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 84 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 87 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 86 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 85 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 88 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 90 - Optical Flow
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Frame 87 - Pulando Deep Learning
+2025-08-01 21:55:17 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:17 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 91 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 90 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 92 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 88 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 93 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 91 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 94 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 92 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 95 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 94 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 96 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 93 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 97 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 95 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 98 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 96 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 99 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 97 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 100 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 98 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 101 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 99 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 102 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 100 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 103 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 101 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 104 - Optical Flow
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Frame 102 - Pulando Deep Learning
+2025-08-01 21:55:18 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:18 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 105 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 103 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 106 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 104 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 107 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 105 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 109 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 106 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 110 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 107 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 111 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 109 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 112 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 110 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 113 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 112 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 114 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 111 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 115 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 113 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 116 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 114 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 117 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 115 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 118 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 116 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 119 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 117 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 120 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 118 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 121 - Optical Flow
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Frame 119 - Pulando Deep Learning
+2025-08-01 21:55:19 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:19 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 122 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 120 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 123 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 121 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 124 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 122 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 125 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 123 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 126 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 124 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 127 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 125 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 128 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 126 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 129 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 127 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 130 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 128 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 131 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 129 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 132 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 130 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 133 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 131 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 134 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 132 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 135 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 133 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 136 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 134 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 137 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 135 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 138 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 136 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 139 - Optical Flow
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Frame 137 - Pulando Deep Learning
+2025-08-01 21:55:20 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:20 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 140 - Optical Flow
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Frame 138 - Pulando Deep Learning
+2025-08-01 21:55:21 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 141 - Optical Flow
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Frame 139 - Pulando Deep Learning
+2025-08-01 21:55:21 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 142 - Optical Flow
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Frame 140 - Pulando Deep Learning
+2025-08-01 21:55:21 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 143 - Optical Flow
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Frame 141 - Pulando Deep Learning
+2025-08-01 21:55:21 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 144 - Optical Flow
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Frame 142 - Pulando Deep Learning
+2025-08-01 21:55:21 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 145 - Optical Flow
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Frame 143 - Pulando Deep Learning
+2025-08-01 21:55:21 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 146 - Optical Flow
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Frame 144 - Pulando Deep Learning
+2025-08-01 21:55:21 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 147 - Optical Flow
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Frame 145 - Pulando Deep Learning
+2025-08-01 21:55:21 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 148 - Optical Flow
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Frame 146 - Pulando Deep Learning
+2025-08-01 21:55:21 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 149 - Optical Flow
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 147 - Deep Learning
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 148 - Deep Learning
+2025-08-01 21:55:21 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 149 - Deep Learning
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 150 - Optical Flow
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 150 - Deep Learning
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:22 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:23 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 151 - Optical Flow
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:23 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 152 - Optical Flow
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 151 - Deep Learning
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 152 - Deep Learning
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:23 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 153 - Optical Flow
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:23 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 153 - Deep Learning
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:24 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 154 - Optical Flow
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:24 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 155 - Optical Flow
+2025-08-01 21:55:24 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 154 - Deep Learning
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:24 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 155 - Deep Learning
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:25 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 156 - Optical Flow
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:25 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 157 - Optical Flow
+2025-08-01 21:55:25 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 156 - Deep Learning
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:25 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 157 - Deep Learning
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:26 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 158 - Optical Flow
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:26 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 159 - Optical Flow
+2025-08-01 21:55:26 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 158 - Deep Learning
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:26 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 159 - Deep Learning
+2025-08-01 21:55:26 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:26 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 167 - Optical Flow
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 167 - Deep Learning
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 175 - Optical Flow
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:27 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:27 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 177 - Optical Flow
+2025-08-01 21:55:27 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 175 - Deep Learning
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 177 - Deep Learning
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:28 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 185 - Optical Flow
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:28 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 185 - Deep Learning
+2025-08-01 21:55:28 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:29 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 195 - Optical Flow
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:29 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 199 - Optical Flow
+2025-08-01 21:55:29 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 195 - Deep Learning
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:29 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:29 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 206 - Optical Flow
+2025-08-01 21:55:29 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 199 - Deep Learning
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 206 - Deep Learning
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:30 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 213 - Optical Flow
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 213 - Deep Learning
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:30 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 220 - Optical Flow
+2025-08-01 21:55:31 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:31 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:31 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:31 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 227 - Optical Flow
+2025-08-01 21:55:31 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 220 - Deep Learning
+2025-08-01 21:55:31 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:31 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:31 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:31 | AnomalyDetection | DEBUG    | debug:85 | Carga alta - pulando deep learning
+2025-08-01 21:55:31 | AnomalyDetection | DEBUG    | debug:85 | Frame 227 - Pulando Deep Learning
+2025-08-01 21:55:31 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 233 - Optical Flow
+2025-08-01 21:55:31 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:31 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 242 - Optical Flow
+2025-08-01 21:55:31 | AnomalyDetection | DEBUG    | debug:85 | Frame 233 - Pulando Deep Learning
+2025-08-01 21:55:31 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 247 - Optical Flow
+2025-08-01 21:55:32 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:32 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:32 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 242 - Pulando Deep Learning
+2025-08-01 21:55:32 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 256 - Optical Flow
+2025-08-01 21:55:32 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:32 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:32 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:32 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 264 - Optical Flow
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 247 - Pulando Deep Learning
+2025-08-01 21:55:32 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 271 - Optical Flow
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 256 - Pulando Deep Learning
+2025-08-01 21:55:32 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:32 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 278 - Optical Flow
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 271 - Pulando Deep Learning
+2025-08-01 21:55:32 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 285 - Optical Flow
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 264 - Pulando Deep Learning
+2025-08-01 21:55:32 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 294 - Optical Flow
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 278 - Pulando Deep Learning
+2025-08-01 21:55:32 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 298 - Optical Flow
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 285 - Pulando Deep Learning
+2025-08-01 21:55:32 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 303 - Optical Flow
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 294 - Pulando Deep Learning
+2025-08-01 21:55:32 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 305 - Optical Flow
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 298 - Pulando Deep Learning
+2025-08-01 21:55:32 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 306 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 305 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 303 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 310 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 314 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 306 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 315 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 310 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 317 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 314 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 318 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 315 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 319 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 317 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 320 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 318 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 321 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 319 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 322 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 321 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 320 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 323 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 324 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 322 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 325 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 324 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 326 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 323 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 327 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 325 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 328 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 326 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 329 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 327 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 330 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 328 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 331 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 329 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 332 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 330 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 333 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 331 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 334 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 332 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 335 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 333 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 336 - Optical Flow
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Frame 334 - Pulando Deep Learning
+2025-08-01 21:55:33 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 337 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 335 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 336 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 338 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 337 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 339 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 338 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 340 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 339 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 341 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 340 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 342 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 341 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 343 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 342 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 344 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 343 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 345 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 344 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 346 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 345 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 347 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 346 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 348 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 347 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 349 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 348 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 350 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 349 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 351 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 350 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 352 - Optical Flow
+2025-08-01 21:55:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 351 - Pulando Deep Learning
+2025-08-01 21:55:34 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 353 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 352 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 354 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 353 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 355 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 354 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 356 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 355 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 357 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 356 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 358 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 357 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 359 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 358 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 360 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 359 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 361 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 360 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 362 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 361 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 363 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 362 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 364 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 363 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 365 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 364 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 366 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 365 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 367 - Optical Flow
+2025-08-01 21:55:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 366 - Pulando Deep Learning
+2025-08-01 21:55:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 368 - Optical Flow
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Frame 367 - Pulando Deep Learning
+2025-08-01 21:55:36 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 369 - Optical Flow
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Frame 368 - Pulando Deep Learning
+2025-08-01 21:55:36 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 370 - Optical Flow
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Frame 369 - Pulando Deep Learning
+2025-08-01 21:55:36 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 371 - Optical Flow
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Frame 370 - Pulando Deep Learning
+2025-08-01 21:55:36 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 372 - Optical Flow
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Frame 371 - Pulando Deep Learning
+2025-08-01 21:55:36 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 373 - Optical Flow
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Frame 372 - Pulando Deep Learning
+2025-08-01 21:55:36 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 374 - Optical Flow
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Frame 373 - Pulando Deep Learning
+2025-08-01 21:55:36 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 375 - Optical Flow
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Frame 374 - Pulando Deep Learning
+2025-08-01 21:55:36 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 376 - Optical Flow
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Frame 375 - Pulando Deep Learning
+2025-08-01 21:55:36 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 377 - Optical Flow
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 378 - Optical Flow
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 376 - Deep Learning
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 377 - Deep Learning
+2025-08-01 21:55:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 378 - Deep Learning
+2025-08-01 21:55:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:37 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 379 - Optical Flow
+2025-08-01 21:55:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 379 - Deep Learning
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 380 - Optical Flow
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 381 - Optical Flow
+2025-08-01 21:55:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 380 - Deep Learning
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 381 - Deep Learning
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 382 - Optical Flow
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 382 - Deep Learning
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 383 - Optical Flow
+2025-08-01 21:55:40 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 384 - Optical Flow
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 383 - Deep Learning
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 384 - Deep Learning
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 385 - Optical Flow
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:40 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 385 - Deep Learning
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | DEBUG    | debug:85 | Carga alta - pulando deep learning
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 386 - Optical Flow
+2025-08-01 21:55:42 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 387 - Optical Flow
+2025-08-01 21:55:42 | AnomalyDetection | INFO     | info:90 | Parando processamento...
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 386 - Pulando Deep Learning
+2025-08-01 21:55:42 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:42 | AnomalyDetection | INFO     | info:90 | Thread de processamento 2 finalizada
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 387 - Pulando Deep Learning
+2025-08-01 21:55:42 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:42 | AnomalyDetection | INFO     | info:90 | Thread de processamento 1 finalizada
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:42 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-01 21:55:42 | AnomalyDetection | INFO     | info:90 | Thread de processamento 0 finalizada
+2025-08-01 21:55:42 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-01 21:55:44 | AnomalyDetection | INFO     | info:90 | Processamento parado
+2025-08-01 21:55:44 | AnomalyDetection | INFO     | info:90 | Thread de captura finalizada
+2025-08-01 21:55:44 | AnomalyDetection | INFO     | info:90 | Captura de vídeo parada
+2025-08-01 21:55:44 | AnomalyDetection | INFO     | info:90 | Sistema parado via web
+2025-08-01 21:55:46 | AnomalyDetection | INFO     | info:90 | Monitor de performance finalizado
+2025-08-01 21:58:11 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-01 21:58:11 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | ProcessingEngine inicializado
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | AlertSystem inicializado
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | OutputManager inicializado
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Callback adicionado - total: 1
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Callback de resultado adicionado - total: 1
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Callback de anomalia adicionado - total: 1
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | SISTEMA INICIADO | {'platform': 'Windows', 'python_version': '3.10.0rc2', 'cpu_count': 8, 'memory_gb': '15.7', 'timestamp': '2025-08-01T21:58:12.370812'}
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Sistema de Detecção de Anomalias inicializado
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do sistema...
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Parando componentes do sistema...
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Todos os componentes parados
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do ProcessingEngine
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector resetado
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Detectores resetados
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | ProcessingEngine limpo
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do OutputManager
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | OutputManager limpo
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Sistema limpo e finalizado
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do ProcessingEngine
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector resetado
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Detectores resetados
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | ProcessingEngine limpo
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do OutputManager
+2025-08-01 21:58:12 | AnomalyDetection | INFO     | info:90 | OutputManager limpo
+2025-08-01 21:58:38 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-01 21:58:38 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | ProcessingEngine inicializado
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | AlertSystem inicializado
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | OutputManager inicializado
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Callback adicionado - total: 1
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Callback de resultado adicionado - total: 1
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Callback de anomalia adicionado - total: 1
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | SISTEMA INICIADO | {'platform': 'Windows', 'python_version': '3.10.0rc2', 'cpu_count': 8, 'memory_gb': '15.7', 'timestamp': '2025-08-01T21:58:39.384928'}
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Sistema de Detecção de Anomalias inicializado
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do sistema...
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Parando componentes do sistema...
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Todos os componentes parados
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do ProcessingEngine
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector resetado
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Detectores resetados
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | ProcessingEngine limpo
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do OutputManager
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | OutputManager limpo
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Sistema limpo e finalizado
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do ProcessingEngine
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector resetado
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Detectores resetados
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | ProcessingEngine limpo
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do OutputManager
+2025-08-01 21:58:39 | AnomalyDetection | INFO     | info:90 | OutputManager limpo
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | ProcessingEngine inicializado
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | AlertSystem inicializado
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | OutputManager inicializado
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | Callback adicionado - total: 1
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | Callback de resultado adicionado - total: 1
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | Callback de anomalia adicionado - total: 1
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | SISTEMA INICIADO | {'platform': 'Windows', 'python_version': '3.10.0rc2', 'cpu_count': 8, 'memory_gb': '15.7', 'timestamp': '2025-08-01T21:58:53.572131'}
+2025-08-01 21:58:53 | AnomalyDetection | INFO     | info:90 | Sistema de Detecção de Anomalias inicializado
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Iniciando treinamento em lote
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Treinando com vídeos do diretório: ./data/videos
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Buscando vídeos em: ./data/videos
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Encontrados 40 arquivos de vídeo:
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   1. h-1.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   2. h-10.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   3. h-11.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   4. h-12.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   5. h-13.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   6. h-14.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   7. h-15.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   8. h-2.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   9. h-3.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   10. h-4.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   11. h-5.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   12. h-6.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   13. h-7.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   14. h-8.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   15. h-9.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   16. home-1.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   17. home-10.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   18. home-12.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   19. home-13.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   20. home-14.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   21. home-16.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   22. home-17.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   23. home-18.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   24. home-19.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   25. home-2.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   26. home-20.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   27. home-3.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   28. home-4.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   29. home-5.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   30. home-6.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   31. home-7-1.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   32. home-7.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   33. home-8.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   34. home-9.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   35. home-non-home-1.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   36. home-non-home-2.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   37. home-non-home-3.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   38. home-non-home-4.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   39. home-non-home-5.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   40. hone-11.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Iniciando treinamento dos modelos
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Processando 40 arquivos de vídeo para treinamento
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Processando vídeo 1/40: h-1.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 381, FPS: 30.0
+2025-08-01 21:59:01 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-1.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Processando vídeo 2/40: h-10.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 528, FPS: 30.0
+2025-08-01 21:59:01 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-10.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Processando vídeo 3/40: h-11.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 565, FPS: 30.0
+2025-08-01 21:59:01 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-11.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Processando vídeo 4/40: h-12.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 469, FPS: 30.0
+2025-08-01 21:59:01 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-12.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Processando vídeo 5/40: h-13.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 660, FPS: 30.0
+2025-08-01 21:59:01 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-13.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Processando vídeo 6/40: h-14.mp4
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 998, FPS: 30.0
+2025-08-01 21:59:01 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-14.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:01 | AnomalyDetection | INFO     | info:90 | Processando vídeo 7/40: h-15.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1260, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-15.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 8/40: h-2.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 534, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-2.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 9/40: h-3.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 254, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-3.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 10/40: h-4.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 317, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-4.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 11/40: h-5.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 405, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-5.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 12/40: h-6.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 564, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-6.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 13/40: h-7.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 373, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-7.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 14/40: h-8.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 302, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-8.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 15/40: h-9.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 289, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\h-9.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 16/40: home-1.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1813, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-1.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 17/40: home-10.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2622, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-10.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 18/40: home-12.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1771, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-12.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 19/40: home-13.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2002, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-13.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 20/40: home-14.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2471, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-14.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 21/40: home-16.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2511, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-16.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 22/40: home-17.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 443, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-17.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 23/40: home-18.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 320, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-18.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 24/40: home-19.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2666, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-19.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 25/40: home-2.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1509, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-2.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 26/40: home-20.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2591, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-20.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 27/40: home-3.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1269, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-3.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 28/40: home-4.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1098, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-4.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 29/40: home-5.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1080, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-5.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 30/40: home-6.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1020, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-6.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 31/40: home-7-1.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1845, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-7-1.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 32/40: home-7.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1761, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-7.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 33/40: home-8.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 3527, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-8.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 34/40: home-9.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2091, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-9.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 35/40: home-non-home-1.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1972, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-non-home-1.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 36/40: home-non-home-2.mp4
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 3021, FPS: 30.0
+2025-08-01 21:59:02 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-non-home-2.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:02 | AnomalyDetection | INFO     | info:90 | Processando vídeo 37/40: home-non-home-3.mp4
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2102, FPS: 30.0
+2025-08-01 21:59:03 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-non-home-3.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Processando vídeo 38/40: home-non-home-4.mp4
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1845, FPS: 30.0
+2025-08-01 21:59:03 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-non-home-4.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Processando vídeo 39/40: home-non-home-5.mp4
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1375, FPS: 30.0
+2025-08-01 21:59:03 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\home-non-home-5.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Processando vídeo 40/40: hone-11.mp4
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2029, FPS: 30.0
+2025-08-01 21:59:03 | AnomalyDetection | ERROR    | error:101 | Erro ao processar ./data/videos\normal\hone-11.mp4: name 'tqdm' is not defined
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Total de frames extraídos de todos os vídeos: 0
+2025-08-01 21:59:03 | AnomalyDetection | ERROR    | error:101 | Nenhum dado disponível para treinamento
+2025-08-01 21:59:03 | AnomalyDetection | ERROR    | error:101 | ❌ Erro no treinamento: Sem dados para treinamento
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do sistema...
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Parando componentes do sistema...
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Todos os componentes parados
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do ProcessingEngine
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector resetado
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Detectores resetados
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | ProcessingEngine limpo
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do OutputManager
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | OutputManager limpo
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Sistema limpo e finalizado
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do ProcessingEngine
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector resetado
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Detectores resetados
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | ProcessingEngine limpo
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do OutputManager
+2025-08-01 21:59:03 | AnomalyDetection | INFO     | info:90 | OutputManager limpo
+2025-08-01 22:56:49 | AnomalyDetection | INFO     | info:90 | Cliente web desconectado
+2025-08-02 00:40:36 | AnomalyDetection | INFO     | info:90 | Cliente web conectado
+2025-08-02 00:52:19 | AnomalyDetection | INFO     | info:90 | Iniciando servidor web em http://127.0.0.1:5000
+2025-08-02 00:52:19 | AnomalyDetection | INFO     | info:90 | Cliente web conectado
+2025-08-02 00:52:24 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-02 00:52:24 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-02 00:52:24 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-02 00:52:24 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-02 00:52:25 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-02 00:52:25 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-02 00:52:25 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-02 00:52:25 | AnomalyDetection | INFO     | info:90 | ProcessingEngine inicializado
+2025-08-02 00:52:25 | AnomalyDetection | INFO     | info:90 | AlertSystem inicializado
+2025-08-02 00:52:25 | AnomalyDetection | INFO     | info:90 | OutputManager inicializado
+2025-08-02 00:52:25 | AnomalyDetection | INFO     | info:90 | Callback adicionado - total: 1
+2025-08-02 00:52:25 | AnomalyDetection | INFO     | info:90 | Callback de resultado adicionado - total: 1
+2025-08-02 00:52:25 | AnomalyDetection | INFO     | info:90 | Callback de anomalia adicionado - total: 1
+2025-08-02 00:52:25 | AnomalyDetection | INFO     | info:90 | SISTEMA INICIADO | {'platform': 'Windows', 'python_version': '3.10.0rc2', 'cpu_count': 8, 'memory_gb': '15.7', 'timestamp': '2025-08-02T00:52:25.194090'}
+2025-08-02 00:52:25 | AnomalyDetection | INFO     | info:90 | Sistema de Detecção de Anomalias inicializado
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 | Iniciando treinamento em lote
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 | Treinando com vídeos do diretório: ./data/videos
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 | Buscando vídeos em: ./data/videos
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 | Encontrados 40 arquivos de vídeo:
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   1. h-1.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   2. h-10.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   3. h-11.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   4. h-12.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   5. h-13.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   6. h-14.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   7. h-15.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   8. h-2.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   9. h-3.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   10. h-4.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   11. h-5.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   12. h-6.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   13. h-7.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   14. h-8.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   15. h-9.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   16. home-1.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   17. home-10.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   18. home-12.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   19. home-13.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   20. home-14.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   21. home-16.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   22. home-17.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   23. home-18.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   24. home-19.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   25. home-2.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   26. home-20.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   27. home-3.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   28. home-4.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   29. home-5.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   30. home-6.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   31. home-7-1.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   32. home-7.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   33. home-8.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   34. home-9.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   35. home-non-home-1.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   36. home-non-home-2.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   37. home-non-home-3.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   38. home-non-home-4.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   39. home-non-home-5.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   40. hone-11.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 | Iniciando treinamento dos modelos
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 | Processando 40 arquivos de vídeo para treinamento
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 | Processando vídeo 1/40: h-1.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 381, FPS: 30.0
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 191 frames de h-1.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 | Processando vídeo 2/40: h-10.mp4
+2025-08-02 00:52:36 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 528, FPS: 30.0
+2025-08-02 00:52:37 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 264 frames de h-10.mp4
+2025-08-02 00:52:37 | AnomalyDetection | INFO     | info:90 | Processando vídeo 3/40: h-11.mp4
+2025-08-02 00:52:37 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 565, FPS: 30.0
+2025-08-02 00:52:38 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 283 frames de h-11.mp4
+2025-08-02 00:52:38 | AnomalyDetection | INFO     | info:90 | Processando vídeo 4/40: h-12.mp4
+2025-08-02 00:52:38 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 469, FPS: 30.0
+2025-08-02 00:52:38 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 235 frames de h-12.mp4
+2025-08-02 00:52:38 | AnomalyDetection | INFO     | info:90 | Processando vídeo 5/40: h-13.mp4
+2025-08-02 00:52:38 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 660, FPS: 30.0
+2025-08-02 00:52:39 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 330 frames de h-13.mp4
+2025-08-02 00:52:39 | AnomalyDetection | INFO     | info:90 | Processando vídeo 6/40: h-14.mp4
+2025-08-02 00:52:39 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 998, FPS: 30.0
+2025-08-02 00:52:40 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 499 frames de h-14.mp4
+2025-08-02 00:52:40 | AnomalyDetection | INFO     | info:90 | Processando vídeo 7/40: h-15.mp4
+2025-08-02 00:52:40 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1260, FPS: 30.0
+2025-08-02 00:52:42 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 630 frames de h-15.mp4
+2025-08-02 00:52:42 | AnomalyDetection | INFO     | info:90 | Processando vídeo 8/40: h-2.mp4
+2025-08-02 00:52:42 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 534, FPS: 30.0
+2025-08-02 00:52:43 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 267 frames de h-2.mp4
+2025-08-02 00:52:43 | AnomalyDetection | INFO     | info:90 | Processando vídeo 9/40: h-3.mp4
+2025-08-02 00:52:43 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 254, FPS: 30.0
+2025-08-02 00:52:43 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 127 frames de h-3.mp4
+2025-08-02 00:52:43 | AnomalyDetection | INFO     | info:90 | Processando vídeo 10/40: h-4.mp4
+2025-08-02 00:52:43 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 317, FPS: 30.0
+2025-08-02 00:52:44 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 159 frames de h-4.mp4
+2025-08-02 00:52:44 | AnomalyDetection | INFO     | info:90 | Processando vídeo 11/40: h-5.mp4
+2025-08-02 00:52:44 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 405, FPS: 30.0
+2025-08-02 00:52:44 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 203 frames de h-5.mp4
+2025-08-02 00:52:44 | AnomalyDetection | INFO     | info:90 | Processando vídeo 12/40: h-6.mp4
+2025-08-02 00:52:44 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 564, FPS: 30.0
+2025-08-02 00:52:45 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 282 frames de h-6.mp4
+2025-08-02 00:52:45 | AnomalyDetection | INFO     | info:90 | Processando vídeo 13/40: h-7.mp4
+2025-08-02 00:52:45 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 373, FPS: 30.0
+2025-08-02 00:52:46 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 187 frames de h-7.mp4
+2025-08-02 00:52:46 | AnomalyDetection | INFO     | info:90 | Processando vídeo 14/40: h-8.mp4
+2025-08-02 00:52:46 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 302, FPS: 30.0
+2025-08-02 00:52:46 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 151 frames de h-8.mp4
+2025-08-02 00:52:46 | AnomalyDetection | INFO     | info:90 | Processando vídeo 15/40: h-9.mp4
+2025-08-02 00:52:46 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 289, FPS: 30.0
+2025-08-02 00:52:46 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 145 frames de h-9.mp4
+2025-08-02 00:52:46 | AnomalyDetection | INFO     | info:90 | Processando vídeo 16/40: home-1.mp4
+2025-08-02 00:52:46 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1813, FPS: 30.0
+2025-08-02 00:52:58 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 907 frames de home-1.mp4
+2025-08-02 00:52:58 | AnomalyDetection | INFO     | info:90 | Processando vídeo 17/40: home-10.mp4
+2025-08-02 00:52:58 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2622, FPS: 30.0
+2025-08-02 00:53:11 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 1311 frames de home-10.mp4
+2025-08-02 00:53:11 | AnomalyDetection | INFO     | info:90 | Processando vídeo 18/40: home-12.mp4
+2025-08-02 00:53:11 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1771, FPS: 30.0
+2025-08-02 00:53:21 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 886 frames de home-12.mp4
+2025-08-02 00:53:21 | AnomalyDetection | INFO     | info:90 | Processando vídeo 19/40: home-13.mp4
+2025-08-02 00:53:21 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2002, FPS: 30.0
+2025-08-02 00:53:31 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 1001 frames de home-13.mp4
+2025-08-02 00:53:31 | AnomalyDetection | INFO     | info:90 | Processando vídeo 20/40: home-14.mp4
+2025-08-02 00:53:31 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2471, FPS: 30.0
+2025-08-02 00:53:43 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 1236 frames de home-14.mp4
+2025-08-02 00:53:43 | AnomalyDetection | INFO     | info:90 | Processando vídeo 21/40: home-16.mp4
+2025-08-02 00:53:43 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2511, FPS: 30.0
+2025-08-02 00:53:56 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 1256 frames de home-16.mp4
+2025-08-02 00:53:56 | AnomalyDetection | INFO     | info:90 | Processando vídeo 22/40: home-17.mp4
+2025-08-02 00:53:56 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 443, FPS: 30.0
+2025-08-02 00:53:58 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 222 frames de home-17.mp4
+2025-08-02 00:53:58 | AnomalyDetection | INFO     | info:90 | Processando vídeo 23/40: home-18.mp4
+2025-08-02 00:53:58 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 320, FPS: 30.0
+2025-08-02 00:53:59 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 160 frames de home-18.mp4
+2025-08-02 00:53:59 | AnomalyDetection | INFO     | info:90 | Processando vídeo 24/40: home-19.mp4
+2025-08-02 00:53:59 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2666, FPS: 30.0
+2025-08-02 00:54:13 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 1333 frames de home-19.mp4
+2025-08-02 00:54:13 | AnomalyDetection | INFO     | info:90 | Processando vídeo 25/40: home-2.mp4
+2025-08-02 00:54:13 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1509, FPS: 30.0
+2025-08-02 00:54:23 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 755 frames de home-2.mp4
+2025-08-02 00:54:23 | AnomalyDetection | INFO     | info:90 | Processando vídeo 26/40: home-20.mp4
+2025-08-02 00:54:23 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2591, FPS: 30.0
+2025-08-02 00:54:38 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 1296 frames de home-20.mp4
+2025-08-02 00:54:38 | AnomalyDetection | INFO     | info:90 | Processando vídeo 27/40: home-3.mp4
+2025-08-02 00:54:38 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1269, FPS: 30.0
+2025-08-02 00:54:46 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 635 frames de home-3.mp4
+2025-08-02 00:54:46 | AnomalyDetection | INFO     | info:90 | Processando vídeo 28/40: home-4.mp4
+2025-08-02 00:54:46 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1098, FPS: 30.0
+2025-08-02 00:54:53 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 549 frames de home-4.mp4
+2025-08-02 00:54:53 | AnomalyDetection | INFO     | info:90 | Processando vídeo 29/40: home-5.mp4
+2025-08-02 00:54:53 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1080, FPS: 30.0
+2025-08-02 00:54:55 | AnomalyDetection | INFO     | info:90 | Cliente web desconectado
+2025-08-02 00:55:00 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 540 frames de home-5.mp4
+2025-08-02 00:55:00 | AnomalyDetection | INFO     | info:90 | Processando vídeo 30/40: home-6.mp4
+2025-08-02 00:55:00 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1020, FPS: 30.0
+2025-08-02 00:55:08 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 510 frames de home-6.mp4
+2025-08-02 00:55:08 | AnomalyDetection | INFO     | info:90 | Processando vídeo 31/40: home-7-1.mp4
+2025-08-02 00:55:08 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1845, FPS: 30.0
+2025-08-02 00:55:18 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 923 frames de home-7-1.mp4
+2025-08-02 00:55:18 | AnomalyDetection | INFO     | info:90 | Processando vídeo 32/40: home-7.mp4
+2025-08-02 00:55:18 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1761, FPS: 30.0
+2025-08-02 00:55:28 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 881 frames de home-7.mp4
+2025-08-02 00:55:28 | AnomalyDetection | INFO     | info:90 | Processando vídeo 33/40: home-8.mp4
+2025-08-02 00:55:28 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 3527, FPS: 30.0
+2025-08-02 00:55:47 | AnomalyDetection | INFO     | info:90 |   Limitado a 1500 frames para economizar memória
+2025-08-02 00:55:47 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 1500 frames de home-8.mp4
+2025-08-02 00:55:47 | AnomalyDetection | INFO     | info:90 | Processando vídeo 34/40: home-9.mp4
+2025-08-02 00:55:47 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2091, FPS: 30.0
+2025-08-02 00:55:59 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 1046 frames de home-9.mp4
+2025-08-02 00:55:59 | AnomalyDetection | INFO     | info:90 | Processando vídeo 35/40: home-non-home-1.mp4
+2025-08-02 00:55:59 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1972, FPS: 30.0
+2025-08-02 00:56:09 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 986 frames de home-non-home-1.mp4
+2025-08-02 00:56:09 | AnomalyDetection | INFO     | info:90 | Processando vídeo 36/40: home-non-home-2.mp4
+2025-08-02 00:56:09 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 3021, FPS: 30.0
+2025-08-02 00:56:24 | AnomalyDetection | INFO     | info:90 |   Limitado a 1500 frames para economizar memória
+2025-08-02 00:56:24 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 1500 frames de home-non-home-2.mp4
+2025-08-02 00:56:24 | AnomalyDetection | INFO     | info:90 | Processando vídeo 37/40: home-non-home-3.mp4
+2025-08-02 00:56:24 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2102, FPS: 30.0
+2025-08-02 00:56:33 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 1051 frames de home-non-home-3.mp4
+2025-08-02 00:56:33 | AnomalyDetection | INFO     | info:90 | Processando vídeo 38/40: home-non-home-4.mp4
+2025-08-02 00:56:33 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1845, FPS: 30.0
+2025-08-02 00:56:43 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 923 frames de home-non-home-4.mp4
+2025-08-02 00:56:43 | AnomalyDetection | INFO     | info:90 | Processando vídeo 39/40: home-non-home-5.mp4
+2025-08-02 00:56:43 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 1375, FPS: 30.0
+2025-08-02 00:56:52 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 688 frames de home-non-home-5.mp4
+2025-08-02 00:56:52 | AnomalyDetection | INFO     | info:90 | Processando vídeo 40/40: hone-11.mp4
+2025-08-02 00:56:52 | AnomalyDetection | INFO     | info:90 |   📹 Frames: 2029, FPS: 30.0
+2025-08-02 00:57:11 | AnomalyDetection | INFO     | info:90 |   ✅ Extraídos 1015 frames de hone-11.mp4
+2025-08-02 00:57:11 | AnomalyDetection | INFO     | info:90 | Total de frames extraídos de todos os vídeos: 27063
+2025-08-02 00:57:22 | AnomalyDetection | INFO     | info:90 | Dataset final: 27063 frames
+2025-08-02 00:57:22 | AnomalyDetection | INFO     | info:90 | Treinando CAE...
+2025-08-02 00:57:54 | AnomalyDetection | INFO     | info:90 | Iniciando treinamento CAE - 21650 samples, 40 epochs
+2025-08-02 00:57:56 | AnomalyDetection | ERROR    | error:101 | Erro no treinamento em lote: ModelUtils.normalize_batch() takes 1 positional argument but 2 were given
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do sistema...
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | Parando componentes do sistema...
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | Todos os componentes parados
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do ProcessingEngine
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector resetado
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | Detectores resetados
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | ProcessingEngine limpo
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do OutputManager
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | OutputManager limpo
+2025-08-02 00:58:12 | AnomalyDetection | INFO     | info:90 | Sistema limpo e finalizado
+2025-08-02 00:58:13 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-02 00:58:13 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-02 00:58:13 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do ProcessingEngine
+2025-08-02 00:58:13 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector resetado
+2025-08-02 00:58:13 | AnomalyDetection | INFO     | info:90 | Detectores resetados
+2025-08-02 00:58:13 | AnomalyDetection | INFO     | info:90 | ProcessingEngine limpo
+2025-08-02 00:58:13 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do OutputManager
+2025-08-02 00:58:13 | AnomalyDetection | INFO     | info:90 | OutputManager limpo
