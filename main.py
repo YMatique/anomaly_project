@@ -2,10 +2,6 @@
 """
 Sistema de Detecção de Anomalias em Tempo Real
 Usando Optical Flow, CAE (Convolutional Autoencoder) e ConvLSTM
-Otimizado para i5 11Gen, 16GB RAM
-
-Autor: Sistema AI
-Versão: 1.0
 """
 
 import os
@@ -13,7 +9,7 @@ import sys
 import time
 import argparse
 import signal
-from typing import Optional, Dict
+from typing import Optional, Dict, Union, List
 import cv2
 
 # Adicionar src ao path
@@ -153,73 +149,10 @@ class AnomalyDetectionSystem:
             logger.error(f"Erro na detecção por arquivo: {e}")
             return False
     
-    def start_batch_training(self, video_sources: Union[List[str], str],
-                           epochs_cae: int = 30, epochs_convlstm: int = 20) -> bool:
+    def start_training_mode(self, camera_index: int = 0, 
+                          duration_minutes: int = 10) -> bool:
         """
-        Inicia treinamento com múltiplos vídeos
-        
-        Args:
-            video_sources: Lista de arquivos ou diretório com vídeos
-            epochs_cae: Épocas para CAE
-            epochs_convlstm: Épocas para ConvLSTM
-            
-        Returns:
-            True se treinamento foi bem-sucedido
-        """
-        logger.info("Iniciando treinamento em lote")
-        
-        try:
-            # Determinar se é lista de arquivos ou diretório
-            if isinstance(video_sources, str):
-                # É um diretório
-                if os.path.isdir(video_sources):
-                    logger.info(f"Treinando com vídeos do diretório: {video_sources}")
-                    training_results = self.processing_engine.train_models(
-                        video_directory=video_sources,
-                        epochs_cae=epochs_cae,
-                        epochs_convlstm=epochs_convlstm
-                    )
-                else:
-                    logger.error(f"Diretório não encontrado: {video_sources}")
-                    return False
-            else:
-                # É uma lista de arquivos
-                logger.info(f"Treinando com {len(video_sources)} arquivos de vídeo:")
-                for i, video in enumerate(video_sources):
-                    logger.info(f"  {i+1}. {os.path.basename(video)}")
-                
-                training_results = self.processing_engine.train_with_video_batch(
-                    video_sources, epochs_cae, epochs_convlstm
-                )
-            
-            if "error" not in training_results:
-                # Salvar modelos
-                self.processing_engine.save_models()
-                
-                # Mostrar resumo
-                if "training_summary" in training_results:
-                    summary = training_results["training_summary"]
-                    logger.info("="*50)
-                    logger.info("RESUMO DO TREINAMENTO")
-                    logger.info("="*50)
-                    logger.info(f"Total de frames: {summary.get('total_frames', 0)}")
-                    logger.info(f"Frames para CAE: {summary.get('cae_frames', 0)}")
-                    logger.info(f"Sequências ConvLSTM: {summary.get('convlstm_sequences', 0)}")
-                    logger.info(f"Vídeos processados: {summary.get('video_files_processed', 0)}")
-                    logger.info("="*50)
-                
-                logger.info("✅ Treinamento em lote concluído com sucesso!")
-                logger.info("Modelos salvos e prontos para uso")
-                return True
-            else:
-                logger.error(f"❌ Erro no treinamento: {training_results['error']}")
-                return False
-                
-        except Exception as e:
-            logger.error(f"Erro no treinamento em lote: {e}")
-            return False
-        """
-        Inicia modo de treinamento
+        Inicia modo de treinamento online com câmera
         
         Args:
             camera_index: Índice da câmera
@@ -304,6 +237,72 @@ class AnomalyDetectionSystem:
             return False
         finally:
             self._stop_system_components()
+
+    def start_batch_training(self, video_sources: Union[List[str], str],
+                           epochs_cae: int = 30, epochs_convlstm: int = 20) -> bool:
+        """
+        Inicia treinamento com múltiplos vídeos
+        
+        Args:
+            video_sources: Lista de arquivos ou diretório com vídeos
+            epochs_cae: Épocas para CAE
+            epochs_convlstm: Épocas para ConvLSTM
+            
+        Returns:
+            True se treinamento foi bem-sucedido
+        """
+        logger.info("Iniciando treinamento em lote")
+        
+        try:
+            # Determinar se é lista de arquivos ou diretório
+            if isinstance(video_sources, str):
+                # É um diretório
+                if os.path.isdir(video_sources):
+                    logger.info(f"Treinando com vídeos do diretório: {video_sources}")
+                    training_results = self.processing_engine.train_models(
+                        video_directory=video_sources,
+                        epochs_cae=epochs_cae,
+                        epochs_convlstm=epochs_convlstm
+                    )
+                else:
+                    logger.error(f"Diretório não encontrado: {video_sources}")
+                    return False
+            else:
+                # É uma lista de arquivos
+                logger.info(f"Treinando com {len(video_sources)} arquivos de vídeo:")
+                for i, video in enumerate(video_sources):
+                    logger.info(f"  {i+1}. {os.path.basename(video)}")
+                
+                training_results = self.processing_engine.train_with_video_batch(
+                    video_sources, epochs_cae, epochs_convlstm
+                )
+            
+            if "error" not in training_results:
+                # Salvar modelos
+                self.processing_engine.save_models()
+                
+                # Mostrar resumo
+                if "training_summary" in training_results:
+                    summary = training_results["training_summary"]
+                    logger.info("="*50)
+                    logger.info("RESUMO DO TREINAMENTO")
+                    logger.info("="*50)
+                    logger.info(f"Total de frames: {summary.get('total_frames', 0)}")
+                    logger.info(f"Frames para CAE: {summary.get('cae_frames', 0)}")
+                    logger.info(f"Sequências ConvLSTM: {summary.get('convlstm_sequences', 0)}")
+                    logger.info(f"Vídeos processados: {summary.get('video_files_processed', 0)}")
+                    logger.info("="*50)
+                
+                logger.info("✅ Treinamento em lote concluído com sucesso!")
+                logger.info("Modelos salvos e prontos para uso")
+                return True
+            else:
+                logger.error(f"❌ Erro no treinamento: {training_results['error']}")
+                return False
+                
+        except Exception as e:
+            logger.error(f"Erro no treinamento em lote: {e}")
+            return False
     
     def _start_system_components(self, display: bool = True) -> bool:
         """Inicia todos os componentes do sistema"""
@@ -523,7 +522,7 @@ def main():
     parser.add_argument("--train-duration", type=int, default=10,
                        help="Duração do treinamento em minutos")
     
-    # NOVOS: Argumentos para treinamento em lote
+    # Argumentos para treinamento em lote
     parser.add_argument("--video-list", type=str, nargs="+",
                        help="Lista de arquivos de vídeo para treinamento")  
     parser.add_argument("--video-dir", type=str,
@@ -642,38 +641,12 @@ def main():
             print("⚠️  Evite vídeos com anomalias durante o treinamento!")
             input("Pressione ENTER para continuar...")
             
-            
-        else:
-            print(f"❌ Modo não reconhecido: {args.mode}")
-            return 1
-        
-        if success:
-            print("✓ Sistema executado com sucesso")
-            return 0
-        else:
-            print("❌ Erro na execução do sistema")
-            return 1)} arquivos de vídeo:")
-                for i, video in enumerate(args.video_list):
-                    print(f"   {i+1}. {os.path.basename(video)}")
-                video_source = args.video_list
-                
-            else:
-                print("❌ Erro: Especifique --video-dir ou --video-list para treinamento em lote")
-                print("Exemplos:")
-                print("  python main.py --mode batch-train --video-dir ./videos/treinamento/")
-                print("  python main.py --mode batch-train --video-list video1.mp4 video2.mp4 video3.mp4")
-                return 1
-            
-            print("⚠️  IMPORTANTE: Use apenas vídeos com comportamento NORMAL!")
-            print("⚠️  Evite vídeos com anomalias durante o treinamento!")
-            input("Pressione ENTER para continuar...")
-            
             success = system.start_batch_training(
                 video_source, 
                 args.epochs_cae, 
                 args.epochs_convlstm
             )
-        
+            
         else:
             print(f"❌ Modo não reconhecido: {args.mode}")
             return 1
@@ -790,6 +763,7 @@ def create_default_config():
         print(f"❌ Erro ao criar configuração: {e}")
 
 if __name__ == "__main__":
+
     
     # Verificar argumentos especiais
     if len(sys.argv) > 1:
