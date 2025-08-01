@@ -619,25 +619,46 @@ class DeepLearningDetector:
         logger.info(f"Modo de treinamento parado - {len(self.training_data)} frames coletados")
     
     def train_models(self, external_data: Optional[np.ndarray] = None, 
-                    epochs_cae: int = 50, epochs_convlstm: int = 30) -> Dict:
+                    epochs_cae: int = 50, epochs_convlstm: int = 30,
+                    video_files: Optional[List[str]] = None) -> Dict:
         """
-        Treina ambos os modelos
+        Treina ambos os modelos com suporte a múltiplos vídeos
         
         Args:
             external_data: Dados externos de treinamento (opcional)
             epochs_cae: Épocas para CAE
             epochs_convlstm: Épocas para ConvLSTM
+            video_files: Lista de arquivos de vídeo para treinamento
         """
         logger.info("Iniciando treinamento dos modelos")
         
-        # Usar dados coletados ou externos
+        # Coletar dados de múltiplas fontes
+        all_training_data = []
+        
+        # Usar dados coletados online se disponível
+        if self.training_data:
+            logger.info(f"Adicionando {len(self.training_data)} frames coletados online")
+            all_training_data.extend(self.training_data)
+        
+        # Usar dados externos se fornecidos
         if external_data is not None:
-            training_frames = external_data
-        elif self.training_data:
-            training_frames = np.array(self.training_data)
-        else:
+            logger.info(f"Adicionando {len(external_data)} frames de dados externos")
+            all_training_data.extend(external_data)
+        
+        # Processar múltiplos arquivos de vídeo
+        if video_files:
+            logger.info(f"Processando {len(video_files)} arquivos de vídeo para treinamento")
+            video_data = self._process_video_files(video_files)
+            if video_data:
+                all_training_data.extend(video_data)
+        
+        if not all_training_data:
             logger.error("Nenhum dado disponível para treinamento")
             return {"error": "Sem dados para treinamento"}
+        
+        # Converter para numpy array
+        training_frames = np.array(all_training_data)
+        logger.info(f"Dataset final: {len(training_frames)} frames")
         
         results = {}
         
@@ -647,11 +668,18 @@ class DeepLearningDetector:
             VideoProcessor.preprocess_frame(frame, self.config.model.cae_input_shape[:2])
             for frame in training_frames
         ])
-        cae_data = cae_data[cae_data != None]  # Remover frames inválidos
+        # Remover frames inválidos
+        cae_data = np.array([frame for frame in cae_data if frame is not None])
         
         if len(cae_data) > 0:
+            # Dividir em treino/validação (80/20)
+            split_idx = int(len(cae_data) * 0.8)
+            train_data = cae_data[:split_idx]
+            val_data = cae_data[split_idx:] if split_idx < len(cae_data) else None
+            
             cae_result = self.cae.train(
-                cae_data, 
+                train_data,
+                validation_data=val_data,
                 epochs=epochs_cae,
                 save_path=os.path.join(self.models_path, "cae_model")
             )
@@ -666,18 +694,152 @@ class DeepLearningDetector:
         )
         
         if len(sequences) > 0:
-            logger.info("Treinando ConvLSTM...")
+            # Dividir sequências em treino/validação
+            split_idx = int(len(sequences) * 0.8)
+            train_sequences = sequences[:split_idx]
+            val_sequences = sequences[split_idx:] if split_idx < len(sequences) else None
+            
+            logger.info(f"Treinando ConvLSTM com {len(train_sequences)} sequências...")
             convlstm_result = self.convlstm.train(
-                sequences,
+                train_sequences,
+                validation_sequences=val_sequences,
                 epochs=epochs_convlstm,
                 save_path=os.path.join(self.models_path, "convlstm_model")
             )
             results["convlstm_training"] = convlstm_result
         
         self.is_trained = True
+        
+        # Estatísticas finais
+        results["training_summary"] = {
+            "total_frames": len(training_frames),
+            "cae_frames": len(cae_data),
+            "convlstm_sequences": len(sequences) if len(sequences) > 0 else 0,
+            "video_files_processed": len(video_files) if video_files else 0,
+            "online_frames": len(self.training_data),
+            "external_frames": len(external_data) if external_data is not None else 0
+        }
+        
         logger.info("Treinamento concluído")
+        logger.info(f"Resumo: {results['training_summary']}")
         
         return results
+    
+    def _process_video_files(self, video_files: List[str]) -> List[np.ndarray]:
+        """
+        Processa múltiplos arquivos de vídeo para extração de frames
+        
+        Args:
+            video_files: Lista de caminhos para arquivos de vídeo
+            
+        Returns:
+            Lista de frames extraídos de todos os vídeos
+        """
+        all_frames = []
+        
+        for i, video_path in enumerate(video_files):
+            logger.info(f"Processando vídeo {i+1}/{len(video_files)}: {os.path.basename(video_path)}")
+            
+            if not os.path.exists(video_path):
+                logger.warning(f"Arquivo não encontrado: {video_path}")
+                continue
+            
+            try:
+                cap = cv2.VideoCapture(video_path)
+                
+                if not cap.isOpened():
+                    logger.warning(f"Não foi possível abrir: {video_path}")
+                    continue
+                
+                # Obter informações do vídeo
+                total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+                fps = cap.get(cv2.CAP_PROP_FPS)
+                
+                logger.info(f"  📹 Frames: {total_frames}, FPS: {fps:.1f}")
+                
+                # Estratégia de amostragem (não usar todos os frames)
+                # Para vídeos longos, pegar 1 frame a cada N frames
+                if total_frames > 3000:  # Mais de 100s a 30fps
+                    frame_skip = max(1, total_frames // 1500)  # Max 1500 frames por vídeo
+                else:
+                    frame_skip = 2  # Frame skip padrão
+                
+                frame_count = 0
+                extracted_frames = 0
+                
+                with tqdm(total=total_frames//frame_skip, desc=f"  Extraindo frames", leave=False) as pbar:
+                    while True:
+                        ret, frame = cap.read()
+                        if not ret:
+                            break
+                        
+                        # Aplicar frame skip
+                        if frame_count % frame_skip == 0:
+                            # Redimensionar frame para economizar memória
+                            resized_frame = cv2.resize(frame, (320, 240))
+                            all_frames.append(resized_frame)
+                            extracted_frames += 1
+                            pbar.update(1)
+                        
+                        frame_count += 1
+                        
+                        # Limitar frames por vídeo para evitar uso excessivo de memória
+                        if extracted_frames >= 1500:
+                            logger.info(f"  Limitado a {extracted_frames} frames para economizar memória")
+                            break
+                
+                cap.release()
+                logger.info(f"  ✅ Extraídos {extracted_frames} frames de {os.path.basename(video_path)}")
+                
+            except Exception as e:
+                logger.error(f"Erro ao processar {video_path}: {e}")
+                continue
+        
+        logger.info(f"Total de frames extraídos de todos os vídeos: {len(all_frames)}")
+        return all_frames
+    
+    def train_from_video_directory(self, video_directory: str, 
+                                 file_extensions: List[str] = None,
+                                 epochs_cae: int = 50, epochs_convlstm: int = 30) -> Dict:
+        """
+        Treina modelos usando todos os vídeos de um diretório
+        
+        Args:
+            video_directory: Diretório contendo vídeos de treinamento
+            file_extensions: Extensões de arquivo aceitas
+            epochs_cae: Épocas para CAE
+            epochs_convlstm: Épocas para ConvLSTM
+        """
+        if file_extensions is None:
+            file_extensions = ['.mp4', '.avi', '.mov', '.mkv', '.wmv', '.flv']
+        
+        logger.info(f"Buscando vídeos em: {video_directory}")
+        
+        if not os.path.exists(video_directory):
+            logger.error(f"Diretório não encontrado: {video_directory}")
+            return {"error": "Diretório não encontrado"}
+        
+        # Encontrar todos os arquivos de vídeo
+        video_files = []
+        for root, dirs, files in os.walk(video_directory):
+            for file in files:
+                if any(file.lower().endswith(ext) for ext in file_extensions):
+                    video_files.append(os.path.join(root, file))
+        
+        if not video_files:
+            logger.error(f"Nenhum arquivo de vídeo encontrado em: {video_directory}")
+            return {"error": "Nenhum vídeo encontrado"}
+        
+        logger.info(f"Encontrados {len(video_files)} arquivos de vídeo:")
+        for i, video_file in enumerate(video_files):
+            logger.info(f"  {i+1}. {os.path.basename(video_file)}")
+        
+        # Treinar com todos os vídeos
+        return self.train_models(
+            video_files=video_files,
+            epochs_cae=epochs_cae,
+            epochs_convlstm=epochs_convlstm
+        )
     
     def save_models(self, base_path: str = None):
         """Salva ambos os modelos"""
