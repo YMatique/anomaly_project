@@ -1,0 +1,344 @@
+2025-08-02 02:54:37,016 - anomaly_detection - INFO - Iniciando servidor web em http://127.0.0.1:5000
+2025-08-02 02:54:41,073 - anomaly_detection - INFO - Iniciando servidor web em http://127.0.0.1:5000
+2025-08-02 02:54:41,331 - anomaly_detection - INFO - Cliente web conectado
+2025-08-02 02:55:55,948 - anomaly_detection - ERROR - Erro ao iniciar sistema via API: 'SystemConfig' object has no attribute 'queue_size'
+2025-08-02 02:55:55,948 - anomaly_detection - INFO - Iniciando limpeza do InputManager
+2025-08-02 02:56:17,723 - anomaly_detection - INFO - Iniciando servidor web em http://127.0.0.1:5000
+2025-08-02 02:56:18,051 - anomaly_detection - INFO - Cliente web conectado
+2025-08-02 02:56:18,403 - anomaly_detection - ERROR - Erro ao iniciar sistema via API: 'SystemConfig' object has no attribute 'queue_size'
+2025-08-02 02:56:18,405 - anomaly_detection - INFO - Iniciando limpeza do InputManager
+2025-08-02 02:56:19,508 - anomaly_detection - ERROR - Erro ao iniciar sistema via API: 'SystemConfig' object has no attribute 'queue_size'
+2025-08-02 02:56:19,508 - anomaly_detection - INFO - Iniciando limpeza do InputManager
+2025-08-02 02:56:33,113 - anomaly_detection - INFO - Iniciando servidor web em http://127.0.0.1:5000
+2025-08-02 02:56:33,375 - anomaly_detection - INFO - Cliente web conectado
+2025-08-02 02:56:34,241 - anomaly_detection - INFO - InputManager inicializado
+2025-08-02 02:56:34,241 - anomaly_detection - INFO - OpticalFlowDetector inicializado - método: farneback
+2025-08-02 02:56:34,361 - anomaly_detection - INFO - Arquitetura CAE construída
+2025-08-02 02:56:34,361 - anomaly_detection - INFO - CAE inicializado - input shape: [64, 64, 3]
+2025-08-02 02:56:34,630 - anomaly_detection - INFO - Arquitetura ConvLSTM construída
+2025-08-02 02:56:34,630 - anomaly_detection - INFO - ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-02 02:56:34,630 - anomaly_detection - INFO - DeepLearningDetector inicializado
+2025-08-02 02:56:34,630 - anomaly_detection - INFO - ProcessingEngine inicializado
+2025-08-02 02:56:34,630 - anomaly_detection - INFO - AlertSystem inicializado
+2025-08-02 02:56:34,630 - anomaly_detection - INFO - OutputManager inicializado
+2025-08-02 02:56:34,630 - anomaly_detection - INFO - Callback adicionado - total: 1
+2025-08-02 02:56:34,630 - anomaly_detection - INFO - Callback de resultado adicionado - total: 1
+2025-08-02 02:56:34,630 - anomaly_detection - INFO - Callback de anomalia adicionado - total: 1
+2025-08-02 02:56:34,630 - anomaly_detection - INFO - WebSystemManager inicializado
+2025-08-02 02:56:34,646 - anomaly_detection - INFO - Inicializando arquivo: C:\Users\LENOVO\Documents\GitHub\anomaly_project\data\videos\normal\h-6.mp4
+2025-08-02 02:56:34,672 - anomaly_detection - INFO - Arquivo de vídeo carregado: C:\Users\LENOVO\Documents\GitHub\anomaly_project\data\videos\normal\h-6.mp4 (564 frames, 30.0 fps)
+2025-08-02 02:56:34,672 - anomaly_detection - INFO - Arquivo de vídeo inicializado com sucesso
+2025-08-02 02:56:34,672 - anomaly_detection - INFO - Thread de captura iniciada
+2025-08-02 02:56:34,672 - anomaly_detection - INFO - Captura de vídeo iniciada
+2025-08-02 02:56:34,672 - anomaly_detection - INFO - Iniciando processamento com 3 threads
+2025-08-02 02:56:34,678 - anomaly_detection - INFO - Thread de processamento 0 iniciada
+2025-08-02 02:56:34,678 - anomaly_detection - INFO - Thread de processamento 1 iniciada
+2025-08-02 02:56:34,680 - anomaly_detection - INFO - Thread de processamento 2 iniciada
+2025-08-02 02:56:34,680 - anomaly_detection - INFO - Monitor de performance iniciado
+2025-08-02 02:56:34,680 - anomaly_detection - INFO - Processamento iniciado
+2025-08-02 02:56:34,686 - anomaly_detection - INFO - Arquivo C:\Users\LENOVO\Documents\GitHub\anomaly_project\data\videos\normal\h-6.mp4 iniciado via web
+2025-08-02 02:56:35,112 - anomaly_detection - ERROR - Erro no processamento do frame 2: 'deep_learning_detections'
+2025-08-02 02:56:35,116 - anomaly_detection - ERROR - Erro no processamento do frame 4: 'deep_learning_detections'
+2025-08-02 02:56:35,116 - anomaly_detection - ERROR - Erro no processamento do frame 3: 'deep_learning_detections'
+2025-08-02 02:56:35,264 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:35,272 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:35,280 - anomaly_detection - ERROR - Erro no processamento do frame 7: 'optical_flow_detections'
+2025-08-02 02:56:35,440 - anomaly_detection - ERROR - Erro no processamento do frame 9: 'optical_flow_detections'
+2025-08-02 02:56:35,450 - anomaly_detection - ERROR - Erro no processamento do frame 8: 'optical_flow_detections'
+2025-08-02 02:56:35,457 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:35,603 - anomaly_detection - ERROR - Erro no processamento do frame 12: 'optical_flow_detections'
+2025-08-02 02:56:35,603 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:35,612 - anomaly_detection - ERROR - Erro no processamento do frame 13: 'optical_flow_detections'
+2025-08-02 02:56:35,769 - anomaly_detection - ERROR - Erro no processamento do frame 14: 'optical_flow_detections'
+2025-08-02 02:56:35,774 - anomaly_detection - ERROR - Erro no processamento do frame 15: 'optical_flow_detections'
+2025-08-02 02:56:35,788 - anomaly_detection - ERROR - Erro no processamento do frame 16: 'optical_flow_detections'
+2025-08-02 02:56:35,934 - anomaly_detection - ERROR - Erro no processamento do frame 17: 'optical_flow_detections'
+2025-08-02 02:56:35,941 - anomaly_detection - ERROR - Erro no processamento do frame 18: 'optical_flow_detections'
+2025-08-02 02:56:35,951 - anomaly_detection - ERROR - Erro no processamento do frame 19: 'optical_flow_detections'
+2025-08-02 02:56:36,095 - anomaly_detection - ERROR - Erro no processamento do frame 21: 'optical_flow_detections'
+2025-08-02 02:56:36,111 - anomaly_detection - ERROR - Erro no processamento do frame 20: 'optical_flow_detections'
+2025-08-02 02:56:36,145 - anomaly_detection - ERROR - Erro no processamento do frame 22: 'optical_flow_detections'
+2025-08-02 02:56:36,283 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:36,287 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:36,352 - anomaly_detection - ERROR - Erro no processamento do frame 23: 'deep_learning_detections'
+2025-08-02 02:56:36,387 - anomaly_detection - ERROR - Erro no processamento do frame 25: 'deep_learning_detections'
+2025-08-02 02:56:36,466 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:36,468 - anomaly_detection - ERROR - Erro no processamento do frame 26: 'optical_flow_detections'
+2025-08-02 02:56:36,549 - anomaly_detection - ERROR - Erro no processamento do frame 27: 'optical_flow_detections'
+2025-08-02 02:56:36,590 - anomaly_detection - ERROR - Erro no processamento do frame 28: 'optical_flow_detections'
+2025-08-02 02:56:36,648 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:36,670 - anomaly_detection - ERROR - Erro no processamento do frame 29: 'optical_flow_detections'
+2025-08-02 02:56:36,733 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:36,756 - anomaly_detection - ERROR - Erro no processamento do frame 30: 'optical_flow_detections'
+2025-08-02 02:56:36,822 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:36,833 - anomaly_detection - ERROR - Erro no processamento do frame 31: 'optical_flow_detections'
+2025-08-02 02:56:36,916 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:36,932 - anomaly_detection - ERROR - Erro no processamento do frame 32: 'optical_flow_detections'
+2025-08-02 02:56:37,018 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,039 - anomaly_detection - ERROR - Erro no processamento do frame 33: 'optical_flow_detections'
+2025-08-02 02:56:37,106 - anomaly_detection - ERROR - Erro no processamento do frame 34: 'optical_flow_detections'
+2025-08-02 02:56:37,154 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,204 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,243 - anomaly_detection - ERROR - Erro no processamento do frame 35: 'optical_flow_detections'
+2025-08-02 02:56:37,305 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,310 - anomaly_detection - ERROR - Erro no processamento do frame 37: 'optical_flow_detections'
+2025-08-02 02:56:37,384 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,437 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,467 - anomaly_detection - ERROR - Erro no processamento do frame 38: 'deep_learning_detections'
+2025-08-02 02:56:37,532 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,574 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,619 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,671 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,679 - anomaly_detection - ERROR - Erro no processamento do frame 41: 'optical_flow_detections'
+2025-08-02 02:56:37,717 - anomaly_detection - ERROR - Erro no processamento do frame 42: 'optical_flow_detections'
+2025-08-02 02:56:37,720 - anomaly_detection - ERROR - Erro no processamento do frame 39: 'deep_learning_detections'
+2025-08-02 02:56:37,852 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,903 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,951 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:37,951 - anomaly_detection - ERROR - Erro no processamento do frame 43: 'optical_flow_detections'
+2025-08-02 02:56:37,956 - anomaly_detection - ERROR - Erro no processamento do frame 45: 'optical_flow_detections'
+2025-08-02 02:56:37,964 - anomaly_detection - ERROR - Erro no processamento do frame 47: 'optical_flow_detections'
+2025-08-02 02:56:38,135 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:38,183 - anomaly_detection - ERROR - Erro no processamento do frame 49: 'optical_flow_detections'
+2025-08-02 02:56:38,193 - anomaly_detection - ERROR - Erro no processamento do frame 51: 'optical_flow_detections'
+2025-08-02 02:56:38,199 - anomaly_detection - ERROR - Erro no processamento do frame 53: 'optical_flow_detections'
+2025-08-02 02:56:38,329 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:38,374 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:38,380 - anomaly_detection - ERROR - Erro no processamento do frame 57: 'optical_flow_detections'
+2025-08-02 02:56:38,420 - anomaly_detection - ERROR - Erro no processamento do frame 59: 'optical_flow_detections'
+2025-08-02 02:56:38,432 - anomaly_detection - ERROR - Erro no processamento do frame 54: 'optical_flow_detections'
+2025-08-02 02:56:38,567 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:38,613 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:38,663 - anomaly_detection - ERROR - Erro no processamento do frame 62: 'optical_flow_detections'
+2025-08-02 02:56:38,665 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:38,725 - anomaly_detection - ERROR - Erro no processamento do frame 68: 'optical_flow_detections'
+2025-08-02 02:56:38,730 - anomaly_detection - ERROR - Erro no processamento do frame 67: 'optical_flow_detections'
+2025-08-02 02:56:38,847 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:38,895 - anomaly_detection - ERROR - Erro no processamento do frame 69: 'optical_flow_detections'
+2025-08-02 02:56:38,947 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:38,964 - anomaly_detection - ERROR - Erro no processamento do frame 74: 'optical_flow_detections'
+2025-08-02 02:56:38,978 - anomaly_detection - ERROR - Erro no processamento do frame 73: 'optical_flow_detections'
+2025-08-02 02:56:39,084 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:39,122 - anomaly_detection - ERROR - Erro no processamento do frame 75: 'optical_flow_detections'
+2025-08-02 02:56:39,180 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:39,209 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:39,209 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:39,321 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:39,321 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:39,419 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:39,427 - anomaly_detection - ERROR - Erro no processamento do frame 83: 'optical_flow_detections'
+2025-08-02 02:56:39,429 - anomaly_detection - ERROR - Erro no processamento do frame 82: 'optical_flow_detections'
+2025-08-02 02:56:39,538 - anomaly_detection - ERROR - Erro no processamento do frame 84: 'optical_flow_detections'
+2025-08-02 02:56:39,608 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:39,623 - anomaly_detection - ERROR - Erro no processamento do frame 89: 'optical_flow_detections'
+2025-08-02 02:56:39,634 - anomaly_detection - ERROR - Erro no processamento do frame 88: 'optical_flow_detections'
+2025-08-02 02:56:39,729 - anomaly_detection - ERROR - Erro no processamento do frame 90: 'optical_flow_detections'
+2025-08-02 02:56:39,798 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:39,818 - anomaly_detection - ERROR - Erro no processamento do frame 92: 'optical_flow_detections'
+2025-08-02 02:56:39,825 - anomaly_detection - ERROR - Erro no processamento do frame 94: 'optical_flow_detections'
+2025-08-02 02:56:39,904 - anomaly_detection - ERROR - Erro no processamento do frame 95: 'optical_flow_detections'
+2025-08-02 02:56:39,983 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,028 - anomaly_detection - ERROR - Erro no processamento do frame 97: 'optical_flow_detections'
+2025-08-02 02:56:40,080 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,133 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,147 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:40,189 - anomaly_detection - ERROR - Erro no processamento do frame 99: 'deep_learning_detections'
+2025-08-02 02:56:40,266 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,315 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,322 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:40,412 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,454 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,506 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,508 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:40,526 - anomaly_detection - ERROR - Erro no processamento do frame 104: 'deep_learning_detections'
+2025-08-02 02:56:40,655 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,697 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,723 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:40,755 - anomaly_detection - ERROR - Erro no processamento do frame 109: 'optical_flow_detections'
+2025-08-02 02:56:40,835 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,890 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,929 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:40,977 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,025 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,082 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,112 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:41,172 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,219 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,271 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,313 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,359 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,422 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,454 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,506 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,549 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,593 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,642 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,692 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,740 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,784 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,836 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,880 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,928 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:41,971 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,023 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,067 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,118 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,165 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,212 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,268 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,313 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,363 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,405 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,459 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,506 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,555 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,603 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,662 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,709 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,746 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,805 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,859 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,901 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:42,951 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,004 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,063 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,124 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,178 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,225 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,274 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,344 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,356 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:43,374 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:43,391 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:43,491 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,537 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,582 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,601 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:43,666 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,705 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,748 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,763 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:43,894 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,939 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:43,991 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,056 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,141 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,200 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,244 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,296 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,337 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,425 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,504 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,534 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,590 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,594 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:44,595 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:44,767 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,828 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,875 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,912 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,972 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:44,993 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:45,002 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:45,132 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:45,154 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:45,213 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:45,249 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:45,305 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:45,309 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:45,353 - anomaly_detection - ERROR - Erro no processamento do frame 132: 'optical_flow_detections'
+2025-08-02 02:56:45,437 - anomaly_detection - ERROR - Erro no processamento do frame 139: 'optical_flow_detections'
+2025-08-02 02:56:45,441 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:45,540 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:45,592 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:45,604 - anomaly_detection - ERROR - Erro no processamento do frame 185: 'optical_flow_detections'
+2025-08-02 02:56:45,653 - anomaly_detection - ERROR - Erro no processamento do frame 186: 'optical_flow_detections'
+2025-08-02 02:56:45,730 - anomaly_detection - ERROR - Erro no processamento do frame 187: 'optical_flow_detections'
+2025-08-02 02:56:45,791 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:45,841 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:45,853 - anomaly_detection - ERROR - Erro no processamento do frame 191: 'optical_flow_detections'
+2025-08-02 02:56:45,906 - anomaly_detection - ERROR - Erro no processamento do frame 195: 'optical_flow_detections'
+2025-08-02 02:56:45,971 - anomaly_detection - ERROR - Erro no processamento do frame 209: 'optical_flow_detections'
+2025-08-02 02:56:46,010 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,060 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,100 - anomaly_detection - ERROR - Erro no processamento do frame 210: 'optical_flow_detections'
+2025-08-02 02:56:46,145 - anomaly_detection - ERROR - Erro no processamento do frame 216: 'optical_flow_detections'
+2025-08-02 02:56:46,202 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,222 - anomaly_detection - ERROR - Erro no processamento do frame 217: 'optical_flow_detections'
+2025-08-02 02:56:46,305 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,357 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,401 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,430 - anomaly_detection - ERROR - Erro no processamento do frame 219: 'optical_flow_detections'
+2025-08-02 02:56:46,471 - anomaly_detection - ERROR - Erro no processamento do frame 223: 'optical_flow_detections'
+2025-08-02 02:56:46,534 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,547 - anomaly_detection - ERROR - Erro no processamento do frame 224: 'optical_flow_detections'
+2025-08-02 02:56:46,638 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,683 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,701 - anomaly_detection - ERROR - Erro no processamento do frame 226: 'optical_flow_detections'
+2025-08-02 02:56:46,740 - anomaly_detection - ERROR - Erro no processamento do frame 229: 'optical_flow_detections'
+2025-08-02 02:56:46,768 - anomaly_detection - ERROR - Erro no processamento do frame 230: 'optical_flow_detections'
+2025-08-02 02:56:46,866 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,907 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,958 - anomaly_detection - ERROR - Erro no processamento do frame 231: 'optical_flow_detections'
+2025-08-02 02:56:46,959 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:46,990 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:47,032 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:47,146 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:47,191 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:47,208 - anomaly_detection - ERROR - Erro no processamento do frame 236: 'optical_flow_detections'
+2025-08-02 02:56:47,242 - anomaly_detection - ERROR - Erro no processamento do frame 239: 'optical_flow_detections'
+2025-08-02 02:56:47,252 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:47,359 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:47,381 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:47,417 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:47,432 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:47,535 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:47,543 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:47,588 - anomaly_detection - ERROR - Erro no processamento do frame 252: 'optical_flow_detections'
+2025-08-02 02:56:47,607 - anomaly_detection - ERROR - Erro no processamento do frame 253: 'optical_flow_detections'
+2025-08-02 02:56:47,695 - anomaly_detection - ERROR - Erro no processamento do frame 254: 'optical_flow_detections'
+2025-08-02 02:56:47,765 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:47,812 - anomaly_detection - ERROR - Erro no processamento do frame 258: 'optical_flow_detections'
+2025-08-02 02:56:47,837 - anomaly_detection - ERROR - Erro no processamento do frame 259: 'optical_flow_detections'
+2025-08-02 02:56:47,894 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:47,929 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:47,943 - anomaly_detection - ERROR - Erro no processamento do frame 260: 'optical_flow_detections'
+2025-08-02 02:56:48,014 - anomaly_detection - WARNING - Queue de processamento cheia - frame descartado
+2025-08-02 02:56:48,026 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:48,047 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:48,104 - anomaly_detection - INFO - Fim do arquivo de vídeo
+2025-08-02 02:56:48,104 - anomaly_detection - INFO - Thread de captura finalizada
+2025-08-02 02:56:48,117 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:48,176 - anomaly_detection - ERROR - Erro no processamento do frame 267: 'optical_flow_detections'
+2025-08-02 02:56:48,199 - anomaly_detection - ERROR - Erro no processamento do frame 268: 'optical_flow_detections'
+2025-08-02 02:56:48,277 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:48,404 - anomaly_detection - ERROR - Erro no processamento do frame 271: 'optical_flow_detections'
+2025-08-02 02:56:48,449 - anomaly_detection - ERROR - Erro no processamento do frame 272: 'optical_flow_detections'
+2025-08-02 02:56:48,523 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:48,632 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:48,687 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:48,750 - anomaly_detection - ERROR - Erro em callback de resultado: Object of type bool_ is not JSON serializable
+2025-08-02 02:56:48,844 - anomaly_detection - ERROR - Erro no processamento do frame 280: 'optical_flow_detections'
+2025-08-02 02:56:48,874 - anomaly_detection - ERROR - Erro no processamento do frame 282: 'optical_flow_detections'
+2025-08-02 02:58:09,387 - anomaly_detection - INFO - InputManager inicializado
+2025-08-02 02:58:09,388 - anomaly_detection - INFO - OpticalFlowDetector inicializado - método: farneback
+2025-08-02 02:58:09,563 - anomaly_detection - INFO - Arquitetura CAE construída
+2025-08-02 02:58:09,563 - anomaly_detection - INFO - CAE inicializado - input shape: [64, 64, 3]
+2025-08-02 02:58:09,827 - anomaly_detection - INFO - Arquitetura ConvLSTM construída
+2025-08-02 02:58:09,827 - anomaly_detection - INFO - ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-02 02:58:09,827 - anomaly_detection - INFO - DeepLearningDetector inicializado
+2025-08-02 02:58:09,827 - anomaly_detection - INFO - ProcessingEngine inicializado
+2025-08-02 02:58:09,827 - anomaly_detection - INFO - AlertSystem inicializado
+2025-08-02 02:58:09,827 - anomaly_detection - INFO - OutputManager inicializado
+2025-08-02 02:58:09,827 - anomaly_detection - INFO - Callback adicionado - total: 1
+2025-08-02 02:58:09,827 - anomaly_detection - INFO - Callback de resultado adicionado - total: 1
+2025-08-02 02:58:09,827 - anomaly_detection - INFO - Callback de anomalia adicionado - total: 1
+2025-08-02 02:58:09,827 - anomaly_detection - ERROR - Erro na função main: 'AnomalyLogger' object has no attribute 'log_system_info'
+2025-08-02 02:58:09,917 - anomaly_detection - INFO - Iniciando limpeza do InputManager
+2025-08-02 02:58:09,917 - anomaly_detection - INFO - InputManager limpo
+2025-08-02 02:58:09,917 - anomaly_detection - INFO - Iniciando limpeza do ProcessingEngine
+2025-08-02 02:58:09,917 - anomaly_detection - INFO - OpticalFlowDetector resetado
+2025-08-02 02:58:09,917 - anomaly_detection - INFO - Detectores resetados
+2025-08-02 02:58:09,917 - anomaly_detection - INFO - ProcessingEngine limpo
+2025-08-02 02:58:09,917 - anomaly_detection - INFO - Iniciando limpeza do OutputManager
+2025-08-02 02:58:09,917 - anomaly_detection - INFO - OutputManager limpo
