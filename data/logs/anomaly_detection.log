@@ -10419,3 +10419,572 @@
 2025-08-02 02:35:35 | AnomalyDetection | ERROR    | error:101 | Erro em callback de resultado: Object of type Config is not JSON serializable
 2025-08-02 02:35:35 | AnomalyDetection | INFO     | info:90 | Fim do arquivo de vídeo
 2025-08-02 02:35:35 | AnomalyDetection | INFO     | info:90 | Thread de captura finalizada
+2025-08-02 02:58:29 | AnomalyDetection | INFO     | info:90 | Iniciando servidor web em http://127.0.0.1:5000
+2025-08-02 02:58:29 | AnomalyDetection | INFO     | info:90 | Cliente web conectado
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | ProcessingEngine inicializado
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | AlertSystem inicializado
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | OutputManager inicializado
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Callback adicionado - total: 1
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Callback de resultado adicionado - total: 1
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Callback de anomalia adicionado - total: 1
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | SISTEMA INICIADO | {'platform': 'Windows', 'python_version': '3.10.0rc2', 'cpu_count': 8, 'memory_gb': '15.7', 'timestamp': '2025-08-02T02:58:31.686100'}
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Sistema de Detecção de Anomalias inicializado
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Iniciando detecção por arquivo - ./data/videos/normal/h-6.mp4
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Inicializando arquivo: ./data/videos/normal/h-6.mp4
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Arquivo de vídeo carregado: ./data/videos/normal/h-6.mp4 (564 frames, 30.0 fps)
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Arquivo de vídeo inicializado com sucesso
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Thread de captura iniciada
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Captura de vídeo iniciada
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Iniciando processamento com 3 threads
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Thread de processamento 0 iniciada
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Thread de processamento 1 iniciada
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Thread de processamento 2 iniciada
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Monitor de performance iniciado
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Processamento iniciado
+2025-08-02 02:58:31 | AnomalyDetection | DEBUG    | debug:85 | Performance - Carga: 0.00, Frames: 0, Anomalias: 0
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Iniciando display visual
+2025-08-02 02:58:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 1 - Optical Flow
+2025-08-02 02:58:31 | AnomalyDetection | DEBUG    | debug:85 | Frame 1 - Pulando Deep Learning
+2025-08-02 02:58:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 2 - Optical Flow
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Thread de display iniciada
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Display visual iniciado
+2025-08-02 02:58:31 | AnomalyDetection | INFO     | info:90 | Sistema iniciado - pressione 'q' para sair, 'p' para pausar
+2025-08-02 02:58:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 3 - Optical Flow
+2025-08-02 02:58:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 4 - Optical Flow
+2025-08-02 02:58:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 2 - Deep Learning
+2025-08-02 02:58:31 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 3 - Deep Learning
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 4 - Deep Learning
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 4: 'deep_learning_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 5 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 2: 'deep_learning_detections'
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 3: 'deep_learning_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 6 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 7 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 5 - Pulando Deep Learning
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 8 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 6 - Pulando Deep Learning
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 9 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 7: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 10 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Frame 10 - Pulando Deep Learning
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 8: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 11 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 9: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 12 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 13 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 12: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 14 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 11: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 15 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 13: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 16 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 14: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 17 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 16: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 18 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 15: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 19 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 17: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 20 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 19: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 21 - Optical Flow
+2025-08-02 02:58:32 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 18: 'optical_flow_detections'
+2025-08-02 02:58:32 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 22 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 20: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 21: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 23 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 24 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 22: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 25 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 23 - Deep Learning
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 24: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 26 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 25 - Deep Learning
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 23: 'deep_learning_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 27 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 25: 'deep_learning_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 28 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 26: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 29 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 28: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 30 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 27: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 31 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 29: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 32 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 30: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 33 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 31: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 34 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 32: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 35 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 33: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 36 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 34: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 37 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 35: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 38 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 36: 'optical_flow_detections'
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 39 - Optical Flow
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 37 - Deep Learning
+2025-08-02 02:58:33 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:33 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 38 - Deep Learning
+2025-08-02 02:58:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 37: 'deep_learning_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 40 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 39 - Deep Learning
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 38: 'deep_learning_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 41 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 39: 'deep_learning_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 42 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 40 - Deep Learning
+2025-08-02 02:58:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 41: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 43 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 40: 'deep_learning_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 44 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 42: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 45 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 43: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 46 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 44: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 47 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 45: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 48 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 46: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 49 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 47: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 52 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 48: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 53 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 49: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 54 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 52: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 56 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 53: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 57 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 54: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 58 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 56 - Deep Learning
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Frame 57 - Pulando Deep Learning
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 59 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 58: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 60 - Optical Flow
+2025-08-02 02:58:34 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:34 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 59: 'optical_flow_detections'
+2025-08-02 02:58:34 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 61 - Optical Flow
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 60 - Pulando Deep Learning
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 62 - Optical Flow
+2025-08-02 02:58:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 61 - Deep Learning
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | DEBUG    | debug:85 | Frame 62 - Pulando Deep Learning
+2025-08-02 02:58:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 63 - Optical Flow
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 63 - Deep Learning
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:35 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 64 - Optical Flow
+2025-08-02 02:58:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 66 - Optical Flow
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 67 - Optical Flow
+2025-08-02 02:58:36 | AnomalyDetection | DEBUG    | debug:85 | Frame 64 - Pulando Deep Learning
+2025-08-02 02:58:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 68 - Optical Flow
+2025-08-02 02:58:36 | AnomalyDetection | DEBUG    | debug:85 | Frame 66 - Pulando Deep Learning
+2025-08-02 02:58:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 69 - Optical Flow
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | DEBUG    | debug:85 | Carga alta - pulando deep learning
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:36 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 67: 'optical_flow_detections'
+2025-08-02 02:58:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 70 - Optical Flow
+2025-08-02 02:58:36 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 68: 'optical_flow_detections'
+2025-08-02 02:58:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 71 - Optical Flow
+2025-08-02 02:58:36 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 69: 'optical_flow_detections'
+2025-08-02 02:58:36 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 73 - Optical Flow
+2025-08-02 02:58:36 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Frame 70 - Pulando Deep Learning
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 76 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Frame 71 - Pulando Deep Learning
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 79 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 73: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 99 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 76: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 100 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 99: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 104 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 79: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 105 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 100: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 106 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 105: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 110 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 104: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 111 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Frame 106 - Pulando Deep Learning
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 112 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 110: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 115 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 111: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 116 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 112: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 117 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 115: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 119 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 116: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 120 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 117: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 121 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 119: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 123 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 120: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 124 - Optical Flow
+2025-08-02 02:58:37 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 121: 'optical_flow_detections'
+2025-08-02 02:58:37 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 125 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 123: 'optical_flow_detections'
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 127 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 124 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 129 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 125 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 130 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 129 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 131 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 127 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 132 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 130 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 133 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 131 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 132: 'optical_flow_detections'
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 134 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 135 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 133 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 136 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 135 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 134 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 137 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 138 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 136 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 139 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 138 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 137 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 140 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 142 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 139 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 143 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 140 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 142 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 144 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 145 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 143 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 146 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 144 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 147 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 145 - Pulando Deep Learning
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 148 - Optical Flow
+2025-08-02 02:58:38 | AnomalyDetection | DEBUG    | debug:85 | Frame 146 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 149 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 147 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 150 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 148 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 152 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 149: 'optical_flow_detections'
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 153 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 150: 'optical_flow_detections'
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 154 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 152: 'optical_flow_detections'
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 155 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 153: 'optical_flow_detections'
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 156 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:39 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 154: 'optical_flow_detections'
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 157 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 155 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 159 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 156 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 160 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 157 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 161 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 159 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 162 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 160 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 163 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 161 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 164 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 162 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 165 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 163 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 166 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 164 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 167 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 165 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 169 - Optical Flow
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Frame 166 - Pulando Deep Learning
+2025-08-02 02:58:39 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 170 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 167 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 171 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 170 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 169: 'optical_flow_detections'
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 173 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 174 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 171 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 175 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 173 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 174 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 176 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 177 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 175 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 178 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 176 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 177 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 179 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 180 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 178: 'optical_flow_detections'
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 181 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 179: 'optical_flow_detections'
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 182 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 180: 'optical_flow_detections'
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 183 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 181: 'optical_flow_detections'
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 184 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 183 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 185 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 182 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 186 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 184 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 187 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 185 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 188 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 186: 'optical_flow_detections'
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 189 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 187: 'optical_flow_detections'
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 190 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 188: 'optical_flow_detections'
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 191 - Optical Flow
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Frame 189 - Pulando Deep Learning
+2025-08-02 02:58:40 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 192 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:41 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 190: 'optical_flow_detections'
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 193 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 191: 'optical_flow_detections'
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 194 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 192: 'optical_flow_detections'
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 195 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 193: 'optical_flow_detections'
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 196 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 194: 'optical_flow_detections'
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 197 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 195: 'optical_flow_detections'
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 198 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 196: 'optical_flow_detections'
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 199 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Frame 198 - Pulando Deep Learning
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 200 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 197: 'optical_flow_detections'
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 201 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Frame 199 - Pulando Deep Learning
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 202 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Frame 200 - Pulando Deep Learning
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 204 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 201: 'optical_flow_detections'
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 205 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Frame 202 - Pulando Deep Learning
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 206 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 204: 'optical_flow_detections'
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 207 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 205: 'optical_flow_detections'
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 208 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Frame 206 - Pulando Deep Learning
+2025-08-02 02:58:41 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 209 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Frame 207 - Pulando Deep Learning
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 210 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Frame 208 - Pulando Deep Learning
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 211 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Frame 209 - Pulando Deep Learning
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 212 - Optical Flow
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Frame 210 - Pulando Deep Learning
+2025-08-02 02:58:41 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 214 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 211: 'optical_flow_detections'
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 215 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 212: 'optical_flow_detections'
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 216 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 215 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 217 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 214: 'optical_flow_detections'
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 218 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 216: 'optical_flow_detections'
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 219 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 217 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 221 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 218: 'optical_flow_detections'
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 222 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 219 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 223 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 221 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 224 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 222 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 225 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 223 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 226 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 224 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 227 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 225 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 228 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 226 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 229 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 227: 'optical_flow_detections'
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 230 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 228: 'optical_flow_detections'
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 231 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 229: 'optical_flow_detections'
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 232 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 230 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 233 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 231 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 234 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 232 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 235 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 233: 'optical_flow_detections'
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 236 - Optical Flow
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Frame 234 - Pulando Deep Learning
+2025-08-02 02:58:42 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 237 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 235 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 238 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 236: 'optical_flow_detections'
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 239 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 237: 'optical_flow_detections'
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 240 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 238 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 241 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 239 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 242 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 241 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 243 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 240 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 244 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 242 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 245 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 243 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 244 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 246 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 247 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 245 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 248 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 246 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 249 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 247: 'optical_flow_detections'
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 250 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 248 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 251 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 249 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 252 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 250 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 253 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 253 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 251 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 254 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 255 - Optical Flow
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Frame 252 - Pulando Deep Learning
+2025-08-02 02:58:43 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 256 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 254 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 256: 'optical_flow_detections'
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 257 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 258 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 255: 'optical_flow_detections'
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 259 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 257 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 260 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 258 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 262 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 259: 'optical_flow_detections'
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 263 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 260 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 264 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 263 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 262 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 266 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 267 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | WARNING  | warning:95 | Queue de processamento cheia - frame descartado
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 264 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 268 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 267: 'optical_flow_detections'
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 269 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 266 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 270 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | INFO     | info:90 | Fim do arquivo de vídeo
+2025-08-02 02:58:44 | AnomalyDetection | INFO     | info:90 | Thread de captura finalizada
+2025-08-02 02:58:44 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 268: 'optical_flow_detections'
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 271 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 269 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 273 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 270 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 274 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 271 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 275 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 273 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 274 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 276 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 277 - Optical Flow
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Frame 275 - Pulando Deep Learning
+2025-08-02 02:58:44 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 278 - Optical Flow
+2025-08-02 02:58:45 | AnomalyDetection | DEBUG    | debug:85 | Frame 276 - Pulando Deep Learning
+2025-08-02 02:58:45 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 280 - Optical Flow
+2025-08-02 02:58:45 | AnomalyDetection | DEBUG    | debug:85 | Frame 277 - Pulando Deep Learning
+2025-08-02 02:58:45 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 281 - Optical Flow
+2025-08-02 02:58:45 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 278: 'optical_flow_detections'
+2025-08-02 02:58:45 | AnomalyDetection | DEBUG    | debug:85 | Processando frame 282 - Optical Flow
+2025-08-02 02:58:45 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 280: 'optical_flow_detections'
+2025-08-02 02:58:45 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 281: 'optical_flow_detections'
+2025-08-02 02:58:45 | AnomalyDetection | ERROR    | error:101 | Erro no processamento do frame 282: 'optical_flow_detections'
+2025-08-02 03:21:29 | AnomalyDetection | INFO     | info:90 | Iniciando servidor web em http://127.0.0.1:5000
+2025-08-02 03:21:29 | AnomalyDetection | INFO     | info:90 | Cliente web conectado
+2025-08-02 03:23:53 | AnomalyDetection | INFO     | info:90 | Cliente web desconectado
+2025-08-02 03:24:22 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-02 03:24:22 | AnomalyDetection | ERROR    | error:101 | Erro ao iniciar sistema via API: Logger.__init__() takes 1 positional argument but 2 were given
+2025-08-02 03:24:22 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-02 03:24:22 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-02 03:26:05 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-02 03:26:05 | AnomalyDetection | ERROR    | error:101 | Erro ao iniciar sistema via API: Logger.__init__() takes 1 positional argument but 2 were given
+2025-08-02 03:26:05 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-02 03:26:05 | AnomalyDetection | INFO     | info:90 | InputManager limpo
