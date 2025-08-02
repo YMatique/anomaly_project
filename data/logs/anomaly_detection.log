@@ -10992,3 +10992,7 @@
 2025-08-02 11:56:41 | AnomalyDetection | ERROR    | error:101 | Erro na função main: Logger.__init__() takes 1 positional argument but 2 were given
 2025-08-02 11:56:41 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
 2025-08-02 11:56:41 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-02 12:01:32 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-02 12:01:32 | AnomalyDetection | ERROR    | error:101 | Erro na função main: Logger.__init__() takes 1 positional argument but 2 were given
+2025-08-02 12:01:32 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-02 12:01:32 | AnomalyDetection | INFO     | info:90 | InputManager limpo
