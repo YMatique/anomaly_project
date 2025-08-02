@@ -10996,3 +10996,18 @@
 2025-08-02 12:01:32 | AnomalyDetection | ERROR    | error:101 | Erro na função main: Logger.__init__() takes 1 positional argument but 2 were given
 2025-08-02 12:01:32 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
 2025-08-02 12:01:32 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 01:23:45 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-03 01:23:46 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-03 01:23:46 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-03 01:23:48 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-03 01:23:48 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-03 01:23:48 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-03 01:28:11 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 01:28:11 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 01:28:11 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 01:29:48 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 01:29:48 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 01:29:48 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 01:29:59 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 01:29:59 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 01:29:59 | AnomalyDetection | INFO     | info:90 | InputManager limpo
