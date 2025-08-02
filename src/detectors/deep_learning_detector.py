@@ -2,6 +2,7 @@
 Detector de Deep Learning usando CAE (Convolutional Autoencoder) e ConvLSTM
 Segunda camada de detecção para análise mais profunda de anomalias
 Otimizado para i5 11Gen com 16GB RAM
+VERSÃO CORRIGIDA COM LIMITES DE FRAMES
 """
 
 import numpy as np
@@ -18,8 +19,32 @@ import threading
 from queue import Queue
 from tqdm import tqdm
 
-from ..utils.helpers import time_function, ModelUtils, VideoProcessor
+from ..utils.helpers import time_function, VideoProcessor
 from ..utils.logger import logger
+
+def normalize_batch_fixed(data: np.ndarray, params: Dict = None) -> Tuple[np.ndarray, Dict]:
+    """Função corrigida para normalizar dados"""
+    if params is None:
+        mean = np.mean(data, axis=0)
+        std = np.std(data, axis=0)
+        std = np.where(std == 0, 1, std)  # Evitar divisão por zero
+        params = {"mean": mean, "std": std}
+    else:
+        mean = params["mean"]
+        std = params["std"]
+    
+    normalized = (data - mean) / std
+    return normalized, params
+
+def create_sequences_fixed(data: np.ndarray, sequence_length: int, overlap: int = 1) -> np.ndarray:
+    """Cria sequências de frames para treinamento"""
+    sequences = []
+    step = max(1, sequence_length - overlap)
+    
+    for i in range(0, len(data) - sequence_length + 1, step):
+        sequences.append(data[i:i + sequence_length])
+    
+    return np.array(sequences)
 
 class ConvolutionalAutoencoder:
     """
@@ -91,8 +116,8 @@ class ConvolutionalAutoencoder:
         """
         logger.info(f"Iniciando treinamento CAE - {len(training_data)} samples, {epochs} epochs")
         
-        # Normalizar dados
-        normalized_data, self.normalization_params = ModelUtils.normalize_batch(training_data)
+        # Normalizar dados - CORRIGIDO
+        normalized_data, self.normalization_params = normalize_batch_fixed(training_data)
         
         # Callbacks
         callbacks = [
@@ -110,7 +135,7 @@ class ConvolutionalAutoencoder:
         # Treinamento
         validation_data_norm = None
         if validation_data is not None:
-            validation_data_norm = ModelUtils.normalize_batch(validation_data, self.normalization_params)[0]
+            validation_data_norm = normalize_batch_fixed(validation_data, self.normalization_params)[0]
         
         history = self.model.fit(
             normalized_data, normalized_data,  # Autoencoder: input = output
@@ -378,8 +403,8 @@ class ConvLSTMDetector:
         
         logger.info(f"Iniciando treinamento ConvLSTM - {len(sequences)} sequências")
         
-        # Normalizar
-        normalized_sequences, self.normalization_params = ModelUtils.normalize_batch(sequences)
+        # Normalizar - CORRIGIDO
+        normalized_sequences, self.normalization_params = normalize_batch_fixed(sequences)
         
         # Target = último frame de cada sequência
         targets = normalized_sequences[:, -1, :, :, :]
@@ -398,7 +423,7 @@ class ConvLSTMDetector:
         # Preparar dados de validação
         validation_data = None
         if validation_sequences is not None:
-            val_normalized = ModelUtils.normalize_batch(validation_sequences, self.normalization_params)[0]
+            val_normalized = normalize_batch_fixed(validation_sequences, self.normalization_params)[0]
             val_targets = val_normalized[:, -1, :, :, :]
             validation_data = (val_normalized, val_targets)
         
@@ -620,46 +645,73 @@ class DeepLearningDetector:
         logger.info(f"Modo de treinamento parado - {len(self.training_data)} frames coletados")
     
     def train_models(self, external_data: Optional[np.ndarray] = None, 
-                    epochs_cae: int = 50, epochs_convlstm: int = 30,
-                    video_files: Optional[List[str]] = None) -> Dict:
+                    epochs_cae: int = 10, epochs_convlstm: int = 8,  # REDUZIDO PARA TESTE
+                    video_files: Optional[List[str]] = None,
+                    max_frames_per_video: int = 50,     # NOVO PARÂMETRO
+                    max_total_frames: int = 1000) -> Dict:  # NOVO PARÂMETRO
         """
-        Treina ambos os modelos com suporte a múltiplos vídeos
+        Treina ambos os modelos com suporte a múltiplos vídeos COM LIMITES
         
         Args:
             external_data: Dados externos de treinamento (opcional)
-            epochs_cae: Épocas para CAE
-            epochs_convlstm: Épocas para ConvLSTM
+            epochs_cae: Épocas para CAE (padrão: 10 para teste)
+            epochs_convlstm: Épocas para ConvLSTM (padrão: 8 para teste)
             video_files: Lista de arquivos de vídeo para treinamento
+            max_frames_per_video: Máximo frames por vídeo (padrão: 50)
+            max_total_frames: Máximo total de frames (padrão: 1000)
         """
         logger.info("Iniciando treinamento dos modelos")
+        logger.info(f"CONFIGURAÇÃO: CAE {epochs_cae} épocas, ConvLSTM {epochs_convlstm} épocas")
+        logger.info(f"LIMITES: {max_frames_per_video} frames/vídeo, {max_total_frames} total")
         
         # Coletar dados de múltiplas fontes
         all_training_data = []
         
         # Usar dados coletados online se disponível
         if self.training_data:
-            logger.info(f"Adicionando {len(self.training_data)} frames coletados online")
-            all_training_data.extend(self.training_data)
+            frames_to_use = min(len(self.training_data), max_total_frames // 2)
+            logger.info(f"Adicionando {frames_to_use} frames coletados online")
+            all_training_data.extend(self.training_data[:frames_to_use])
         
         # Usar dados externos se fornecidos
         if external_data is not None:
-            logger.info(f"Adicionando {len(external_data)} frames de dados externos")
-            all_training_data.extend(external_data)
+            remaining_space = max_total_frames - len(all_training_data)
+            frames_to_use = min(len(external_data), remaining_space)
+            logger.info(f"Adicionando {frames_to_use} frames de dados externos")
+            all_training_data.extend(external_data[:frames_to_use])
         
-        # Processar múltiplos arquivos de vídeo
+            # Processar vídeos COM LIMITE ABSOLUTO
         if video_files:
-            logger.info(f"Processando {len(video_files)} arquivos de vídeo para treinamento")
-            video_data = self._process_video_files(video_files)
+            logger.info(f"Processando {len(video_files)} vídeos")
+            video_data = self._process_video_files(
+                video_files, 
+                max_frames_per_video=max_frames_per_video,
+                max_total_frames=max_total_frames
+            )
             if video_data:
-                all_training_data.extend(video_data)
+                all_training_data = video_data[:max_total_frames]  # CORTAR PARA GARANTIR
         
         if not all_training_data:
             logger.error("Nenhum dado disponível para treinamento")
             return {"error": "Sem dados para treinamento"}
         
-        # Converter para numpy array
+        # GARANTIR que não excede o limite
+        # if len(all_training_data) > max_total_frames:
+        #     logger.info(f"Limitando dataset de {len(all_training_data)} para {max_total_frames} frames")
+        #     # Pegar frames distribuídos uniformemente
+        #     indices = np.linspace(0, len(all_training_data)-1, max_total_frames, dtype=int)
+        #     all_training_data = [all_training_data[i] for i in indices]
+        
+        # # Converter para numpy array
+        # training_frames = np.array(all_training_data)
+        # logger.info(f"Dataset final: {len(training_frames)} frames")
+            # GARANTIR LIMITE FINAL
+        if len(all_training_data) > max_total_frames:
+            logger.info(f"🚨 CORTANDO dataset: {len(all_training_data)} -> {max_total_frames}")
+            all_training_data = all_training_data[:max_total_frames]
+        
         training_frames = np.array(all_training_data)
-        logger.info(f"Dataset final: {len(training_frames)} frames")
+        logger.info(f"✅ Dataset final garantido: {len(training_frames)} frames")
         
         results = {}
         
@@ -688,7 +740,7 @@ class DeepLearningDetector:
         
         # Preparar dados para ConvLSTM (sequências)
         logger.info("Preparando dados para ConvLSTM...")
-        sequences = ModelUtils.create_sequences(
+        sequences = create_sequences_fixed(
             cae_data, 
             self.config.model.convlstm_sequence_length,
             overlap=2
@@ -718,7 +770,9 @@ class DeepLearningDetector:
             "convlstm_sequences": len(sequences) if len(sequences) > 0 else 0,
             "video_files_processed": len(video_files) if video_files else 0,
             "online_frames": len(self.training_data),
-            "external_frames": len(external_data) if external_data is not None else 0
+            "external_frames": len(external_data) if external_data is not None else 0,
+            "max_frames_per_video": max_frames_per_video,
+            "max_total_frames": max_total_frames
         }
         
         logger.info("Treinamento concluído")
@@ -726,19 +780,31 @@ class DeepLearningDetector:
         
         return results
     
-    def _process_video_files(self, video_files: List[str]) -> List[np.ndarray]:
+    def _process_video_files(self, video_files: List[str], 
+                           max_frames_per_video: int = 50, 
+                           max_total_frames: int = 1000) -> List[np.ndarray]:
         """
-        Processa múltiplos arquivos de vídeo para extração de frames
+        Processa múltiplos arquivos de vídeo para extração de frames COM LIMITE
         
         Args:
             video_files: Lista de caminhos para arquivos de vídeo
+            max_frames_per_video: Máximo de frames por vídeo (padrão: 50)
+            max_total_frames: Máximo total de frames (padrão: 1000)
             
         Returns:
             Lista de frames extraídos de todos os vídeos
         """
         all_frames = []
         
+        logger.info(f"LIMITE: {max_frames_per_video} frames/vídeo, {max_total_frames} total")
+        total_frames_collected = 0
+        
         for i, video_path in enumerate(video_files):
+            # PARAR se já coletou frames suficientes
+            if total_frames_collected >= max_total_frames:
+                logger.info(f"Limite total atingido ({max_total_frames}). Parando processamento.")
+                break
+                
             logger.info(f"Processando vídeo {i+1}/{len(video_files)}: {os.path.basename(video_path)}")
             
             if not os.path.exists(video_path):
@@ -758,17 +824,26 @@ class DeepLearningDetector:
                 
                 logger.info(f"  📹 Frames: {total_frames}, FPS: {fps:.1f}")
                 
-                # Estratégia de amostragem (não usar todos os frames)
-                # Para vídeos longos, pegar 1 frame a cada N frames
-                if total_frames > 3000:  # Mais de 100s a 30fps
-                    frame_skip = max(1, total_frames // 1500)  # Max 1500 frames por vídeo
+                # Calcular quantos frames ainda pode coletar
+                remaining_space = max_total_frames - total_frames_collected
+                frames_to_extract = min(max_frames_per_video, remaining_space)
+                
+                if frames_to_extract <= 0:
+                    logger.info("Limite total atingido, parando.")
+                    break
+                
+                # Calcular skip para distribuir frames ao longo do vídeo
+                if total_frames <= frames_to_extract:
+                    frame_skip = 1
                 else:
-                    frame_skip = 2  # Frame skip padrão
+                    frame_skip = max(1, total_frames // frames_to_extract)
                 
                 frame_count = 0
                 extracted_frames = 0
                 
-                with tqdm(total=total_frames//frame_skip, desc=f"  Extraindo frames", leave=False) as pbar:
+                logger.info(f"  🎯 Extraindo {frames_to_extract} frames (skip: {frame_skip})")
+                
+                with tqdm(total=frames_to_extract, desc=f"  Extraindo frames", leave=False) as pbar:
                     while True:
                         ret, frame = cap.read()
                         if not ret:
@@ -777,20 +852,24 @@ class DeepLearningDetector:
                         # Aplicar frame skip
                         if frame_count % frame_skip == 0:
                             # Redimensionar frame para economizar memória
-                            resized_frame = cv2.resize(frame, (320, 240))
+                            resized_frame = cv2.resize(frame, (224, 224))  # Usar tamanho fixo
                             all_frames.append(resized_frame)
                             extracted_frames += 1
                             pbar.update(1)
                         
                         frame_count += 1
                         
-                        # Limitar frames por vídeo para evitar uso excessivo de memória
-                        if extracted_frames >= 1500:
-                            logger.info(f"  Limitado a {extracted_frames} frames para economizar memória")
+                        # Parar quando atingir limite por vídeo
+                        if extracted_frames >= frames_to_extract:
                             break
                 
                 cap.release()
-                logger.info(f"  ✅ Extraídos {extracted_frames} frames de {os.path.basename(video_path)}")
+                total_frames_collected += extracted_frames
+                logger.info(f"  ✅ Extraídos {extracted_frames} frames (Total: {total_frames_collected})")
+                
+                # Parar se atingiu limite total
+                if total_frames_collected >= max_total_frames:
+                    break
                 
             except Exception as e:
                 logger.error(f"Erro ao processar {video_path}: {e}")
@@ -801,20 +880,29 @@ class DeepLearningDetector:
     
     def train_from_video_directory(self, video_directory: str, 
                                  file_extensions: List[str] = None,
-                                 epochs_cae: int = 50, epochs_convlstm: int = 30) -> Dict:
+                                 epochs_cae: int = 10, epochs_convlstm: int = 8,  # REDUZIDO PARA TESTE
+                                 max_frames_per_video: int = 50,    # NOVO PARÂMETRO
+                                 max_total_frames: int = 1000) -> Dict:  # NOVO PARÂMETRO
         """
-        Treina modelos usando todos os vídeos de um diretório
+        Treina modelos usando todos os vídeos de um diretório COM LIMITES
         
         Args:
             video_directory: Diretório contendo vídeos de treinamento
             file_extensions: Extensões de arquivo aceitas
-            epochs_cae: Épocas para CAE
-            epochs_convlstm: Épocas para ConvLSTM
+            epochs_cae: Épocas para CAE (padrão: 10 para teste)
+            epochs_convlstm: Épocas para ConvLSTM (padrão: 8 para teste)
+            max_frames_per_video: Máximo frames por vídeo (padrão: 50)
+            max_total_frames: Máximo total de frames (padrão: 1000)
         """
         if file_extensions is None:
             file_extensions = ['.mp4', '.avi', '.mov', '.mkv', '.wmv', '.flv']
         
         logger.info(f"Buscando vídeos em: {video_directory}")
+        logger.info(f"CONFIGURAÇÃO DE TESTE:")
+        logger.info(f"  • Épocas CAE: {epochs_cae}")
+        logger.info(f"  • Épocas ConvLSTM: {epochs_convlstm}")
+        logger.info(f"  • Max frames/vídeo: {max_frames_per_video}")
+        logger.info(f"  • Max total frames: {max_total_frames}")
         
         if not os.path.exists(video_directory):
             logger.error(f"Diretório não encontrado: {video_directory}")
@@ -831,15 +919,15 @@ class DeepLearningDetector:
             logger.error(f"Nenhum arquivo de vídeo encontrado em: {video_directory}")
             return {"error": "Nenhum vídeo encontrado"}
         
-        logger.info(f"Encontrados {len(video_files)} arquivos de vídeo:")
-        for i, video_file in enumerate(video_files):
-            logger.info(f"  {i+1}. {os.path.basename(video_file)}")
+        logger.info(f"Encontrados {len(video_files)} arquivos de vídeo")
         
-        # Treinar com todos os vídeos
+        # Treinar com todos os vídeos COM LIMITE
         return self.train_models(
             video_files=video_files,
             epochs_cae=epochs_cae,
-            epochs_convlstm=epochs_convlstm
+            epochs_convlstm=epochs_convlstm,
+            max_frames_per_video=max_frames_per_video,    # NOVO
+            max_total_frames=max_total_frames             # NOVO
         )
     
     def save_models(self, base_path: str = None):
