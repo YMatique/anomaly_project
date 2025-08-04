@@ -11038,3 +11038,88 @@
 2025-08-03 01:59:40 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
 2025-08-03 01:59:40 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
 2025-08-03 01:59:40 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 07:46:56 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 07:46:56 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 07:46:56 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 07:48:30 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 07:48:30 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 07:48:30 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 07:50:13 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 07:50:13 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 07:50:13 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 07:52:27 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 07:52:27 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 07:52:27 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 07:53:43 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 07:53:43 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 07:53:43 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 07:55:11 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 07:55:11 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 07:55:11 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 07:56:04 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 07:56:04 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 07:56:04 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 07:59:16 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 07:59:16 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 07:59:16 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 08:00:21 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 08:00:21 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 08:00:21 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 08:08:58 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 08:08:58 | AnomalyDetection | ERROR    | error:101 | Erro na função main: Logger.__init__() takes 1 positional argument but 2 were given
+2025-08-03 08:08:58 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 08:08:58 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 08:20:47 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-03 08:20:48 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-03 08:20:48 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-03 08:20:48 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-03 08:20:48 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-03 08:20:48 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-03 08:21:21 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-03 08:21:22 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-03 08:21:22 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-03 08:21:24 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-03 08:21:24 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-03 08:21:24 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-03 08:21:30 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-03 08:21:31 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-03 08:21:31 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-03 08:21:32 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-03 08:21:32 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-03 08:21:32 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-03 08:21:56 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-03 08:21:56 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-03 08:21:56 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-03 08:21:57 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-03 08:21:57 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-03 08:21:57 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-03 08:22:36 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-03 08:22:36 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-03 08:22:36 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-03 08:22:37 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-03 08:22:37 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-03 08:22:37 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-03 08:23:40 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-03 08:23:40 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-03 08:23:40 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-03 08:23:42 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-03 08:23:42 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-03 08:23:42 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-03 08:25:26 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-03 08:25:26 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-03 08:25:26 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-03 08:25:27 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-03 08:25:27 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-03 08:25:27 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-03 08:27:20 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-03 08:27:20 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-03 08:27:20 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-03 08:27:21 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-03 08:27:21 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-03 08:27:21 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-03 17:34:01 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 17:34:01 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 17:34:01 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-03 21:55:11 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-03 21:55:11 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-03 21:55:11 | AnomalyDetection | INFO     | info:90 | InputManager limpo

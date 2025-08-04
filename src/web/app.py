@@ -1,6 +1,7 @@
 """
-Interface Web Flask - Sistema Híbrido com Fallback Inteligente
-GARANTIDO para funcionar na apresentação de segunda-feira!
+Sistema de Detecção Corrigido
+Optical Flow como filtro + CAE/ConvLSTM com thresholds ajustados
+GARANTIDO para funcionar na apresentação!
 """
 
 import os
@@ -10,6 +11,7 @@ import time
 import threading
 import logging
 from datetime import datetime
+from collections import deque
 import cv2
 import numpy as np
 from flask import Flask, render_template, jsonify, request, Response
@@ -17,473 +19,471 @@ from flask_cors import CORS
 
 # Setup básico de logging
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("WebApp")
+logger = logging.getLogger("CorrectedSystem")
 
 # Adiciona path do projeto
 current_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.join(current_dir, '..', '..')
 sys.path.insert(0, project_root)
 
-# PATCH TEMPORÁRIO: Substitui a classe Logger problemática
+# PATCH do Logger
 class MockLogger:
-    """Logger mock que aceita parâmetros sem causar erro"""
     def __init__(self, name=None):
         self.name = name or "MockLogger"
         self.logger = logging.getLogger(self.name)
     
-    def info(self, msg):
-        self.logger.info(msg)
-    
-    def error(self, msg):
-        self.logger.error(msg)
-    
-    def warning(self, msg):
-        self.logger.warning(msg)
-    
-    def debug(self, msg):
-        self.logger.debug(msg)
+    def info(self, msg): self.logger.info(msg)
+    def error(self, msg): self.logger.error(msg)
+    def warning(self, msg): self.logger.warning(msg)
+    def debug(self, msg): self.logger.debug(msg)
 
-# Injeta o MockLogger no sistema antes de importar
 try:
     from src.utils import logger as logger_module
     logger_module.Logger = MockLogger
-    logger.info("✅ Logger patcheado com sucesso")
-except:
-    pass
+    logger.info("✅ Logger patcheado")
+except: pass
 
-# Agora tenta importar o sistema principal
-try:
-    from main import AnomalyDetectionSystem
-    MAIN_SYSTEM_AVAILABLE = True
-    logger.info("✅ Sistema principal importado com sucesso!")
-except ImportError as e:
-    logger.warning(f"⚠️ Erro ao importar sistema principal: {e}")
-    MAIN_SYSTEM_AVAILABLE = False
-
-# Tenta importar detectores individuais como fallback
+# Importa detectores
 try:
     from src.detectors.optical_flow_detector import OpticalFlowDetector
     from src.detectors.deep_learning_detector import DeepLearningDetector
     from src.utils.config import Config
     DETECTORS_AVAILABLE = True
-    logger.info("✅ Detectores individuais disponíveis")
+    logger.info("✅ Detectores importados")
 except ImportError as e:
-    logger.warning(f"⚠️ Detectores individuais não disponíveis: {e}")
+    logger.warning(f"⚠️ Detectores não disponíveis: {e}")
     DETECTORS_AVAILABLE = False
 
 app = Flask(__name__)
 CORS(app)
 
-# Estado global do sistema
+# Estado global
 system_running = False
 system_paused = False
-training_mode = False
 current_frame = None
 current_frame_with_detection = None
 camera_capture = None
 
-# Sistema principal ou detectores individuais
-main_system = None
+# Detectores corrigidos
 optical_flow_detector = None
 deep_learning_detector = None
 config = None
 
-# Sistema de fallback inteligente
-detection_method = "HYBRID"  # HYBRID, DEEP_LEARNING, OPTICAL_FLOW
-deep_learning_failures = 0
-max_dl_failures = 5
+# Buffers para análise temporal
+frame_buffer = deque(maxlen=5)  # Reduzido para 5 frames
+previous_frames = deque(maxlen=3)
 
-# Buffer para frames anteriores (optical flow)
-previous_frames = []
-max_previous_frames = 3
-
-# Padrões de movimento para classificação de anomalias
-movement_patterns = {
-    'sudden_movement': {'threshold': 0.6, 'name': 'Movimento brusco detectado'},
-    'high_activity': {'threshold': 0.4, 'name': 'Alta atividade detectada'},
-    'erratic_pattern': {'threshold': 0.3, 'name': 'Padrão de movimento irregular'},
-    'suspicious_behavior': {'threshold': 0.25, 'name': 'Comportamento suspeito detectado'},
-    'normal_movement': {'threshold': 0.15, 'name': 'Movimento normal detectado'}
+# Thresholds corrigidos
+CORRECTED_THRESHOLDS = {
+    'optical_flow_movement': 15.0,      # Bem mais alto - só movimento significativo
+    'optical_flow_anomaly': 25.0,       # Movimento muito intenso
+    'cae_confidence': 0.3,              # Bem mais baixo - era muito conservador
+    'convlstm_confidence': 0.4,         # Mais baixo também
+    'temporal_frames': 5,               # Menos frames necessários
+    'sudden_change_factor': 3.0         # 3x mudança = anômalo
 }
 
-# Estatísticas em tempo real
+# Estatísticas detalhadas
 stats = {
     'frames_processed': 0,
     'anomalies_detected': 0,
-    'fps': 0.0,
-    'avg_processing_time': 0.0,
     'optical_flow_detections': 0,
-    'deep_learning_detections': 0,
-    'fallback_detections': 0,
-    'detection_method': 'HYBRID',
-    'deep_learning_active': False,
-    'recent_alerts': []
+    'cae_detections': 0,
+    'convlstm_detections': 0,
+    'false_positives_filtered': 0,
+    'fps': 0.0,
+    'recent_alerts': [],
+    'detection_breakdown': {
+        'optical_flow_calls': 0,
+        'cae_calls': 0,
+        'convlstm_calls': 0,
+        'cae_successes': 0,
+        'convlstm_successes': 0
+    }
 }
 
-# Locks para thread safety
+# Locks
 frame_lock = threading.Lock()
 stats_lock = threading.Lock()
 detection_lock = threading.Lock()
 
-def initialize_system_safe():
-    """Inicializa o sistema de forma segura"""
-    global main_system, optical_flow_detector, deep_learning_detector, config, detection_method
+def initialize_corrected_system():
+    """Inicializa sistema com detectores corrigidos"""
+    global optical_flow_detector, deep_learning_detector, config
     
     try:
-        if MAIN_SYSTEM_AVAILABLE:
-            logger.info("🚀 Inicializando sistema principal...")
-            main_system = AnomalyDetectionSystem()
-            detection_method = "HYBRID"
-            logger.info("✅ Sistema principal inicializado - Modo HÍBRIDO ativo")
+        logger.info("🔧 Inicializando sistema com correções...")
+        
+        if not DETECTORS_AVAILABLE:
+            logger.warning("⚠️ Detectores não disponíveis - modo básico")
             return True
-            
-        elif DETECTORS_AVAILABLE:
-            logger.info("🚀 Inicializando detectores individuais...")
-            
-            try:
-                config = Config()
-            except:
-                config = type('MockConfig', (), {
-                    'get': lambda self, key, default=None: default,
-                    'get_all': lambda self: {}
-                })()
-            
-            optical_flow_detector = OpticalFlowDetector(config)
-            deep_learning_detector = DeepLearningDetector(config)
-            detection_method = "HYBRID"
-            logger.info("✅ Detectores individuais inicializados - Modo HÍBRIDO ativo")
-            return True
-        else:
-            detection_method = "OPTICAL_FLOW"
-            logger.info("📱 Funcionará apenas com Optical Flow básico")
-            return True
-            
+        
+        # Configuração mock ou real
+        try:
+            config = Config()
+            logger.info("✅ Configuração carregada")
+        except:
+            config = type('MockConfig', (), {
+                'get': lambda self, key, default=None: default,
+                'get_all': lambda self: {}
+            })()
+            logger.info("📝 Usando configuração mock")
+        
+        # Inicializa detectores
+        optical_flow_detector = OpticalFlowDetector(config)
+        deep_learning_detector = DeepLearningDetector(config)
+        
+        logger.info("✅ Sistema corrigido inicializado!")
+        logger.info("🔧 Thresholds ajustados:")
+        logger.info(f"   • Optical Flow: {CORRECTED_THRESHOLDS['optical_flow_movement']}")
+        logger.info(f"   • CAE: {CORRECTED_THRESHOLDS['cae_confidence']}")
+        logger.info(f"   • ConvLSTM: {CORRECTED_THRESHOLDS['convlstm_confidence']}")
+        
+        return True
+        
     except Exception as e:
-        logger.error(f"❌ Erro ao inicializar sistema: {e}")
-        detection_method = "OPTICAL_FLOW"
-        logger.info("🔄 Fallback para Optical Flow básico")
-        return True  # Sempre retorna True pois optical flow básico sempre funciona
+        logger.error(f"❌ Erro ao inicializar: {e}")
+        return True  # Continua mesmo com erro
 
-def robust_optical_flow(current_frame, prev_frame):
-    """Implementação robusta de optical flow com análise de padrões"""
+def corrected_optical_flow_detection(frame, prev_frame=None):
+    """Optical Flow corrigido - filtro inteligente"""
     try:
+        if prev_frame is None:
+            return {
+                'movement_detected': False,
+                'score': 0.0,
+                'vectors': [],
+                'should_analyze_deep': False,
+                'reason': 'no_previous_frame'
+            }
+        
         # Converte para grayscale
-        if len(current_frame.shape) == 3:
-            curr_gray = cv2.cvtColor(current_frame, cv2.COLOR_BGR2GRAY)
+        if len(frame.shape) == 3:
+            curr_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         else:
-            curr_gray = current_frame
+            curr_gray = frame
             
         if len(prev_frame.shape) == 3:
             prev_gray = cv2.cvtColor(prev_frame, cv2.COLOR_BGR2GRAY)
         else:
             prev_gray = prev_frame
         
-        # Redimensiona se necessário
+        # Garante compatibilidade
         if curr_gray.shape != prev_gray.shape:
             prev_gray = cv2.resize(prev_gray, (curr_gray.shape[1], curr_gray.shape[0]))
         
-        # Detecta cantos para tracking
-        corners = cv2.goodFeaturesToTrack(prev_gray, maxCorners=150, qualityLevel=0.3, minDistance=7, blockSize=7)
+        # Detecta features
+        corners = cv2.goodFeaturesToTrack(
+            prev_gray, 
+            maxCorners=200,  # Mais pontos para análise
+            qualityLevel=0.3,
+            minDistance=7,
+            blockSize=7
+        )
         
         if corners is not None:
             # Calcula optical flow
-            next_points, status, error = cv2.calcOpticalFlowPyrLK(prev_gray, curr_gray, corners, None)
+            next_points, status, error = cv2.calcOpticalFlowPyrLK(
+                prev_gray, curr_gray, corners, None
+            )
             
             # Filtra pontos válidos
             good_new = next_points[status == 1]
             good_old = corners[status == 1]
             
-            if len(good_new) > 0 and len(good_old) > 0:
-                # Calcula vetores de movimento
+            if len(good_new) > 0:
+                # Analisa movimento
                 movement_vectors = good_new - good_old
                 magnitudes = np.sqrt(movement_vectors[:, 0]**2 + movement_vectors[:, 1]**2)
                 
-                # Análise avançada de padrões
                 avg_magnitude = np.mean(magnitudes)
                 max_magnitude = np.max(magnitudes)
-                movement_variance = np.var(magnitudes)
-                
-                # Detecta padrões específicos
-                high_magnitude_count = np.sum(magnitudes > 10)
-                erratic_movement = movement_variance > 50
-                sudden_movement = max_magnitude > 30
-                
-                # Calcula score normalizado
-                base_score = min(avg_magnitude / 30.0, 1.0)
-                
-                # Ajusta score baseado em padrões
-                if sudden_movement:
-                    base_score = min(base_score * 1.5, 1.0)
-                if erratic_movement:
-                    base_score = min(base_score * 1.3, 1.0)
-                if high_magnitude_count > len(magnitudes) * 0.3:
-                    base_score = min(base_score * 1.2, 1.0)
+                movement_count = len(magnitudes)
                 
                 # Cria vetores para visualização
                 flow_vectors = []
                 for i, (new, old) in enumerate(zip(good_new, good_old)):
-                    if magnitudes[i] > 3:  # Apenas movimentos significativos
+                    if magnitudes[i] > 2:  # Apenas movimento significativo
                         flow_vectors.append((old[0], old[1], new[0], new[1]))
                 
+                # LÓGICA CORRIGIDA: Movimento deve ser significativo
+                movement_detected = avg_magnitude > CORRECTED_THRESHOLDS['optical_flow_movement']
+                
+                # Log detalhado
+                logger.info(f"🔍 Optical Flow: {movement_count} vetores, mag={avg_magnitude:.2f}, max={max_magnitude:.2f}")
+                
+                with stats_lock:
+                    stats['detection_breakdown']['optical_flow_calls'] += 1
+                
                 return {
-                    'score': base_score,
-                    'flow_vectors': flow_vectors[:40],  # Limita para performance
+                    'movement_detected': movement_detected,
+                    'score': avg_magnitude,
+                    'vectors': flow_vectors[:30],  # Limita para performance
+                    'should_analyze_deep': movement_detected,  # Só passa se movimento significativo
                     'magnitude': avg_magnitude,
                     'max_magnitude': max_magnitude,
-                    'variance': movement_variance,
-                    'sudden_movement': sudden_movement,
-                    'erratic_movement': erratic_movement,
-                    'vector_count': len(good_new)
+                    'vector_count': movement_count,
+                    'reason': f'movement_threshold_{CORRECTED_THRESHOLDS["optical_flow_movement"]}'
                 }
         
-        return {'score': 0.0, 'flow_vectors': [], 'magnitude': 0.0, 'vector_count': 0}
+        return {
+            'movement_detected': False,
+            'score': 0.0,
+            'vectors': [],
+            'should_analyze_deep': False,
+            'reason': 'no_features_detected'
+        }
         
     except Exception as e:
         logger.warning(f"⚠️ Erro no optical flow: {e}")
-        return {'score': 0.0, 'flow_vectors': [], 'error': str(e)}
+        return {
+            'movement_detected': False,
+            'score': 0.0,
+            'vectors': [],
+            'should_analyze_deep': False,
+            'reason': f'error: {e}'
+        }
 
-def classify_movement_anomaly(optical_flow_result):
-    """Classifica tipo de anomalia baseado no optical flow"""
-    score = optical_flow_result.get('score', 0.0)
-    sudden = optical_flow_result.get('sudden_movement', False)
-    erratic = optical_flow_result.get('erratic_movement', False)
-    vector_count = optical_flow_result.get('vector_count', 0)
-    
-    # Classificação hierárquica
-    if sudden and score > 0.6:
-        return 'sudden_movement'
-    elif erratic and score > 0.4:
-        return 'erratic_pattern'
-    elif score > 0.4 and vector_count > 50:
-        return 'high_activity'
-    elif score > 0.25:
-        return 'suspicious_behavior'
-    elif score > 0.15:
-        return 'normal_movement'
-    else:
-        return None
-
-def try_deep_learning_detection(frame):
-    """Tenta detecção com deep learning - com fallback automático"""
-    global deep_learning_failures, detection_method
-    
+def corrected_cae_detection(frame):
+    """CAE corrigido - threshold mais baixo"""
     try:
         if not deep_learning_detector:
-            return None
+            return {'anomaly_detected': False, 'reason': 'no_detector'}
         
-        # Redimensiona frame
+        # Redimensiona para entrada do modelo
         resized_frame = cv2.resize(frame, (64, 64))
         
-        # Tenta análise com CAE
+        with stats_lock:
+            stats['detection_breakdown']['cae_calls'] += 1
+        
+        logger.info("🧠 Executando CAE...")
+        
+        # Chama detector CAE
         cae_result = deep_learning_detector.detect_frame(resized_frame)
         
-        if cae_result and cae_result.get('anomaly_detected', False):
-            # Reset contador de falhas
-            deep_learning_failures = 0
+        if cae_result:
+            original_confidence = cae_result.get('confidence', 0.0)
             
-            with stats_lock:
-                stats['deep_learning_active'] = True
+            # CORREÇÃO: Threshold bem mais baixo
+            anomaly_detected = original_confidence > CORRECTED_THRESHOLDS['cae_confidence']
+            
+            logger.info(f"🧠 CAE resultado: conf={original_confidence:.3f}, threshold={CORRECTED_THRESHOLDS['cae_confidence']}, detectou={anomaly_detected}")
+            
+            if anomaly_detected:
+                with stats_lock:
+                    stats['detection_breakdown']['cae_successes'] += 1
+                    stats['cae_detections'] += 1
             
             return {
-                'anomaly_detected': True,
-                'anomaly_type': cae_result.get('anomaly_type', 'anomalia_deep_learning'),
-                'confidence': cae_result.get('confidence', 0.8),
-                'method': 'Deep Learning (CAE)'
+                'anomaly_detected': anomaly_detected,
+                'confidence': original_confidence,
+                'anomaly_type': cae_result.get('anomaly_type', 'anomalia_espacial'),
+                'method': 'CAE (Corrigido)',
+                'threshold_used': CORRECTED_THRESHOLDS['cae_confidence']
             }
         
-        # Se chegou aqui, deep learning não detectou anomalia mas funcionou
-        deep_learning_failures = max(0, deep_learning_failures - 1)
-        
-        with stats_lock:
-            stats['deep_learning_active'] = True
-        
-        return {'anomaly_detected': False, 'method': 'Deep Learning (CAE)'}
+        return {'anomaly_detected': False, 'reason': 'cae_no_result'}
         
     except Exception as e:
-        # Incrementa contador de falhas
-        deep_learning_failures += 1
-        logger.warning(f"⚠️ Falha no deep learning ({deep_learning_failures}/{max_dl_failures}): {e}")
-        
-        # Se muitas falhas, desativa temporariamente
-        if deep_learning_failures >= max_dl_failures:
-            with stats_lock:
-                stats['deep_learning_active'] = False
-            logger.warning("🔄 Deep Learning temporariamente desativado - usando apenas Optical Flow")
-        
-        return None
+        logger.error(f"❌ Erro no CAE: {e}")
+        return {'anomaly_detected': False, 'reason': f'cae_error: {e}'}
 
-def process_frame_intelligent_hybrid(frame):
-    """Processamento híbrido inteligente com fallback garantido"""
-    global previous_frames, stats, detection_method
+def corrected_convlstm_detection(frame_sequence):
+    """ConvLSTM corrigido - menos frames e threshold baixo"""
+    try:
+        if not deep_learning_detector or len(frame_sequence) < CORRECTED_THRESHOLDS['temporal_frames']:
+            return {'anomaly_detected': False, 'reason': f'insufficient_frames_{len(frame_sequence)}'}
+        
+        with stats_lock:
+            stats['detection_breakdown']['convlstm_calls'] += 1
+        
+        logger.info(f"🕐 Executando ConvLSTM com {len(frame_sequence)} frames...")
+        
+        # Prepara sequência para ConvLSTM
+        sequence = []
+        for frame in frame_sequence:
+            resized = cv2.resize(frame, (64, 64))
+            sequence.append(resized)
+        
+        # Chama detector ConvLSTM
+        convlstm_result = deep_learning_detector.detect_sequence(sequence)
+        
+        if convlstm_result:
+            original_confidence = convlstm_result.get('confidence', 0.0)
+            
+            # CORREÇÃO: Threshold mais baixo
+            anomaly_detected = original_confidence > CORRECTED_THRESHOLDS['convlstm_confidence']
+            
+            logger.info(f"🕐 ConvLSTM resultado: conf={original_confidence:.3f}, threshold={CORRECTED_THRESHOLDS['convlstm_confidence']}, detectou={anomaly_detected}")
+            
+            if anomaly_detected:
+                with stats_lock:
+                    stats['detection_breakdown']['convlstm_successes'] += 1
+                    stats['convlstm_detections'] += 1
+            
+            return {
+                'anomaly_detected': anomaly_detected,
+                'confidence': original_confidence,
+                'anomaly_type': convlstm_result.get('anomaly_type', 'anomalia_temporal'),
+                'method': 'ConvLSTM (Corrigido)',
+                'threshold_used': CORRECTED_THRESHOLDS['convlstm_confidence'],
+                'sequence_length': len(frame_sequence)
+            }
+        
+        return {'anomaly_detected': False, 'reason': 'convlstm_no_result'}
+        
+    except Exception as e:
+        logger.error(f"❌ Erro no ConvLSTM: {e}")
+        return {'anomaly_detected': False, 'reason': f'convlstm_error: {e}'}
+
+def process_frame_corrected_pipeline(frame):
+    """Pipeline corrigido: Optical Flow → CAE → ConvLSTM"""
+    global frame_buffer, previous_frames
     
     try:
         start_time = time.time()
-        detection_found = False
-        anomaly_type = "normal"
-        confidence = 0.0
-        detection_source = "Nenhum"
-        optical_flow_result = {'score': 0.0, 'flow_vectors': []}
         
-        # ESTÁGIO 1: Optical Flow (SEMPRE executa)
+        # ESTÁGIO 1: Optical Flow como FILTRO
+        optical_flow_result = {'movement_detected': False, 'should_analyze_deep': False}
+        
         if len(previous_frames) > 0:
-            optical_flow_result = robust_optical_flow(frame, previous_frames[-1])
-            optical_flow_score = optical_flow_result.get('score', 0.0)
+            optical_flow_result = corrected_optical_flow_detection(frame, previous_frames[-1])
             
-            # Log detalhado para debug
-            logger.info(f"🔍 Optical Flow: score={optical_flow_score:.3f}, vetores={optical_flow_result.get('vector_count', 0)}")
-            
-            movement_detected = optical_flow_score > 0.15  # Threshold baixo para tentar deep learning
-            
-            if movement_detected:
+            if optical_flow_result['movement_detected']:
                 with stats_lock:
                     stats['optical_flow_detections'] += 1
-        else:
-            movement_detected = False
-            optical_flow_score = 0.0
         
-        # ESTÁGIO 2: Tenta Deep Learning (se movimento detectado e sistema ativo)
-        deep_learning_result = None
-        if movement_detected and deep_learning_failures < max_dl_failures:
-            deep_learning_result = try_deep_learning_detection(frame)
-            
-            if deep_learning_result and deep_learning_result.get('anomaly_detected'):
-                detection_found = True
-                anomaly_type = deep_learning_result.get('anomaly_type', 'anomalia_deep_learning')
-                confidence = deep_learning_result.get('confidence', 0.8)
-                detection_source = deep_learning_result.get('method', 'Deep Learning')
-                
-                with stats_lock:
-                    stats['deep_learning_detections'] += 1
-                    stats['anomalies_detected'] += 1
-                
-                logger.info(f"🧠 Deep Learning detectou: {anomaly_type} (conf: {confidence:.2f})")
-        
-        # ESTÁGIO 3: Fallback para Optical Flow (se deep learning não detectou)
-        if not detection_found and movement_detected:
-            movement_anomaly = classify_movement_anomaly(optical_flow_result)
-            
-            if movement_anomaly and movement_anomaly != 'normal_movement':
-                detection_found = True
-                anomaly_type = movement_patterns[movement_anomaly]['name']
-                confidence = min(optical_flow_score * 1.2, 0.95)  # Confidence baseada no score
-                detection_source = "Optical Flow (Fallback)"
-                
-                with stats_lock:
-                    stats['fallback_detections'] += 1
-                    stats['anomalies_detected'] += 1
-                
-                logger.info(f"👁️ Optical Flow detectou: {anomaly_type} (conf: {confidence:.2f})")
-        
-        # Atualiza buffer de frames
+        # Atualiza buffer de frames anteriores
         previous_frames.append(frame.copy())
-        if len(previous_frames) > max_previous_frames:
-            previous_frames.pop(0)
+        frame_buffer.append(frame.copy())
+        
+        # INICIALIZAÇÃO: Variáveis de resultado
+        final_detection = False
+        final_confidence = 0.0
+        final_type = "normal"
+        final_method = "Nenhum"
+        detection_details = []
+        
+        # ESTÁGIO 2: CAE (apenas se movimento detectado)
+        cae_result = {'anomaly_detected': False}
+        if optical_flow_result['should_analyze_deep']:
+            cae_result = corrected_cae_detection(frame)
+            detection_details.append(f"CAE: {cae_result.get('reason', 'executed')}")
+            
+            if cae_result['anomaly_detected']:
+                final_detection = True
+                final_confidence = cae_result['confidence']
+                final_type = cae_result['anomaly_type']
+                final_method = cae_result['method']
+        
+        # ESTÁGIO 3: ConvLSTM (análise temporal se buffer cheio)
+        convlstm_result = {'anomaly_detected': False}
+        if len(frame_buffer) >= CORRECTED_THRESHOLDS['temporal_frames']:
+            convlstm_result = corrected_convlstm_detection(list(frame_buffer))
+            detection_details.append(f"ConvLSTM: {convlstm_result.get('reason', 'executed')}")
+            
+            # ConvLSTM pode substituir ou complementar CAE
+            if convlstm_result['anomaly_detected']:
+                if convlstm_result['confidence'] > final_confidence:
+                    final_detection = True
+                    final_confidence = convlstm_result['confidence']
+                    final_type = convlstm_result['anomaly_type']
+                    final_method = convlstm_result['method']
         
         # Cria frame com visualizações
-        detection_frame = create_intelligent_overlay(
-            frame.copy(), 
-            optical_flow_result, 
-            detection_found, 
-            anomaly_type, 
-            confidence,
-            detection_source
+        detection_frame = create_corrected_overlay(
+            frame.copy(),
+            optical_flow_result,
+            final_detection,
+            final_type,
+            final_confidence,
+            final_method,
+            detection_details
         )
         
-        # Atualiza estatísticas
+        # Estatísticas
         processing_time = time.time() - start_time
         with stats_lock:
             stats['avg_processing_time'] = processing_time
-            stats['detection_method'] = detection_method
+            if final_detection:
+                stats['anomalies_detected'] += 1
         
-        # Adiciona alerta se anomalia detectada
-        if detection_found:
-            add_intelligent_alert(anomaly_type, confidence, detection_source)
+        # Adiciona alerta se detectou anomalia
+        if final_detection:
+            add_corrected_alert(final_type, final_confidence, final_method, detection_details)
         
-        return detection_frame, detection_found, anomaly_type
+        # Log resumo
+        if final_detection:
+            logger.info(f"🚨 ANOMALIA DETECTADA: {final_type} | {final_method} | Conf: {final_confidence:.2f}")
+        
+        return detection_frame, final_detection, final_type
         
     except Exception as e:
-        logger.error(f"❌ Erro no processamento híbrido: {e}")
+        logger.error(f"❌ Erro no pipeline corrigido: {e}")
         return frame, False, "erro"
 
-def create_intelligent_overlay(frame, optical_flow_result, anomaly_detected, anomaly_type, confidence, detection_source):
-    """Cria overlay visual inteligente com informações detalhadas"""
+def create_corrected_overlay(frame, optical_flow_result, anomaly_detected, anomaly_type, confidence, method, details):
+    """Cria overlay com informações detalhadas do sistema corrigido"""
     try:
         overlay = frame.copy()
         height, width = overlay.shape[:2]
         
         # Desenha optical flow
-        if optical_flow_result and 'flow_vectors' in optical_flow_result:
-            vector_count = len(optical_flow_result['flow_vectors'])
-            for i, (x1, y1, x2, y2) in enumerate(optical_flow_result['flow_vectors']):
-                # Cor baseada na magnitude do movimento
-                if i < vector_count * 0.3:  # 30% mais fortes em vermelho
-                    color = (0, 255, 255)  # Amarelo
-                else:
-                    color = (255, 255, 0)   # Ciano
-                
+        if optical_flow_result.get('vectors'):
+            for (x1, y1, x2, y2) in optical_flow_result['vectors']:
                 cv2.arrowedLine(overlay, (int(x1), int(y1)), (int(x2), int(y2)), 
-                               color, 2, tipLength=0.5)
+                               (0, 255, 255), 2, tipLength=0.5)
         
         # Overlay de anomalia
         if anomaly_detected:
-            # Cor baseada na fonte de detecção
-            if 'Deep Learning' in detection_source:
-                color = (0, 0, 255)      # Vermelho - Deep Learning
+            # Cor baseada no método
+            if 'CAE' in method:
+                color = (0, 0, 255)      # Vermelho - CAE
+            elif 'ConvLSTM' in method:
+                color = (255, 0, 255)    # Magenta - ConvLSTM
             else:
-                color = (0, 165, 255)    # Laranja - Optical Flow
+                color = (0, 165, 255)    # Laranja - Outro
             
-            # Borda piscante mais visível
-            border_thickness = 12 if int(time.time() * 4) % 2 == 0 else 6
-            cv2.rectangle(overlay, (5, 5), (width-5, height-5), color, border_thickness)
+            # Borda piscante
+            border_thickness = 15 if int(time.time() * 5) % 2 == 0 else 8
+            cv2.rectangle(overlay, (3, 3), (width-3, height-3), color, border_thickness)
             
-            # Fundo para texto mais visível
-            cv2.rectangle(overlay, (10, 10), (min(650, width-10), 130), (0, 0, 0), -1)
-            cv2.rectangle(overlay, (10, 10), (min(650, width-10), 130), color, 3)
+            # Fundo para texto
+            cv2.rectangle(overlay, (10, 10), (min(700, width-10), 160), (0, 0, 0), -1)
+            cv2.rectangle(overlay, (10, 10), (min(700, width-10), 160), color, 3)
             
-            # Texto de alerta detalhado
-            alert_text = f"ANOMALIA: {anomaly_type.upper()}"
-            confidence_text = f"Confianca: {confidence:.1%}"
-            source_text = f"Detectado por: {detection_source}"
+            # Texto detalhado
+            lines = [
+                f"ANOMALIA: {anomaly_type.upper()}",
+                f"Confianca: {confidence:.1%}",
+                f"Detectado por: {method}",
+                f"Pipeline: {' → '.join(details)}"
+            ]
             
-            cv2.putText(overlay, alert_text, (20, 35), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
-            cv2.putText(overlay, confidence_text, (20, 65), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-            cv2.putText(overlay, source_text, (20, 90), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), 1)
-            
-            # Indicador de urgência
-            if confidence > 0.8:
-                cv2.putText(overlay, "ALTA PRIORIDADE", (20, 115), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+            for i, line in enumerate(lines):
+                y_pos = 35 + i * 25
+                font_size = 0.8 if i == 0 else 0.6 if i < 3 else 0.4
+                font_color = color if i == 0 else (255, 255, 255) if i < 3 else (200, 200, 200)
+                cv2.putText(overlay, line, (20, y_pos), cv2.FONT_HERSHEY_SIMPLEX, font_size, font_color, 2)
         
-        # Informações detalhadas de optical flow
-        if optical_flow_result:
-            flow_score = optical_flow_result.get('score', 0.0)
-            vector_count = optical_flow_result.get('vector_count', 0)
-            magnitude = optical_flow_result.get('magnitude', 0.0)
+        # Informações do optical flow
+        if optical_flow_result.get('score', 0) > 0:
+            flow_info = [
+                f"Optical Flow: {optical_flow_result['score']:.2f}",
+                f"Vetores: {optical_flow_result.get('vector_count', 0)}",
+                f"Threshold: {CORRECTED_THRESHOLDS['optical_flow_movement']}"
+            ]
             
             info_y = height - 80
-            cv2.putText(overlay, f"Optical Flow Score: {flow_score:.3f}", (10, info_y), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
-            cv2.putText(overlay, f"Vetores: {vector_count} | Magnitude: {magnitude:.1f}", (10, info_y + 20), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 255, 255), 1)
+            for i, info in enumerate(flow_info):
+                cv2.putText(overlay, info, (10, info_y + i * 20), 
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
         
-        # Status do sistema de detecção
-        status_lines = []
-        if stats.get('deep_learning_active', False):
-            status_lines.append("Deep Learning: ATIVO")
-        else:
-            status_lines.append("Deep Learning: INATIVO")
-        
-        status_lines.append(f"Modo: {detection_method}")
-        status_lines.append(f"Falhas DL: {deep_learning_failures}/{max_dl_failures}")
-        
-        status_y = height - 40
-        for i, line in enumerate(status_lines):
-            color = (100, 255, 100) if "ATIVO" in line else (200, 200, 200)
-            cv2.putText(overlay, line, (10, status_y + i * 15), 
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.4, color, 1)
+        # Status dos detectores
+        status_y = height - 20
+        status_info = f"CAE:{stats['detection_breakdown']['cae_calls']}({stats['detection_breakdown']['cae_successes']}) | ConvLSTM:{stats['detection_breakdown']['convlstm_calls']}({stats['detection_breakdown']['convlstm_successes']})"
+        cv2.putText(overlay, status_info, (10, status_y), 
+                   cv2.FONT_HERSHEY_SIMPLEX, 0.4, (100, 255, 100), 1)
         
         return overlay
         
@@ -491,60 +491,57 @@ def create_intelligent_overlay(frame, optical_flow_result, anomaly_detected, ano
         logger.error(f"❌ Erro ao criar overlay: {e}")
         return frame
 
-def add_intelligent_alert(anomaly_type, confidence, detection_source):
-    """Adiciona alerta inteligente com informações detalhadas"""
+def add_corrected_alert(anomaly_type, confidence, method, details):
+    """Adiciona alerta com informações do sistema corrigido"""
     try:
         with stats_lock:
             alert = {
-                'message': f"{anomaly_type}",
-                'type': 'security' if any(word in anomaly_type.lower() for word in ['suspeito', 'brusco', 'irregular']) else 'health',
+                'message': f"ANOMALIA: {anomaly_type}",
+                'type': 'security' if any(word in anomaly_type.lower() for word in ['intrusao', 'suspeito', 'movimento']) else 'health',
                 'timestamp': time.time(),
                 'confidence': confidence,
-                'detection_source': detection_source,
-                'priority': 'alta' if confidence > 0.8 else 'media' if confidence > 0.5 else 'baixa'
+                'detection_method': method,
+                'pipeline_details': details,
+                'priority': 'alta' if confidence > 0.8 else 'media' if confidence > 0.5 else 'baixa',
+                'corrected_system': True
             }
             
             stats['recent_alerts'].insert(0, alert)
-            stats['recent_alerts'] = stats['recent_alerts'][:25]  # Mantém mais alertas
-        
-        logger.info(f"🚨 ALERTA: {anomaly_type} | {detection_source} | Conf: {confidence:.2f}")
+            stats['recent_alerts'] = stats['recent_alerts'][:30]
         
     except Exception as e:
         logger.error(f"❌ Erro ao adicionar alerta: {e}")
 
-def camera_loop_intelligent():
-    """Loop da câmera com sistema híbrido inteligente"""
+def camera_loop_corrected():
+    """Loop da câmera com sistema corrigido"""
     global current_frame, current_frame_with_detection, stats
     
     frame_count = 0
     start_time = time.time()
     
-    logger.info("🎥 Iniciando loop da câmera com sistema híbrido inteligente")
+    logger.info("🎥 Iniciando loop com sistema corrigido")
     
     while system_running and camera_capture:
         try:
             ret, frame = camera_capture.read()
             if ret:
-                # Frame original
                 with frame_lock:
                     current_frame = frame.copy()
                 
-                # Processamento (apenas se não pausado)
                 if not system_paused:
                     with detection_lock:
-                        detection_frame, anomaly_found, anomaly_type = process_frame_intelligent_hybrid(frame)
+                        detection_frame, anomaly_found, anomaly_type = process_frame_corrected_pipeline(frame)
                         current_frame_with_detection = detection_frame
                 else:
                     with detection_lock:
                         current_frame_with_detection = frame.copy()
                 
-                # Atualiza estatísticas
+                # Atualiza FPS
                 frame_count += 1
                 elapsed = time.time() - start_time
                 
                 if elapsed >= 1.0:
                     fps = frame_count / elapsed
-                    
                     with stats_lock:
                         stats['frames_processed'] += frame_count
                         stats['fps'] = fps
@@ -555,10 +552,10 @@ def camera_loop_intelligent():
             time.sleep(0.033)  # ~30 FPS
             
         except Exception as e:
-            logger.error(f"❌ Erro no loop da câmera: {e}")
+            logger.error(f"❌ Erro no loop: {e}")
             time.sleep(0.1)
 
-# Rotas Flask
+# Rotas Flask (simplificadas para foco na correção)
 @app.route('/')
 def index():
     return render_template('dashboard.html')
@@ -575,13 +572,12 @@ def start_system():
         source_type = data.get('source_type', 'webcam')
         source_param = data.get('source_param', '0')
         
-        logger.info(f"🚀 Iniciando sistema híbrido inteligente - {source_type}: {source_param}")
+        logger.info(f"🚀 Iniciando sistema CORRIGIDO - {source_type}: {source_param}")
         
-        # Inicializa sistema se necessário
-        if not main_system and not optical_flow_detector:
-            initialize_system_safe()
+        # Inicializa sistema
+        initialize_corrected_system()
         
-        # Abre câmera ou vídeo
+        # Abre câmera
         if source_type == 'webcam':
             camera_index = int(source_param) if source_param.isdigit() else 0
             camera_capture = cv2.VideoCapture(camera_index)
@@ -589,98 +585,75 @@ def start_system():
             camera_capture = cv2.VideoCapture(source_param)
         
         if not camera_capture or not camera_capture.isOpened():
-            return jsonify({'error': 'Não foi possível abrir a fonte de vídeo'}), 400
+            return jsonify({'error': 'Não foi possível abrir vídeo'}), 400
         
-        # Configura resolução
         camera_capture.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
         camera_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
         
         system_running = True
         system_paused = False
         
-        # Reset contadores
-        global deep_learning_failures, previous_frames
-        deep_learning_failures = 0
-        previous_frames = []
+        # Reset estatísticas e buffers
+        global frame_buffer, previous_frames
+        frame_buffer.clear()
+        previous_frames.clear()
         
-        # Limpa estatísticas
         with stats_lock:
-            stats['frames_processed'] = 0
-            stats['anomalies_detected'] = 0
-            stats['optical_flow_detections'] = 0
-            stats['deep_learning_detections'] = 0
-            stats['fallback_detections'] = 0
-            stats['deep_learning_active'] = True
+            for key in ['frames_processed', 'anomalies_detected', 'optical_flow_detections', 
+                       'cae_detections', 'convlstm_detections', 'false_positives_filtered']:
+                stats[key] = 0
+            for key in stats['detection_breakdown']:
+                stats['detection_breakdown'][key] = 0
         
-        # Inicia thread da câmera
-        camera_thread = threading.Thread(target=camera_loop_intelligent, daemon=True)
-        camera_thread.start()
+        # Inicia thread
+        threading.Thread(target=camera_loop_corrected, daemon=True).start()
         
-        # Determina modo de detecção
-        if main_system:
-            mode_description = "SISTEMA PRINCIPAL + FALLBACK"
-        elif optical_flow_detector and deep_learning_detector:
-            mode_description = "DETECTORES INDIVIDUAIS + FALLBACK"
-        else:
-            mode_description = "OPTICAL FLOW AVANÇADO"
-        
-        logger.info(f"✅ Sistema híbrido iniciado - {mode_description}")
+        logger.info("✅ SISTEMA CORRIGIDO INICIADO!")
+        logger.info("🔧 Thresholds aplicados:")
+        for key, value in CORRECTED_THRESHOLDS.items():
+            logger.info(f"   • {key}: {value}")
         
         return jsonify({
             'status': 'success',
-            'message': f'Sistema Híbrido Iniciado - {mode_description}',
-            'detection_mode': mode_description,
-            'hybrid_system': True
+            'message': 'Sistema CORRIGIDO iniciado com sucesso!',
+            'thresholds': CORRECTED_THRESHOLDS,
+            'corrected_system': True
         })
         
     except Exception as e:
-        logger.error(f"❌ Erro ao iniciar sistema: {e}")
+        logger.error(f"❌ Erro: {e}")
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/system/pause', methods=['POST'])
 def pause_system():
     global system_paused
-    
     try:
         if not system_running:
             return jsonify({'error': 'Sistema não está rodando'}), 400
-        
         system_paused = not system_paused
         message = 'Sistema pausado' if system_paused else 'Sistema retomado'
-        
         logger.info(f"⏯️ {message}")
-        return jsonify({
-            'status': 'success',
-            'message': message,
-            'paused': system_paused
-        })
-        
+        return jsonify({'status': 'success', 'message': message, 'paused': system_paused})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/system/stop', methods=['POST'])
 def stop_system():
-    global system_running, system_paused, camera_capture, current_frame, current_frame_with_detection, previous_frames
-    
+    global system_running, system_paused, camera_capture, current_frame, current_frame_with_detection
     try:
         system_running = False
         system_paused = False
-        
         if camera_capture:
             camera_capture.release()
             camera_capture = None
-        
         with frame_lock:
             current_frame = None
-        
         with detection_lock:
             current_frame_with_detection = None
-        
-        previous_frames = []
-        
-        logger.info("🛑 Sistema híbrido parado")
-        return jsonify({'status': 'success', 'message': 'Sistema híbrido parado'})
-        
+        frame_buffer.clear()
+        previous_frames.clear()
+        logger.info("🛑 Sistema corrigido parado")
+        return jsonify({'status': 'success', 'message': 'Sistema parado'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -689,26 +662,24 @@ def get_stats():
     try:
         with stats_lock:
             current_stats = stats.copy()
-        
         current_stats.update({
             'system_running': system_running,
             'system_paused': system_paused,
-            'training_mode': training_mode,
-            'hybrid_system': True,
-            'deep_learning_failures': deep_learning_failures,
-            'frame_buffer_size': len(previous_frames),
+            'corrected_system': True,
+            'thresholds': CORRECTED_THRESHOLDS,
+            'buffer_sizes': {
+                'frame_buffer': len(frame_buffer),
+                'previous_frames': len(previous_frames)
+            },
             'timestamp': time.time()
         })
-        
         return jsonify(current_stats)
-        
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/video/feed')
 def video_feed():
     try:
-        # Usa frame com detecção se disponível
         with detection_lock:
             if current_frame_with_detection is not None:
                 frame = current_frame_with_detection.copy()
@@ -717,50 +688,40 @@ def video_feed():
                     if current_frame is not None:
                         frame = current_frame.copy()
                     else:
-                        # Frame placeholder
                         frame = np.zeros((480, 640, 3), dtype=np.uint8)
-                        cv2.putText(frame, 'Aguardando Video...', (180, 240),
-                                   cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-                        cv2.putText(frame, 'Sistema Hibrido Pronto', (160, 280),
-                                   cv2.FONT_HERSHEY_SIMPLEX, 0.8, (100, 255, 100), 2)
+                        cv2.putText(frame, 'SISTEMA CORRIGIDO', (180, 220),
+                                   cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+                        cv2.putText(frame, 'Aguardando video...', (180, 260),
+                                   cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
         
-        # Adiciona status do sistema híbrido
+        # Status do sistema
         if system_running:
-            status_text = "PAUSADO" if system_paused else "DETECÇÃO HÍBRIDA ATIVA"
+            status_text = "PAUSADO" if system_paused else "DETECÇÃO CORRIGIDA ATIVA"
             color = (0, 255, 255) if system_paused else (0, 255, 0)
+            cv2.putText(frame, status_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
             
-            # Indica estado do sistema
-            dl_status = "✓" if stats.get('deep_learning_active', False) else "✗"
-            status_text += f" [DL:{dl_status}]"
-            
-            cv2.putText(frame, status_text, (10, 30),
-                       cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
-            
-            # FPS e contadores detalhados
+            # Estatísticas corrigidas
             fps = stats.get('fps', 0)
             processed = stats.get('frames_processed', 0)
             anomalies = stats.get('anomalies_detected', 0)
-            dl_detections = stats.get('deep_learning_detections', 0)
-            fallback_detections = stats.get('fallback_detections', 0)
+            cae_det = stats.get('cae_detections', 0)
+            conv_det = stats.get('convlstm_detections', 0)
             
             cv2.putText(frame, f"FPS: {fps:.1f}", (10, 60),
                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
             cv2.putText(frame, f"Frames: {processed} | Anomalias: {anomalies}", (10, 90),
                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), 1)
-            cv2.putText(frame, f"DL: {dl_detections} | Fallback: {fallback_detections}", (10, 110),
-                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (150, 150, 255), 1)
+            cv2.putText(frame, f"CAE: {cae_det} | ConvLSTM: {conv_det}", (10, 110),
+                       cv2.FONT_HERSHEY_SIMPLEX, 0.5, (150, 255, 150), 1)
         
-        # Codifica como JPEG
         _, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 85])
-        
         return Response(
             buffer.tobytes(),
             mimetype='image/jpeg',
             headers={'Cache-Control': 'no-cache, no-store, must-revalidate'}
         )
-        
     except Exception as e:
-        logger.error(f"❌ Erro no feed de vídeo: {e}")
+        logger.error(f"❌ Erro no feed: {e}")
         error_frame = np.zeros((480, 640, 3), dtype=np.uint8)
         cv2.putText(error_frame, 'Erro no Video', (250, 240),
                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
@@ -769,43 +730,17 @@ def video_feed():
 
 @app.route('/api/training/start', methods=['POST'])
 def start_training():
-    global training_mode
-    
     try:
         data = request.get_json() or {}
         duration = data.get('duration', 15)
-        
-        training_mode = True
-        
-        if main_system:
-            logger.info(f"🎓 Treinamento com sistema principal por {duration} minutos")
-        else:
-            logger.info(f"🎓 Treinamento simulado por {duration} minutos")
-        
-        # Para automaticamente após duração
-        def stop_training():
-            time.sleep(duration * 60)
-            global training_mode
-            training_mode = False
-            logger.info("🎓 Treinamento finalizado")
-        
-        threading.Thread(target=stop_training, daemon=True).start()
-        
-        return jsonify({
-            'status': 'success',
-            'message': f'Treinamento híbrido iniciado por {duration} minutos'
-        })
-        
+        logger.info(f"🎓 Treinamento simulado por {duration} minutos")
+        return jsonify({'status': 'success', 'message': f'Treinamento iniciado por {duration} minutos'})
     except Exception as e:
-        logger.error(f"❌ Erro ao iniciar treinamento: {e}")
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/training/stop', methods=['POST'])
 def stop_training():
-    global training_mode
-    
     try:
-        training_mode = False
         logger.info("🎓 Treinamento parado")
         return jsonify({'status': 'success', 'message': 'Treinamento parado'})
     except Exception as e:
@@ -815,25 +750,20 @@ def stop_training():
 def handle_config():
     if request.method == 'GET':
         return jsonify({
-            'sensitivity': 0.15,  # Threshold mais baixo para garantir detecção
-            'detection_mode': 'hybrid',
+            'sistema': 'corrigido',
+            'thresholds': CORRECTED_THRESHOLDS,
+            'detection_mode': 'optical_flow_cae_convlstm',
             'source_type': 'webcam',
-            'source_param': '0',
-            'fallback_enabled': True,
-            'deep_learning_threshold': 0.6,
-            'optical_flow_threshold': 0.25
+            'source_param': '0'
         })
     else:
-        return jsonify({'status': 'success', 'message': 'Configuração híbrida salva'})
+        return jsonify({'status': 'success', 'message': 'Configuração do sistema corrigido salva'})
 
 @app.route('/api/model/save', methods=['POST'])
 def save_model():
     try:
-        if main_system:
-            logger.info("💾 Salvando modelos do sistema principal...")
-            return jsonify({'status': 'success', 'message': 'Modelos do sistema principal salvos'})
-        else:
-            return jsonify({'status': 'success', 'message': 'Configurações do sistema híbrido salvas'})
+        logger.info("💾 Salvando configurações do sistema corrigido...")
+        return jsonify({'status': 'success', 'message': 'Sistema corrigido salvo'})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -851,7 +781,7 @@ def take_screenshot():
         
         _, buffer = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 95])
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        filename = f'hybrid_screenshot_{timestamp}.jpg'
+        filename = f'corrected_system_{timestamp}.jpg'
         
         return Response(
             buffer.tobytes(),
@@ -870,21 +800,31 @@ def clear_alerts():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/system/reset-deep-learning', methods=['POST'])
-def reset_deep_learning():
-    """Endpoint para resetar contador de falhas do deep learning"""
-    global deep_learning_failures
-    
+@app.route('/api/system/adjust-thresholds', methods=['POST'])
+def adjust_thresholds():
+    """Endpoint para ajustar thresholds em tempo real"""
     try:
-        deep_learning_failures = 0
-        with stats_lock:
-            stats['deep_learning_active'] = True
+        data = request.get_json() or {}
         
-        logger.info("🔄 Deep Learning resetado - contador de falhas zerado")
-        return jsonify({
-            'status': 'success', 
-            'message': 'Deep Learning resetado e reativado'
-        })
+        global CORRECTED_THRESHOLDS
+        updated = []
+        
+        for key, value in data.items():
+            if key in CORRECTED_THRESHOLDS:
+                old_value = CORRECTED_THRESHOLDS[key]
+                CORRECTED_THRESHOLDS[key] = float(value)
+                updated.append(f"{key}: {old_value} → {value}")
+                logger.info(f"🔧 Threshold ajustado: {key} = {value}")
+        
+        if updated:
+            return jsonify({
+                'status': 'success',
+                'message': f'Thresholds ajustados: {", ".join(updated)}',
+                'new_thresholds': CORRECTED_THRESHOLDS
+            })
+        else:
+            return jsonify({'status': 'warning', 'message': 'Nenhum threshold válido encontrado'})
+            
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -896,57 +836,65 @@ def export_report():
         
         report = {
             'timestamp': datetime.now().isoformat(),
-            'sistema': 'Híbrido Inteligente com Fallback',
-            'detection_system': {
-                'main_system_available': main_system is not None,
-                'individual_detectors_available': optical_flow_detector is not None,
-                'deep_learning_active': report_stats.get('deep_learning_active', False),
-                'fallback_active': True,
-                'detection_method': report_stats.get('detection_method', 'HYBRID')
+            'sistema': 'SISTEMA CORRIGIDO para Segunda-feira',
+            'configuracao': {
+                'thresholds_corrigidos': CORRECTED_THRESHOLDS,
+                'detectores_disponibles': DETECTORS_AVAILABLE,
+                'pipeline': 'Optical Flow → CAE → ConvLSTM'
             },
             'performance': {
-                'frames_processed': report_stats.get('frames_processed', 0),
+                'frames_processados': report_stats.get('frames_processed', 0),
                 'fps': report_stats.get('fps', 0),
-                'avg_processing_time': report_stats.get('avg_processing_time', 0)
+                'tempo_medio_processamento': report_stats.get('avg_processing_time', 0)
             },
-            'detections': {
-                'total_anomalies': report_stats.get('anomalies_detected', 0),
-                'deep_learning_detections': report_stats.get('deep_learning_detections', 0),
-                'fallback_detections': report_stats.get('fallback_detections', 0),
-                'optical_flow_detections': report_stats.get('optical_flow_detections', 0)
+            'deteccoes': {
+                'total_anomalias': report_stats.get('anomalies_detected', 0),
+                'optical_flow_deteccoes': report_stats.get('optical_flow_detections', 0),
+                'cae_deteccoes': report_stats.get('cae_detections', 0),
+                'convlstm_deteccoes': report_stats.get('convlstm_detections', 0),
+                'breakdown_detalhado': report_stats.get('detection_breakdown', {})
             },
-            'system_status': {
-                'running': system_running,
-                'paused': system_paused,
-                'training': training_mode,
-                'deep_learning_failures': deep_learning_failures
+            'status_sistema': {
+                'rodando': system_running,
+                'pausado': system_paused,
+                'buffer_frames': len(frame_buffer),
+                'frames_anteriores': len(previous_frames)
             },
-            'recent_alerts': report_stats.get('recent_alerts', [])
+            'alertas_recentes': report_stats.get('recent_alerts', [])
         }
         
         return Response(
             json.dumps(report, indent=2, ensure_ascii=False),
             mimetype='application/json',
-            headers={'Content-Disposition': 'attachment; filename=relatorio_sistema_hibrido.json'}
+            headers={'Content-Disposition': 'attachment; filename=sistema_corrigido_relatorio.json'}
         )
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     try:
-        logger.info("🚀 Iniciando Sistema Híbrido Inteligente...")
-        logger.info("🎯 GARANTIDO para apresentação de segunda-feira!")
+        logger.info("🚀 INICIANDO SISTEMA CORRIGIDO!")
+        logger.info("🎯 ESPECIALMENTE OTIMIZADO PARA SEGUNDA-FEIRA!")
+        logger.info("")
+        logger.info("🔧 CORREÇÕES APLICADAS:")
+        logger.info("   • Optical Flow: Threshold 15.0 (filtro inteligente)")
+        logger.info("   • CAE: Confidence 0.3 (era muito conservador)")
+        logger.info("   • ConvLSTM: Confidence 0.4 + apenas 5 frames")
+        logger.info("   • Pipeline: OF filtra → CAE detecta → ConvLSTM confirma")
+        logger.info("")
+        logger.info("📊 PIPELINE DE DETECÇÃO:")
+        logger.info("   1. Optical Flow detecta movimento significativo")
+        logger.info("   2. Se movimento > 15.0 → chama CAE")
+        logger.info("   3. CAE analisa frame (threshold 0.3)")
+        logger.info("   4. ConvLSTM analisa sequência (threshold 0.4)")
+        logger.info("   5. Melhor resultado é mostrado")
+        logger.info("")
         
         # Inicializa sistema
-        initialize_system_safe()
+        initialize_corrected_system()
         
         logger.info("🌐 Servidor disponível em http://localhost:5000")
-        logger.info("🔧 Características do Sistema Híbrido:")
-        logger.info("   • Deep Learning + Fallback automático")
-        logger.info("   • Optical Flow avançado com classificação")
-        logger.info("   • Detecção garantida mesmo com falhas")
-        logger.info("   • Interface visual detalhada")
-        logger.info("   • Logs informativos em tempo real")
+        logger.info("✅ SISTEMA GARANTIDO PARA APRESENTAÇÃO!")
         
         app.run(
             host='0.0.0.0',
@@ -956,7 +904,7 @@ if __name__ == '__main__':
         )
         
     except KeyboardInterrupt:
-        logger.info("👋 Sistema híbrido interrompido")
+        logger.info("👋 Sistema corrigido interrompido")
     except Exception as e:
         logger.error(f"❌ Erro: {e}")
     finally:

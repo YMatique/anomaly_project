@@ -1,453 +1,466 @@
 """
-Processing Engine - Motor de Processamento Principal
-Sistema de Detecção de Anomalias em Tempo Real
+Motor de Processamento Principal
+Coordena todos os detectores em pipeline de cascata otimizado
 """
 
 import threading
 import time
 import queue
 import numpy as np
-from typing import Dict, List, Any, Optional, Callable
+import cv2
+from typing import Dict, List, Optional, Tuple, Callable
 from dataclasses import dataclass
-from enum import Enum
+from collections import defaultdict, deque
+import json
+from datetime import datetime
 
-from src.utils.logger import Logger
-from src.utils.config import Config
-from src.detectors.optical_flow_detector import OpticalFlowDetector
-from src.detectors.deep_learning_detector import DeepLearningDetector
-
-class ProcessingState(Enum):
-    IDLE = "idle"
-    RUNNING = "running"
-    PAUSED = "paused"
-    TRAINING = "training"
-    STOPPING = "stopping"
+from ..detectors.optical_flow_detector import OpticalFlowDetector
+from ..detectors.deep_learning_detector import DeepLearningDetector
+from ..utils.logger import logger
+from ..utils.helpers import calculate_metrics, create_visualization
 
 @dataclass
 class ProcessingResult:
     """Resultado do processamento de um frame"""
     frame_id: int
-    timestamp: float
-    anomaly_detected: bool
-    anomaly_type: str
-    confidence: float
+    timestamp: datetime
     optical_flow_score: float
-    deep_learning_score: float
-    metadata: Dict[str, Any]
+    cae_score: float
+    convlstm_score: float
+    final_anomaly_score: float
+    is_anomaly: bool
+    anomaly_type: str
+    processing_time: float
+    frame_shape: Tuple[int, int, int]
+
+class PerformanceMetrics:
+    """Classe para coletar métricas de performance"""
+    
+    def __init__(self, window_size: int = 100):
+        self.window_size = window_size
+        self.fps_history = deque(maxlen=window_size)
+        self.processing_times = deque(maxlen=window_size)
+        self.anomaly_scores = deque(maxlen=window_size)
+        self.memory_usage = deque(maxlen=window_size)
+        self.cpu_usage = deque(maxlen=window_size)
+        
+        # Contadores
+        self.total_frames = 0
+        self.anomalies_detected = 0
+        self.false_positives = 0
+        self.false_negatives = 0
+        
+        # Timestamps
+        self.start_time = time.time()
+        self.last_frame_time = time.time()
+    
+    def update(self, result: ProcessingResult, system_stats: Dict):
+        """Atualiza métricas com novo resultado"""
+        current_time = time.time()
+        
+        # FPS
+        fps = 1.0 / (current_time - self.last_frame_time)
+        self.fps_history.append(fps)
+        self.last_frame_time = current_time
+        
+        # Tempos de processamento
+        self.processing_times.append(result.processing_time)
+        
+        # Scores de anomalia
+        self.anomaly_scores.append(result.final_anomaly_score)
+        
+        # Métricas do sistema
+        self.memory_usage.append(system_stats.get('memory_percent', 0))
+        self.cpu_usage.append(system_stats.get('cpu_percent', 0))
+        
+        # Contadores
+        self.total_frames += 1
+        if result.is_anomaly:
+            self.anomalies_detected += 1
+    
+    def get_current_metrics(self) -> Dict:
+        """Retorna métricas atuais"""
+        return {
+            'fps': {
+                'current': self.fps_history[-1] if self.fps_history else 0,
+                'average': np.mean(self.fps_history) if self.fps_history else 0,
+                'min': np.min(self.fps_history) if self.fps_history else 0,
+                'max': np.max(self.fps_history) if self.fps_history else 0
+            },
+            'processing_time': {
+                'current': self.processing_times[-1] if self.processing_times else 0,
+                'average': np.mean(self.processing_times) if self.processing_times else 0,
+                'p95': np.percentile(self.processing_times, 95) if self.processing_times else 0
+            },
+            'anomaly_detection': {
+                'total_frames': self.total_frames,
+                'anomalies_detected': self.anomalies_detected,
+                'anomaly_rate': self.anomalies_detected / max(self.total_frames, 1),
+                'current_score': self.anomaly_scores[-1] if self.anomaly_scores else 0,
+                'average_score': np.mean(self.anomaly_scores) if self.anomaly_scores else 0
+            },
+            'system': {
+                'uptime': time.time() - self.start_time,
+                'memory_usage': self.memory_usage[-1] if self.memory_usage else 0,
+                'cpu_usage': self.cpu_usage[-1] if self.cpu_usage else 0,
+                'avg_memory': np.mean(self.memory_usage) if self.memory_usage else 0,
+                'avg_cpu': np.mean(self.cpu_usage) if self.cpu_usage else 0
+            }
+        }
 
 class ProcessingEngine:
     """
-    Motor de processamento principal que coordena todos os detectores
-    Implementa pipeline em cascata otimizado para hardware i5 11Gen
+    Motor principal de processamento
+    Implementa pipeline em cascata: Optical Flow → CAE → ConvLSTM
     """
     
-    def __init__(self, config: Config):
+    def __init__(self, config):
+        """Inicializa o motor de processamento"""
         self.config = config
-        self.logger = Logger("ProcessingEngine")
         
         # Estado do sistema
-        self.state = ProcessingState.IDLE
-        self.is_running = False
-        self.is_paused = False
+        self.running = False
+        self.paused = False
         
-        # Filas de processamento
-        self.input_queue = queue.Queue(maxsize=30)
-        self.output_queue = queue.Queue(maxsize=50)
+        # Filas thread-safe
+        self.input_queue = queue.Queue(maxsize=config.get('processing.queue_size', 10))
+        self.result_queue = queue.Queue()
         
-        # Detectores
+        # Detectores (inicialização lazy)
         self.optical_flow_detector = None
         self.deep_learning_detector = None
         
-        # Threading
-        self.processing_thread = None
+        # Threads de processamento
+        self.worker_threads = []
+        self.num_workers = config.get('processing.num_workers', 2)
+        
+        # Callbacks
+        self.frame_callbacks = []
+        self.result_callbacks = []
+        self.anomaly_callbacks = []
+        
+        # Métricas e estatísticas
+        self.metrics = PerformanceMetrics()
         self.frame_counter = 0
-        self.total_frames_processed = 0
         
-        # Callbacks para resultados
-        self.result_callbacks: List[Callable] = []
+        # Buffer para ConvLSTM (sequências temporais)
+        self.frame_sequence_buffer = deque(maxlen=config.get('convlstm.sequence_length', 10))
         
-        # Estatísticas de performance
-        self.stats = {
-            'frames_processed': 0,
-            'anomalies_detected': 0,
-            'avg_processing_time': 0.0,
-            'fps': 0.0,
-            'optical_flow_detections': 0,
-            'deep_learning_detections': 0,
-            'false_positives': 0,
-            'processing_times': []
-        }
+        # Thresholds de detecção
+        self.optical_flow_threshold = config.get('thresholds.optical_flow', 0.3)
+        self.cae_threshold = config.get('thresholds.cae', 0.5)
+        self.convlstm_threshold = config.get('thresholds.convlstm', 0.6)
         
-        # Buffer para análise temporal
-        self.frame_buffer = []
-        self.max_buffer_size = config.get('processing.frame_buffer_size', 10)
+        # Sistema de cooldown para alertas
+        self.last_alert_time = {}
+        self.alert_cooldown = config.get('alerts.cooldown_seconds', 5)
         
-        self._initialize_detectors()
-        
-    def _initialize_detectors(self):
-        """Inicializa os detectores com configurações otimizadas"""
-        try:
-            # Optical Flow Detector (rápido - primeira camada)
+        logger.info("ProcessingEngine inicializado")
+    
+    def initialize_detectors(self):
+        """Inicializa detectores (lazy loading)"""
+        if not self.optical_flow_detector:
             self.optical_flow_detector = OpticalFlowDetector(self.config)
-            self.logger.info("OpticalFlowDetector inicializado")
-            
-            # Deep Learning Detector (lento - segunda camada)
-            if self.config.get('processing.use_deep_learning', True):
-                self.deep_learning_detector = DeepLearningDetector(self.config)
-                self.logger.info("DeepLearningDetector inicializado")
-            
-            self.logger.info("Todos os detectores inicializados com sucesso")
-            
-        except Exception as e:
-            self.logger.error(f"Erro ao inicializar detectores: {e}")
-            raise
+            logger.info("OpticalFlowDetector inicializado")
+        
+        if not self.deep_learning_detector:
+            self.deep_learning_detector = DeepLearningDetector(self.config)
+            logger.info("DeepLearningDetector inicializado")
     
     def start(self):
         """Inicia o motor de processamento"""
-        if self.is_running:
-            self.logger.warning("Processing Engine já está rodando")
+        if self.running:
+            logger.warning("ProcessingEngine já está em execução")
             return
         
-        self.is_running = True
-        self.state = ProcessingState.RUNNING
+        self.running = True
+        self.paused = False
         
-        # Thread principal de processamento
-        self.processing_thread = threading.Thread(
-            target=self._processing_loop,
-            daemon=True,
-            name="ProcessingEngine"
-        )
-        self.processing_thread.start()
+        # Inicializar detectores
+        self.initialize_detectors()
         
-        self.logger.info("Processing Engine iniciado")
+        # Criar threads de trabalho
+        for i in range(self.num_workers):
+            thread = threading.Thread(target=self._worker_loop, name=f"ProcessingWorker-{i}")
+            thread.daemon = True
+            thread.start()
+            self.worker_threads.append(thread)
+        
+        # Thread para métricas de sistema
+        metrics_thread = threading.Thread(target=self._metrics_loop, name="MetricsCollector")
+        metrics_thread.daemon = True
+        metrics_thread.start()
+        self.worker_threads.append(metrics_thread)
+        
+        logger.info(f"ProcessingEngine iniciado com {self.num_workers} workers")
     
     def stop(self):
         """Para o motor de processamento"""
-        if not self.is_running:
-            return
+        self.running = False
         
-        self.state = ProcessingState.STOPPING
-        self.is_running = False
-        
-        # Aguarda thread terminar
-        if self.processing_thread and self.processing_thread.is_alive():
-            self.processing_thread.join(timeout=2.0)
-        
-        # Limpa filas
-        while not self.input_queue.empty():
+        # Sinalizar parada para todas as threads
+        for _ in range(self.num_workers):
             try:
-                self.input_queue.get_nowait()
-            except queue.Empty:
-                break
+                self.input_queue.put(None, timeout=1)
+            except queue.Full:
+                pass
         
-        self.state = ProcessingState.IDLE
-        self.logger.info("Processing Engine parado")
+        # Aguardar threads terminarem
+        for thread in self.worker_threads:
+            thread.join(timeout=5)
+        
+        self.worker_threads.clear()
+        logger.info("ProcessingEngine parado")
     
     def pause(self):
         """Pausa o processamento"""
-        self.is_paused = True
-        self.state = ProcessingState.PAUSED
-        self.logger.info("Processing Engine pausado")
+        self.paused = True
+        logger.info("ProcessingEngine pausado")
     
     def resume(self):
-        """Retoma o processamento"""
-        self.is_paused = False
-        self.state = ProcessingState.RUNNING
-        self.logger.info("Processing Engine retomado")
+        """Resume o processamento"""
+        self.paused = False
+        logger.info("ProcessingEngine resumido")
     
-    def process_frame(self, frame: np.ndarray, metadata: Dict[str, Any] = None) -> bool:
-        """
-        Adiciona frame para processamento
-        
-        Args:
-            frame: Frame de vídeo
-            metadata: Metadados do frame
-            
-        Returns:
-            True se frame foi adicionado à fila
-        """
-        if not self.is_running:
+    def add_frame_to_queue(self, frame_data: Dict):
+        """Adiciona frame à fila de processamento"""
+        if not self.running:
             return False
         
         try:
-            frame_data = {
-                'frame': frame.copy(),
-                'metadata': metadata or {},
-                'timestamp': time.time(),
-                'frame_id': self.frame_counter
-            }
-            
-            # Adiciona à fila (não-bloqueante)
-            self.input_queue.put_nowait(frame_data)
-            self.frame_counter += 1
+            self.input_queue.put(frame_data, timeout=0.1)
             return True
-            
         except queue.Full:
-            self.logger.warning("Fila de entrada cheia - descartando frame")
+            logger.warning("Fila de processamento cheia, descartando frame")
             return False
     
-    def _processing_loop(self):
-        """Loop principal de processamento"""
-        self.logger.info("Iniciando loop de processamento")
+    def _worker_loop(self):
+        """Loop principal de processamento em thread separada"""
+        logger.info(f"Worker thread {threading.current_thread().name} iniciada")
         
-        while self.is_running:
+        while self.running:
             try:
-                # Verifica pausa
-                if self.is_paused:
-                    time.sleep(0.1)
+                # Buscar próximo frame
+                frame_data = self.input_queue.get(timeout=1)
+                
+                if frame_data is None:  # Sinal de parada
+                    break
+                
+                if self.paused:
                     continue
                 
-                # Pega próximo frame
-                try:
-                    frame_data = self.input_queue.get(timeout=0.1)
-                except queue.Empty:
-                    continue
+                # Processar frame
+                result = self._process_frame(frame_data)
                 
-                # Processa frame
-                start_time = time.time()
-                result = self._process_single_frame(frame_data)
-                processing_time = time.time() - start_time
-                
-                # Atualiza estatísticas
-                self._update_stats(processing_time, result)
-                
-                # Envia resultado
                 if result:
-                    self._send_result(result)
+                    # Enviar resultado
+                    self.result_queue.put(result)
+                    
+                    # Executar callbacks
+                    self._execute_callbacks(result, frame_data)
                 
-                # Marca como processado
                 self.input_queue.task_done()
                 
+            except queue.Empty:
+                continue
             except Exception as e:
-                self.logger.error(f"Erro no loop de processamento: {e}")
-                time.sleep(0.1)
+                logger.error(f"Erro no worker: {e}")
         
-        self.logger.info("Loop de processamento finalizado")
+        logger.info(f"Worker thread {threading.current_thread().name} finalizada")
     
-    def _process_single_frame(self, frame_data: Dict) -> Optional[ProcessingResult]:
-        """
-        Processa um único frame através do pipeline em cascata
-        
-        Pipeline:
-        1. Optical Flow (rápido) - filtra frames sem movimento
-        2. Deep Learning (lento) - só se movimento detectado
-        """
-        frame = frame_data['frame']
-        metadata = frame_data['metadata']
-        timestamp = frame_data['timestamp']
-        frame_id = frame_data['frame_id']
+    def _process_frame(self, frame_data: Dict) -> Optional[ProcessingResult]:
+        """Processa um frame usando pipeline em cascata"""
+        start_time = time.time()
         
         try:
-            # ESTÁGIO 1: Optical Flow (sempre executa)
-            optical_flow_result = self.optical_flow_detector.detect(frame)
-            optical_flow_score = optical_flow_result.get('score', 0.0)
+            frame = frame_data['frame']
+            frame_id = frame_data.get('frame_id', self.frame_counter)
+            timestamp = frame_data.get('timestamp', datetime.now())
             
-            # Verifica se há movimento significativo
-            movement_threshold = self.config.get('processing.movement_threshold', 0.3)
-            has_movement = optical_flow_score > movement_threshold
+            self.frame_counter += 1
             
-            anomaly_detected = False
-            anomaly_type = "normal"
-            confidence = 0.0
-            deep_learning_score = 0.0
+            # Adicionar frame ao buffer de sequência
+            self.frame_sequence_buffer.append(frame)
             
-            # ESTÁGIO 2: Deep Learning (só se movimento detectado)
-            if has_movement and self.deep_learning_detector:
-                # Adiciona frame ao buffer temporal
-                self._update_frame_buffer(frame)
-                
-                # Se buffer está cheio, faz análise com ConvLSTM
-                if len(self.frame_buffer) >= self.max_buffer_size:
-                    dl_result = self.deep_learning_detector.detect_sequence(
-                        self.frame_buffer.copy()
-                    )
-                    
-                    if dl_result['anomaly_detected']:
-                        anomaly_detected = True
-                        anomaly_type = dl_result['anomaly_type']
-                        confidence = dl_result['confidence']
-                        deep_learning_score = dl_result['score']
-                
-                # Análise frame único com CAE (sempre)
-                cae_result = self.deep_learning_detector.detect_frame(frame)
-                if cae_result['anomaly_detected'] and confidence < cae_result['confidence']:
-                    anomaly_detected = True
-                    anomaly_type = cae_result['anomaly_type']
-                    confidence = cae_result['confidence']
-                    deep_learning_score = max(deep_learning_score, cae_result['score'])
+            # ETAPA 1: Optical Flow (sempre executado)
+            optical_flow_score = self.optical_flow_detector.detect(frame)
             
-            # Cria resultado
+            # ETAPA 2: CAE (só se movimento detectado)
+            cae_score = 0.0
+            if optical_flow_score > self.optical_flow_threshold:
+                cae_score = self.deep_learning_detector.detect_cae(frame)
+            
+            # ETAPA 3: ConvLSTM (só se CAE detectou anomalia)
+            convlstm_score = 0.0
+            if cae_score > self.cae_threshold and len(self.frame_sequence_buffer) >= 5:
+                sequence = list(self.frame_sequence_buffer)[-10:]  # Últimos 10 frames
+                convlstm_score = self.deep_learning_detector.detect_convlstm(sequence)
+            
+            # Calcular score final
+            final_score = self._calculate_final_score(
+                optical_flow_score, cae_score, convlstm_score
+            )
+            
+            # Determinar se é anomalia
+            is_anomaly = final_score > self.convlstm_threshold
+            anomaly_type = self._classify_anomaly_type(
+                optical_flow_score, cae_score, convlstm_score, frame
+            )
+            
+            processing_time = time.time() - start_time
+            
+            # Criar resultado
             result = ProcessingResult(
                 frame_id=frame_id,
                 timestamp=timestamp,
-                anomaly_detected=anomaly_detected,
-                anomaly_type=anomaly_type,
-                confidence=confidence,
                 optical_flow_score=optical_flow_score,
-                deep_learning_score=deep_learning_score,
-                metadata={
-                    **metadata,
-                    'has_movement': has_movement,
-                    'processing_stage': 'deep_learning' if has_movement else 'optical_flow',
-                    'frame_shape': frame.shape
-                }
+                cae_score=cae_score,
+                convlstm_score=convlstm_score,
+                final_anomaly_score=final_score,
+                is_anomaly=is_anomaly,
+                anomaly_type=anomaly_type,
+                processing_time=processing_time,
+                frame_shape=frame.shape
             )
             
             return result
             
         except Exception as e:
-            self.logger.error(f"Erro ao processar frame {frame_id}: {e}")
+            logger.error(f"Erro no processamento do frame {frame_id}: {e}")
             return None
     
-    def _update_frame_buffer(self, frame: np.ndarray):
-        """Atualiza buffer circular de frames para análise temporal"""
-        # Redimensiona frame para o tamanho padrão
-        target_size = self.config.get('processing.frame_size', (64, 64))
-        import cv2
-        resized_frame = cv2.resize(frame, target_size)
+    def _calculate_final_score(self, optical_flow: float, cae: float, convlstm: float) -> float:
+        """Calcula score final combinando os três detectores"""
+        # Pesos para cada detector
+        w_optical = self.config.get('weights.optical_flow', 0.2)
+        w_cae = self.config.get('weights.cae', 0.4)
+        w_convlstm = self.config.get('weights.convlstm', 0.4)
         
-        # Adiciona ao buffer
-        self.frame_buffer.append(resized_frame)
+        # Score ponderado
+        final_score = (w_optical * optical_flow + 
+                      w_cae * cae + 
+                      w_convlstm * convlstm)
         
-        # Mantém tamanho máximo
-        if len(self.frame_buffer) > self.max_buffer_size:
-            self.frame_buffer.pop(0)
+        return min(final_score, 1.0)  # Limitar a 1.0
     
-    def _update_stats(self, processing_time: float, result: Optional[ProcessingResult]):
-        """Atualiza estatísticas de performance"""
-        self.stats['frames_processed'] += 1
-        self.stats['processing_times'].append(processing_time)
+    def _classify_anomaly_type(self, optical_flow: float, cae: float, 
+                              convlstm: float, frame: np.ndarray) -> str:
+        """Classifica o tipo de anomalia detectada"""
         
-        # Mantém apenas últimas 100 medições
-        if len(self.stats['processing_times']) > 100:
-            self.stats['processing_times'].pop(0)
-        
-        # Calcula médias
-        self.stats['avg_processing_time'] = np.mean(self.stats['processing_times'])
-        self.stats['fps'] = 1.0 / self.stats['avg_processing_time'] if self.stats['avg_processing_time'] > 0 else 0
-        
-        # Conta anomalias
-        if result and result.anomaly_detected:
-            self.stats['anomalies_detected'] += 1
-            
-            if result.optical_flow_score > result.deep_learning_score:
-                self.stats['optical_flow_detections'] += 1
-            else:
-                self.stats['deep_learning_detections'] += 1
-    
-    def _send_result(self, result: ProcessingResult):
-        """Envia resultado para callbacks registrados"""
-        try:
-            # Adiciona à fila de saída
-            self.output_queue.put_nowait(result)
-            
-            # Chama callbacks
-            for callback in self.result_callbacks:
-                try:
-                    callback(result)
-                except Exception as e:
-                    self.logger.error(f"Erro em callback: {e}")
-                    
-        except queue.Full:
-            self.logger.warning("Fila de saída cheia - descartando resultado")
-    
-    def get_result(self, timeout: float = 0.1) -> Optional[ProcessingResult]:
-        """Pega próximo resultado da fila"""
-        try:
-            return self.output_queue.get(timeout=timeout)
-        except queue.Empty:
-            return None
-    
-    def add_result_callback(self, callback: Callable[[ProcessingResult], None]):
-        """Adiciona callback para receber resultados"""
-        self.result_callbacks.append(callback)
-        self.logger.info(f"Callback adicionado - total: {len(self.result_callbacks)}")
-    
-    def remove_result_callback(self, callback: Callable):
-        """Remove callback"""
-        if callback in self.result_callbacks:
-            self.result_callbacks.remove(callback)
-            self.logger.info(f"Callback removido - total: {len(self.result_callbacks)}")
-    
-    def get_stats(self) -> Dict[str, Any]:
-        """Retorna estatísticas atuais"""
-        return {
-            **self.stats,
-            'state': self.state.value,
-            'is_running': self.is_running,
-            'is_paused': self.is_paused,
-            'queue_sizes': {
-                'input': self.input_queue.qsize(),
-                'output': self.output_queue.qsize()
-            },
-            'frame_buffer_size': len(self.frame_buffer)
-        }
-    
-    def reset_stats(self):
-        """Reseta estatísticas"""
-        self.stats = {
-            'frames_processed': 0,
-            'anomalies_detected': 0,
-            'avg_processing_time': 0.0,
-            'fps': 0.0,
-            'optical_flow_detections': 0,
-            'deep_learning_detections': 0,
-            'false_positives': 0,
-            'processing_times': []
-        }
-        self.logger.info("Estatísticas resetadas")
-    
-    def set_training_mode(self, enabled: bool):
-        """Ativa/desativa modo de treinamento"""
-        if enabled:
-            self.state = ProcessingState.TRAINING
-            if self.deep_learning_detector:
-                self.deep_learning_detector.set_training_mode(True)
+        if convlstm > 0.8:
+            return "anomalia_temporal_crítica"
+        elif cae > 0.7:
+            return "anomalia_espacial"
+        elif optical_flow > 0.6:
+            return "movimento_suspeito"
+        elif optical_flow < 0.1 and cae > 0.4:
+            return "objeto_estático_anômalo"
         else:
-            self.state = ProcessingState.RUNNING if self.is_running else ProcessingState.IDLE
-            if self.deep_learning_detector:
-                self.deep_learning_detector.set_training_mode(False)
-        
-        self.logger.info(f"Modo de treinamento: {'ativado' if enabled else 'desativado'}")
+            return "anomalia_geral"
     
-    def save_models(self, models_dir: str):
-        """Salva modelos treinados"""
-        if self.deep_learning_detector:
-            self.deep_learning_detector.save_models(models_dir)
-            self.logger.info(f"Modelos salvos em: {models_dir}")
-    
-    def load_models(self, models_dir: str):
-        """Carrega modelos salvos"""
-        if self.deep_learning_detector:
-            self.deep_learning_detector.load_models(models_dir)
-            self.logger.info(f"Modelos carregados de: {models_dir}")
-    
-    def cleanup(self):
-        """Limpeza de recursos"""
-        self.logger.info("Iniciando limpeza do ProcessingEngine")
-        
-        # Para processamento
-        self.stop()
-        
-        # Reset detectores
-        if self.optical_flow_detector:
-            self.optical_flow_detector.reset()
-            self.logger.info("OpticalFlowDetector resetado")
-        
-        if self.deep_learning_detector:
-            self.deep_learning_detector.cleanup()
-            self.logger.info("DeepLearningDetector limpo")
-        
-        # Limpa buffers
-        self.frame_buffer.clear()
-        self.result_callbacks.clear()
-        
-        self.logger.info("Detectores resetados")
-        self.logger.info("ProcessingEngine limpo")
-    
-    def __del__(self):
-        """Destrutor - garante limpeza"""
+    def _execute_callbacks(self, result: ProcessingResult, frame_data: Dict):
+        """Executa callbacks registrados"""
         try:
-            self.cleanup()
-        except:
-            pass
+            # Callbacks de resultado (sempre executados)
+            for callback in self.result_callbacks:
+                callback(result, frame_data)
+            
+            # Callbacks de anomalia (só quando detectada)
+            if result.is_anomaly:
+                # Verificar cooldown
+                current_time = time.time()
+                last_alert = self.last_alert_time.get(result.anomaly_type, 0)
+                
+                if current_time - last_alert >= self.alert_cooldown:
+                    self.last_alert_time[result.anomaly_type] = current_time
+                    
+                    for callback in self.anomaly_callbacks:
+                        callback(result, frame_data)
+        
+        except Exception as e:
+            logger.error(f"Erro ao executar callbacks: {e}")
+    
+    def _metrics_loop(self):
+        """Thread para coleta de métricas do sistema"""
+        import psutil
+        
+        while self.running:
+            try:
+                # Coletar métricas do sistema
+                system_stats = {
+                    'cpu_percent': psutil.cpu_percent(interval=1),
+                    'memory_percent': psutil.virtual_memory().percent,
+                    'disk_usage': psutil.disk_usage('/').percent
+                }
+                
+                # Se houver resultado recente, atualizar métricas
+                try:
+                    result = self.result_queue.get_nowait()
+                    self.metrics.update(result, system_stats)
+                except queue.Empty:
+                    pass
+                
+                time.sleep(1)
+                
+            except Exception as e:
+                logger.error(f"Erro na coleta de métricas: {e}")
+                time.sleep(5)
+    
+    def get_metrics(self) -> Dict:
+        """Retorna métricas atuais do sistema"""
+        return self.metrics.get_current_metrics()
+    
+    def get_performance_data(self, last_n_minutes: int = 10) -> Dict:
+        """Retorna dados para gráficos de performance"""
+        try:
+            # Dados dos últimos N minutos
+            window_size = min(last_n_minutes * 60, len(self.metrics.fps_history))
+            
+            if window_size == 0:
+                return {}
+            
+            # Preparar dados para gráficos
+            timestamps = [time.time() - i for i in range(window_size, 0, -1)]
+            
+            performance_data = {
+                'timestamps': timestamps,
+                'fps': list(self.metrics.fps_history)[-window_size:],
+                'processing_times': list(self.metrics.processing_times)[-window_size:],
+                'anomaly_scores': list(self.metrics.anomaly_scores)[-window_size:],
+                'memory_usage': list(self.metrics.memory_usage)[-window_size:],
+                'cpu_usage': list(self.metrics.cpu_usage)[-window_size:],
+                'summary': self.get_metrics()
+            }
+            
+            return performance_data
+            
+        except Exception as e:
+            logger.error(f"Erro ao obter dados de performance: {e}")
+            return {}
+    
+    def export_metrics_to_json(self, filepath: str):
+        """Exporta métricas para arquivo JSON"""
+        try:
+            metrics_data = {
+                'export_timestamp': datetime.now().isoformat(),
+                'system_config': self.config.get_all(),
+                'performance_metrics': self.get_metrics(),
+                'detailed_data': self.get_performance_data(60)  # Última hora
+            }
+            
+            with open(filepath, 'w') as f:
+                json.dump(metrics_data, f, indent=2, default=str)
+            
+            logger.info(f"Métricas exportadas para {filepath}")
+            
+        except Exception as e:
+            logger.error(f"Erro ao exportar métricas: {e}")
+    
+    # Métodos para registrar callbacks
+    def add_result_callback(self, callback: Callable):
+        """Adiciona callback para resultados"""
+        self.result_callbacks.append(callback)
+    
+    def add_anomaly_callback(self, callback: Callable):
+        """Adiciona callback para anomalias"""
+        self.anomaly_callbacks.append(callback)
