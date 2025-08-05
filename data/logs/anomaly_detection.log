@@ -11123,3 +11123,28 @@
 2025-08-03 21:55:11 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
 2025-08-03 21:55:11 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
 2025-08-03 21:55:11 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-04 20:45:18 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-04 20:45:19 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-04 20:45:19 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-04 20:45:19 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-04 20:45:19 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-04 20:45:19 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-04 21:54:18 | AnomalyDetection | INFO     | info:90 | SISTEMA INICIADO | {'platform': 'Windows', 'python_version': '3.10.0rc2', 'cpu_count': 8, 'memory_gb': '15.7', 'timestamp': '2025-08-04T21:54:18.438623'}
+2025-08-04 21:54:18 | AnomalyDetection | INFO     | info:90 | Sistema de Detecção de Anomalias inicializado
+2025-08-04 21:54:18 | AnomalyDetection | ERROR    | error:101 | Erro ao inicializar componentes: 'Config' object has no attribute 'get'
+2025-08-04 22:15:14 | AnomalyDetection | INFO     | info:90 | InputManager inicializado
+2025-08-04 22:15:14 | AnomalyDetection | ERROR    | error:101 | Erro na função main: Logger.__init__() takes 1 positional argument but 2 were given
+2025-08-04 22:15:14 | AnomalyDetection | INFO     | info:90 | Iniciando limpeza do InputManager
+2025-08-04 22:15:14 | AnomalyDetection | INFO     | info:90 | InputManager limpo
+2025-08-04 22:18:40 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-04 22:18:40 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-04 22:18:40 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-04 22:18:40 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-04 22:18:40 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-04 22:18:40 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-04 22:20:34 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-04 22:20:35 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-04 22:20:35 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-04 22:20:35 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-04 22:20:35 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-04 22:20:35 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
