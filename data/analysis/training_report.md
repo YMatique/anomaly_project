@@ -1,6 +1,6 @@
 # Relatório de Treinamento - Sistema de Detecção de Anomalias
 
-**Data:** 2025-08-06 06:26:01
+**Data:** 2025-08-06 06:49:00
 
 ## Resumo Executivo
 
@@ -10,25 +10,25 @@ Este relatório apresenta os resultados do treinamento dos modelos de deep learn
 
 ### CAE
 
-- **Épocas treinadas:** 20
-- **Loss final:** 0.036200
-- **Melhor loss:** 0.036200
+- **Épocas treinadas:** 35
+- **Loss final:** 0.506865
+- **Melhor loss:** 0.506865
 - **Convergência:** Sim
 
-- **Loss de validação final:** 0.038600
-- **Melhor loss de validação:** 0.038600
+- **Loss de validação final:** 0.472681
+- **Melhor loss de validação:** 0.471681
 - **Overfitting detectado:** Não
 
 ### ConvLSTM
 
-- **Épocas treinadas:** 20
-- **Loss final:** 0.037900
-- **Melhor loss:** 0.037900
+- **Épocas treinadas:** 24
+- **Loss final:** 0.481329
+- **Melhor loss:** 0.481329
 - **Convergência:** Sim
 
-- **Loss de validação final:** 0.036700
-- **Melhor loss de validação:** 0.036700
-- **Overfitting detectado:** Não
+- **Loss de validação final:** 0.894011
+- **Melhor loss de validação:** 0.712219
+- **Overfitting detectado:** Sim
 
 ## Análise de Convergência
 

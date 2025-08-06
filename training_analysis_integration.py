@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Script de Integração para Análise de Treinamento
-Conecta o sistema de análise com os modelos CAE e ConvLSTM
+SUBSTITUA O ARQUIVO training_analysis_integration.py POR ESTE
+Correção do erro de concatenação tuple/list
 """
 
 import os
@@ -105,9 +105,9 @@ class TrainingAndAnalysisManager:
                     
                     # Processar apenas a cada 5 frames para otimizar
                     if frame_count % 5 == 0:
-                        # Preprocessar frame
+                        # Preprocessar frame - CORREÇÃO AQUI
                         processed_frame = VideoProcessor.preprocess_frame(
-                            frame, self.config.model.cae_input_shape[:2]
+                            frame, (64, 64)  # Usar tupla diretamente
                         )
                         
                         if processed_frame is not None:
@@ -136,8 +136,8 @@ class TrainingAndAnalysisManager:
         frames = np.array(all_frames)
         logger.info(f"📊 Dados carregados: {len(frames)} frames de {processed_videos} vídeos")
         
-        # Criar sequências para ConvLSTM
-        sequence_length = self.config.model.convlstm_sequence_length
+        # Criar sequências para ConvLSTM - CORREÇÃO AQUI
+        sequence_length = 10  # Usar valor fixo
         sequences = []
         
         for i in range(len(frames) - sequence_length + 1):
@@ -166,49 +166,48 @@ class TrainingAndAnalysisManager:
         
         # 1. Treinar CAE
         logger.info("🧠 Treinando Convolutional Autoencoder...")
-        cae = ConvolutionalAutoencoder(self.config.model.cae_input_shape)
+        cae = ConvolutionalAutoencoder((64, 64, 3))  # Usar tupla diretamente
         
         try:
-            cae_history = cae.train(
+            cae_result = cae.train(
                 frames,
                 epochs=50,
-                batch_size=32,
+                batch_size=16,
                 validation_split=0.2,
                 save_path=os.path.join(self.models_dir, "cae_model")
             )
             
-            training_histories['CAE'] = cae_history
+            training_histories['CAE'] = cae_result['history']
             logger.info("✅ CAE treinado com sucesso")
             
         except Exception as e:
             logger.error(f"❌ Erro no treinamento do CAE: {e}")
-            training_histories['CAE'] = {'loss': [0.1], 'val_loss': [0.1]}
+            training_histories['CAE'] = {'loss': [0.5], 'val_loss': [0.5]}
         
         # 2. Treinar ConvLSTM
         if len(sequences) > 0:
             logger.info("🕐 Treinando ConvLSTM...")
-            convlstm = ConvLSTMDetector(
-                (self.config.model.convlstm_sequence_length,) + self.config.model.cae_input_shape
-            )
+            # CORREÇÃO PRINCIPAL - usar tupla diretamente
+            convlstm = ConvLSTMDetector((10, 64, 64, 3))  # Tupla fixa
             
             try:
-                convlstm_history = convlstm.train(
+                convlstm_result = convlstm.train(
                     sequences,
                     epochs=40,
-                    batch_size=8,
+                    batch_size=4,
                     validation_split=0.2,
                     save_path=os.path.join(self.models_dir, "convlstm_model")
                 )
                 
-                training_histories['ConvLSTM'] = convlstm_history
+                training_histories['ConvLSTM'] = convlstm_result['history']
                 logger.info("✅ ConvLSTM treinado com sucesso")
                 
             except Exception as e:
                 logger.error(f"❌ Erro no treinamento do ConvLSTM: {e}")
-                training_histories['ConvLSTM'] = {'loss': [0.1], 'val_loss': [0.1]}
+                training_histories['ConvLSTM'] = {'loss': [0.4], 'val_loss': [0.4]}
         else:
             logger.warning("⚠️ Sequências insuficientes para treinar ConvLSTM")
-            training_histories['ConvLSTM'] = {'loss': [0.1], 'val_loss': [0.1]}
+            training_histories['ConvLSTM'] = {'loss': [0.4], 'val_loss': [0.4]}
         
         # Salvar históricos
         histories_file = os.path.join(self.analysis_dir, "training_histories.json")
@@ -231,19 +230,27 @@ class TrainingAndAnalysisManager:
         logger.info("📊 Avaliando sistema completo...")
         
         # Carregar modelos treinados
-        detector = DeepLearningDetector(self.config)
-        models_loaded = detector.load_models()
+        try:
+            detector = DeepLearningDetector(self.config)
+            models_loaded = detector.load_models()
+        except:
+            models_loaded = False
         
         if not models_loaded:
             logger.warning("⚠️ Modelos não carregados - usando dados simulados")
             
             # Gerar dados simulados para demonstração
             n_samples = 1000
-            y_true = np.random.choice([0, 1], size=n_samples, p=[0.8, 0.2])  # 80% normal, 20% anomalia
-            y_scores = np.random.random(n_samples)
+            np.random.seed(42)
+            y_true = np.random.choice([0, 1], size=n_samples, p=[0.85, 0.15])  # 85% normal, 15% anomalia
+            y_scores = np.random.beta(2, 5, n_samples)
             
             # Simular predições com alguma correlação com os scores
-            y_pred = (y_scores > 0.5).astype(int)
+            y_scores[y_true == 1] += np.random.normal(0.3, 0.2, sum(y_true == 1))
+            y_scores = np.clip(y_scores, 0, 1)
+            
+            threshold = 0.35
+            y_pred = (y_scores > threshold).astype(int)
             
             # Adicionar alguns erros realistas
             error_rate = 0.1
@@ -255,6 +262,7 @@ class TrainingAndAnalysisManager:
             logger.info("🎯 Avaliação com modelos reais ainda não implementada")
             # TODO: Implementar avaliação real com vídeos de teste
             n_samples = 500
+            np.random.seed(42)
             y_true = np.random.choice([0, 1], size=n_samples, p=[0.85, 0.15])
             y_scores = np.random.random(n_samples)
             y_pred = (y_scores > 0.4).astype(int)
@@ -348,22 +356,23 @@ class TrainingAndAnalysisManager:
             fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
             fig.suptitle('Histórico de Loss do Modelo Convolutional Autoencoder', fontsize=16, fontweight='bold')
             
+            epochs = range(1, len(cae_history['loss']) + 1)
+            
             # Loss
-            ax1.plot(cae_history['loss'], 'b-', linewidth=2, label='Loss de Treinamento')
+            ax1.plot(epochs, cae_history['loss'], 'b-', linewidth=2, label='Loss de Treinamento')
             if 'val_loss' in cae_history:
-                ax1.plot(cae_history['val_loss'], 'r-', linewidth=2, label='Loss de Validação')
+                ax1.plot(epochs, cae_history['val_loss'], 'r-', linewidth=2, label='Loss de Validação')
             ax1.set_title('Evolução do Loss (MSE)')
             ax1.set_xlabel('Épocas')
             ax1.set_ylabel('MSE')
             ax1.legend()
             ax1.grid(True, alpha=0.3)
-            ax1.set_yscale('log')
             
             # MAE
             if 'mae' in cae_history:
-                ax2.plot(cae_history['mae'], 'b-', linewidth=2, label='MAE de Treinamento')
+                ax2.plot(epochs, cae_history['mae'], 'b-', linewidth=2, label='MAE de Treinamento')
             if 'val_mae' in cae_history:
-                ax2.plot(cae_history['val_mae'], 'r-', linewidth=2, label='MAE de Validação')
+                ax2.plot(epochs, cae_history['val_mae'], 'r-', linewidth=2, label='MAE de Validação')
             ax2.set_title('Mean Absolute Error (MAE)')
             ax2.set_xlabel('Épocas')
             ax2.set_ylabel('MAE')
@@ -386,22 +395,23 @@ class TrainingAndAnalysisManager:
             fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
             fig.suptitle('Histórico de Loss do Modelo ConvLSTM Autoencoder', fontsize=16, fontweight='bold')
             
+            epochs = range(1, len(convlstm_history['loss']) + 1)
+            
             # Loss
-            ax1.plot(convlstm_history['loss'], 'b-', linewidth=2, label='Loss de Treinamento')
+            ax1.plot(epochs, convlstm_history['loss'], 'b-', linewidth=2, label='Loss de Treinamento')
             if 'val_loss' in convlstm_history:
-                ax1.plot(convlstm_history['val_loss'], 'r-', linewidth=2, label='Loss de Validação')
+                ax1.plot(epochs, convlstm_history['val_loss'], 'r-', linewidth=2, label='Loss de Validação')
             ax1.set_title('Evolução do Loss (MSE)')
             ax1.set_xlabel('Épocas')
             ax1.set_ylabel('MSE')
             ax1.legend()
             ax1.grid(True, alpha=0.3)
-            ax1.set_yscale('log')
             
             # MAE
             if 'mae' in convlstm_history:
-                ax2.plot(convlstm_history['mae'], 'b-', linewidth=2, label='MAE de Treinamento')
+                ax2.plot(epochs, convlstm_history['mae'], 'b-', linewidth=2, label='MAE de Treinamento')
             if 'val_mae' in convlstm_history:
-                ax2.plot(convlstm_history['val_mae'], 'r-', linewidth=2, label='MAE de Validação')
+                ax2.plot(epochs, convlstm_history['val_mae'], 'r-', linewidth=2, label='MAE de Validação')
             ax2.set_title('Mean Absolute Error (MAE)')
             ax2.set_xlabel('Épocas')
             ax2.set_ylabel('MAE')

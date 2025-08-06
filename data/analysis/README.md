@@ -1,6 +1,6 @@
 # 📊 Relatório de Análise - Sistema de Detecção de Anomalias
 
-**Data de Geração:** 2025-08-06 06:26:02
+**Data de Geração:** 2025-08-06 06:49:01
 
 ## 📁 Arquivos Gerados
 
@@ -12,8 +12,8 @@ Este diretório contém 8 arquivos de análise gerados automaticamente:
 - `training_report.md` - Histórico de treinamento
 
 ### 📊 Métricas de Avaliação
-- `confusion_matrix_1754454361.png` - Análise de performance
-- `roc_curve_1754454361.png` - Análise de performance
+- `confusion_matrix_1754455740.png` - Análise de performance
+- `roc_curve_1754455741.png` - Análise de performance
 - `classification_report_sistema_híbrido_(cae_+_convlstm_+_optical_flow).txt` - Análise de performance
 
 ## 🚀 Como Usar

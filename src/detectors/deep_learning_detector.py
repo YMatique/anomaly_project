@@ -1,27 +1,27 @@
 #!/usr/bin/env python3
 """
-CORREÇÃO DO DEEP LEARNING DETECTOR
-Adicionando método detect_sequence que estava faltando
+SUBSTITUA SEU ARQUIVO src/detectors/deep_learning_detector.py POR ESTE
+Detector de Deep Learning com métodos de treinamento implementados
 """
 
 import numpy as np
-import time
-import pickle
-from typing import Dict, List, Tuple, Optional
-from collections import deque
-from queue import Queue
-import threading
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
+import cv2
+import os
+import pickle
+from typing import Dict, List, Tuple, Optional, Union
+from collections import deque
+import time
+import threading
+from queue import Queue
 
 import sys
-import os
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
+from utils.helpers import time_function, VideoProcessor, normalize_batch_fixed
 from utils.logger import logger
-from utils.helpers import VideoProcessor, time_function, normalize_batch_fixed
-
 
 class ConvolutionalAutoencoder:
     """
@@ -37,7 +37,7 @@ class ConvolutionalAutoencoder:
         self.normalization_params = None
         
         # Configurações
-        self.batch_size = 32
+        self.batch_size = 16
         self.learning_rate = 0.001
         
         self._build_model()
@@ -77,6 +77,79 @@ class ConvolutionalAutoencoder:
         
         logger.info("Arquitetura CAE construída")
     
+    def train(self, training_data: np.ndarray, validation_split: float = 0.2,
+              epochs: int = 50, batch_size: int = None, save_path: str = None) -> Dict:
+        """
+        Treina o autoencoder com dados normais
+        
+        Args:
+            training_data: Array de frames normais [N, H, W, C]
+            validation_split: Proporção para validação
+            epochs: Número de épocas
+            batch_size: Tamanho do batch (usa padrão se None)
+            save_path: Caminho para salvar modelo
+            
+        Returns:
+            Dict com histórico de treinamento
+        """
+        logger.info(f"Iniciando treinamento CAE - {len(training_data)} samples, {epochs} epochs")
+        
+        if batch_size is not None:
+            self.batch_size = batch_size
+        
+        # Normalizar dados
+        normalized_data, self.normalization_params = normalize_batch_fixed(training_data)
+        
+        # Callbacks
+        callbacks = [
+            keras.callbacks.EarlyStopping(patience=10, restore_best_weights=True),
+            keras.callbacks.ReduceLROnPlateau(factor=0.5, patience=5)
+        ]
+        
+        if save_path:
+            callbacks.append(
+                keras.callbacks.ModelCheckpoint(
+                    f"{save_path}_cae.h5", save_best_only=True, monitor='val_loss'
+                )
+            )
+        
+        # Treinamento
+        history = self.model.fit(
+            normalized_data, normalized_data,  # Autoencoder: input = output
+            epochs=epochs,
+            batch_size=self.batch_size,
+            validation_split=validation_split,
+            callbacks=callbacks,
+            verbose=1
+        )
+        
+        # Calcular threshold baseado nos erros de reconstrução
+        self._calculate_threshold(normalized_data)
+        
+        # Salvar modelo e parâmetros
+        if save_path:
+            self.save_model(save_path)
+        
+        logger.info(f"Treinamento CAE concluído - threshold: {self.threshold:.6f}")
+        
+        return {
+            "history": history.history,
+            "threshold": self.threshold,
+            "final_loss": history.history['loss'][-1],
+            "best_val_loss": min(history.history['val_loss']) if 'val_loss' in history.history else None
+        }
+    
+    def _calculate_threshold(self, normalized_data: np.ndarray):
+        """Calcula threshold baseado nos erros de reconstrução do training set"""
+        predictions = self.model.predict(normalized_data, batch_size=self.batch_size, verbose=0)
+        reconstruction_errors = np.mean((normalized_data - predictions) ** 2, axis=(1, 2, 3))
+        
+        mean_error = np.mean(reconstruction_errors)
+        std_error = np.std(reconstruction_errors)
+        self.threshold = mean_error + 2 * std_error
+        
+        logger.info(f"Threshold calculado: {self.threshold:.6f} (mean: {mean_error:.6f}, std: {std_error:.6f})")
+    
     def predict(self, frame: np.ndarray) -> Dict:
         """
         Prediz se frame é anômalo baseado no erro de reconstrução
@@ -113,6 +186,51 @@ class ConvolutionalAutoencoder:
             "confidence": float(confidence),
             "reconstructed_frame": reconstruction[0]
         }
+    
+    def save_model(self, path: str):
+        """Salva modelo e parâmetros"""
+        if self.model is not None:
+            self.model.save(f"{path}_cae.h5")
+            
+            # Salvar parâmetros adicionais
+            params = {
+                "threshold": self.threshold,
+                "normalization_params": self.normalization_params,
+                "input_shape": self.input_shape
+            }
+            
+            with open(f"{path}_cae_params.pkl", "wb") as f:
+                pickle.dump(params, f)
+            
+            logger.info(f"Modelo CAE salvo: {path}")
+    
+    def load_model(self, path: str):
+        """Carrega modelo e parâmetros"""
+        try:
+            self.model = keras.models.load_model(f"{path}_cae.h5")
+            
+            with open(f"{path}_cae_params.pkl", "rb") as f:
+                params = pickle.load(f)
+            
+            self.threshold = params["threshold"]
+            self.normalization_params = params["normalization_params"]
+            self.input_shape = params["input_shape"]
+            
+            # Recriar encoder
+            encoder_layer = None
+            for i, layer in enumerate(self.model.layers):
+                if 'max_pooling2d' in layer.name and i > 4:  # Último pooling do encoder
+                    encoder_layer = layer.output
+                    break
+            
+            if encoder_layer is not None:
+                self.encoder = keras.Model(self.model.input, encoder_layer)
+            
+            logger.info(f"Modelo CAE carregado: {path}")
+            return True
+        except Exception as e:
+            logger.error(f"Erro ao carregar modelo CAE: {e}")
+            return False
 
 
 class ConvLSTMDetector:
@@ -183,6 +301,82 @@ class ConvLSTMDetector:
         
         logger.info("Arquitetura ConvLSTM construída")
     
+    def train(self, sequences: np.ndarray, validation_split: float = 0.2,
+              epochs: int = 40, batch_size: int = None, save_path: str = None) -> Dict:
+        """
+        Treina ConvLSTM com sequências normais
+        
+        Args:
+            sequences: Array de sequências [N, T, H, W, C]
+            validation_split: Proporção para validação
+            epochs: Número de épocas
+            batch_size: Tamanho do batch
+            save_path: Caminho para salvar
+            
+        Returns:
+            Dict com histórico de treinamento
+        """
+        logger.info(f"Iniciando treinamento ConvLSTM - {len(sequences)} sequências, {epochs} epochs")
+        
+        if batch_size is not None:
+            self.batch_size = batch_size
+        
+        # Normalizar sequências
+        normalized_sequences, self.normalization_params = normalize_batch_fixed(sequences)
+        
+        # Target = último frame de cada sequência
+        targets = normalized_sequences[:, -1, :, :, :]
+        
+        # Callbacks
+        callbacks = [
+            keras.callbacks.EarlyStopping(patience=10, restore_best_weights=True),
+            keras.callbacks.ReduceLROnPlateau(factor=0.5, patience=5)
+        ]
+        
+        if save_path:
+            callbacks.append(
+                keras.callbacks.ModelCheckpoint(
+                    f"{save_path}_convlstm.h5", save_best_only=True, monitor='val_loss'
+                )
+            )
+        
+        # Treinamento
+        history = self.model.fit(
+            normalized_sequences, targets,
+            epochs=epochs,
+            batch_size=self.batch_size,
+            validation_split=validation_split,
+            callbacks=callbacks,
+            verbose=1
+        )
+        
+        # Calcular threshold
+        self._calculate_threshold(normalized_sequences, targets)
+        
+        # Salvar modelo
+        if save_path:
+            self.save_model(save_path)
+        
+        logger.info(f"Treinamento ConvLSTM concluído - threshold: {self.threshold:.6f}")
+        
+        return {
+            "history": history.history,
+            "threshold": self.threshold,
+            "final_loss": history.history['loss'][-1],
+            "best_val_loss": min(history.history['val_loss']) if 'val_loss' in history.history else None
+        }
+    
+    def _calculate_threshold(self, sequences: np.ndarray, targets: np.ndarray):
+        """Calcula threshold baseado nos erros de reconstrução"""
+        predictions = self.model.predict(sequences, batch_size=self.batch_size, verbose=0)
+        reconstruction_errors = np.mean((targets - predictions) ** 2, axis=(1, 2, 3))
+        
+        mean_error = np.mean(reconstruction_errors)
+        std_error = np.std(reconstruction_errors)
+        self.threshold = mean_error + 2 * std_error
+        
+        logger.info(f"ConvLSTM threshold calculado: {self.threshold:.6f}")
+    
     def add_frame(self, frame: np.ndarray):
         """Adiciona frame ao buffer de sequência"""
         processed_frame = VideoProcessor.preprocess_frame(frame, self.input_shape[1:3])
@@ -224,42 +418,47 @@ class ConvLSTMDetector:
         is_anomaly = reconstruction_error > self.threshold
         confidence = min(reconstruction_error / self.threshold, 3.0) if self.threshold > 0 else 0.0
         
-        # Análise temporal adicional
-        temporal_analysis = self._analyze_temporal_sequence(sequence)
-        
         return {
             "reconstruction_error": float(reconstruction_error),
             "threshold": float(self.threshold),
             "is_anomaly": bool(is_anomaly),
             "confidence": float(confidence),
-            "temporal_analysis": temporal_analysis,
             "reconstructed_frame": reconstruction[0]
         }
     
-    def _analyze_temporal_sequence(self, sequence: np.ndarray) -> Dict:
-        """Analisa padrões temporais na sequência"""
-        
-        # Calcular diferenças entre frames consecutivos
-        frame_diffs = []
-        for i in range(1, len(sequence)):
-            diff = np.mean((sequence[i] - sequence[i-1]) ** 2)
-            frame_diffs.append(diff)
-        
-        temporal_info = {
-            "avg_frame_diff": float(np.mean(frame_diffs)) if frame_diffs else 0.0,
-            "max_frame_diff": float(np.max(frame_diffs)) if frame_diffs else 0.0,
-            "temporal_consistency": float(1.0 / (1.0 + np.std(frame_diffs))) if frame_diffs else 1.0,
-            "trend": "stable"
-        }
-        
-        # Detectar tendência
-        if len(frame_diffs) > 3:
-            if np.mean(frame_diffs[-3:]) > np.mean(frame_diffs[:3]) * 1.5:
-                temporal_info["trend"] = "increasing_change"
-            elif np.mean(frame_diffs[-3:]) < np.mean(frame_diffs[:3]) * 0.5:
-                temporal_info["trend"] = "decreasing_change"
-        
-        return temporal_info
+    def save_model(self, path: str):
+        """Salva modelo ConvLSTM"""
+        if self.model is not None:
+            self.model.save(f"{path}_convlstm.h5")
+            
+            params = {
+                "threshold": self.threshold,
+                "normalization_params": self.normalization_params,
+                "input_shape": self.input_shape
+            }
+            
+            with open(f"{path}_convlstm_params.pkl", "wb") as f:
+                pickle.dump(params, f)
+            
+            logger.info(f"Modelo ConvLSTM salvo: {path}")
+    
+    def load_model(self, path: str):
+        """Carrega modelo ConvLSTM"""
+        try:
+            self.model = keras.models.load_model(f"{path}_convlstm.h5")
+            
+            with open(f"{path}_convlstm_params.pkl", "rb") as f:
+                params = pickle.load(f)
+            
+            self.threshold = params["threshold"]
+            self.normalization_params = params["normalization_params"]
+            self.input_shape = params["input_shape"]
+            
+            logger.info(f"Modelo ConvLSTM carregado: {path}")
+            return True
+        except Exception as e:
+            logger.error(f"Erro ao carregar modelo ConvLSTM: {e}")
+            return False
 
 
 class DeepLearningDetector:
@@ -272,11 +471,8 @@ class DeepLearningDetector:
         self.config = config
         
         # Inicializar detectores
-        cae_shape = config.model.cae_input_shape
-        convlstm_shape = (
-            config.model.convlstm_sequence_length,
-            cae_shape[0], cae_shape[1], cae_shape[2]
-        )
+        cae_shape = tuple(config.model.cae_input_shape)
+        convlstm_shape = tuple([config.model.convlstm_sequence_length] + list(cae_shape))
         
         self.cae = ConvolutionalAutoencoder(cae_shape)
         self.convlstm = ConvLSTMDetector(convlstm_shape)
@@ -290,24 +486,12 @@ class DeepLearningDetector:
         self.training_mode = False
         self.training_data = []
         
-        # Threading para processamento assíncrono
-        self.processing_queue = Queue(maxsize=10)
-        self.result_queue = Queue()
-        self.processing_thread = None
-        self.processing_active = False
-        
         logger.info("DeepLearningDetector inicializado")
     
     @time_function
     def detect(self, frame: np.ndarray) -> Dict:
         """
         Detecta anomalias usando CAE e ConvLSTM em cascata
-        
-        Args:
-            frame: Frame a ser analisado
-            
-        Returns:
-            Dict com resultados da detecção
         """
         if frame is None:
             return {"error": "Frame inválido"}
@@ -358,17 +542,9 @@ class DeepLearningDetector:
         
         return results
     
-    # *** MÉTODO QUE ESTAVA FALTANDO! ***
     def detect_sequence(self, frames: List[np.ndarray]) -> Dict:
         """
         Detecta anomalias em uma sequência de frames
-        ESTE É O MÉTODO QUE ESTAVA FALTANDO!
-        
-        Args:
-            frames: Lista de frames para analisar
-            
-        Returns:
-            Dict com resultado da análise da sequência
         """
         if not frames or len(frames) == 0:
             return {"error": "Sequência vazia"}
@@ -379,7 +555,6 @@ class DeepLearningDetector:
             "timestamp": time.time(),
             "sequence_length": len(frames),
             "frame_results": [],
-            "sequence_analysis": {},
             "final_decision": {
                 "is_anomaly": False,
                 "confidence": 0.0,
@@ -406,18 +581,10 @@ class DeepLearningDetector:
                 total_confidence += frame_result.get("final_decision", {}).get("confidence", 0)
                 anomaly_frames.append(i)
         
-        # Análise da sequência como um todo
+        # Decisão final da sequência
         anomaly_ratio = anomaly_count / len(frames) if len(frames) > 0 else 0
         avg_confidence = total_confidence / anomaly_count if anomaly_count > 0 else 0
         
-        results["sequence_analysis"] = {
-            "total_frames": len(frames),
-            "anomaly_frames": anomaly_count,
-            "anomaly_ratio": anomaly_ratio,
-            "avg_confidence": avg_confidence
-        }
-        
-        # Decisão final da sequência
         # Considera sequência anômala se mais de 30% dos frames são anômalos
         sequence_is_anomaly = anomaly_ratio > 0.3
         
@@ -437,64 +604,13 @@ class DeepLearningDetector:
         
         cae_confidence = cae_result.get("confidence", 0)
         convlstm_confidence = convlstm_result.get("confidence", 0)
-        temporal_analysis = convlstm_result.get("temporal_analysis", {})
         
-        # Classificação baseada em padrões
-        if temporal_analysis.get("trend") == "increasing_change":
-            return "movement_escalation"
-        elif temporal_analysis.get("trend") == "decreasing_change":
-            return "sudden_stop"
-        elif cae_confidence > convlstm_confidence * 1.5:
+        if cae_confidence > convlstm_confidence * 1.5:
             return "spatial_anomaly"
         elif convlstm_confidence > cae_confidence * 1.5:
             return "temporal_anomaly"
         else:
             return "spatiotemporal_anomaly"
-    
-    def start_training_mode(self):
-        """Inicia modo de treinamento"""
-        self.training_mode = True
-        self.training_data = []
-        logger.info("Modo de treinamento ativado")
-    
-    def stop_training_mode(self):
-        """Para modo de treinamento e treina modelos"""
-        self.training_mode = False
-        logger.info(f"Modo de treinamento desativado - {len(self.training_data)} amostras coletadas")
-        
-        if len(self.training_data) > 100:  # Mínimo de amostras
-            self._train_models()
-        else:
-            logger.warning("Poucos dados para treinamento - colete mais amostras")
-    
-    def _train_models(self):
-        """Treina ambos os modelos com os dados coletados"""
-        logger.info("Iniciando treinamento dos modelos...")
-        
-        # Converter dados para arrays numpy
-        frames = np.array(self.training_data)
-        
-        # Treinar CAE
-        logger.info("Treinando CAE...")
-        cae_result = self.cae.train(frames, epochs=20)
-        
-        # Criar sequências para ConvLSTM
-        sequences = []
-        seq_length = self.convlstm.input_shape[0]
-        
-        for i in range(len(frames) - seq_length + 1):
-            sequences.append(frames[i:i + seq_length])
-        
-        if len(sequences) > 10:
-            sequences = np.array(sequences)
-            logger.info("Treinando ConvLSTM...")
-            convlstm_result = self.convlstm.train(sequences, epochs=15)
-        
-        # Salvar modelos
-        self.save_models()
-        self.is_trained = True
-        
-        logger.info("Treinamento concluído e modelos salvos")
     
     def save_models(self):
         """Salva ambos os modelos"""
