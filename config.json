@@ -1,48 +1,30 @@
 {
-    "video": {
-        "realtime_resolution": [
-            640,
-            480
-        ],
-        "training_resolution": [
-            1280,
-            720
-        ],
-        "fps": 30,
-        "buffer_size": 5,
-        "frame_skip": 2
-    },
-    "model": {
-        "cae_input_shape": [
-            64,
-            64,
-            3
-        ],
-        "cae_latent_dim": 128,
-        "cae_batch_size": 16,
-        "convlstm_sequence_length": 10,
-        "convlstm_filters": 64,
-        "convlstm_kernel_size": [
-            3,
-            3
-        ],
-        "optical_flow_method": "farneback",
-        "flow_threshold": 2.0,
-        "anomaly_threshold": 0.7,
-        "movement_threshold": 11
-    },
-    "system": {
-        "max_threads": 4,
-        "queue_size": 10,
-        "log_level": "INFO",
-        "log_file": "data/logs/anomaly_detection.log",
-        "alert_cooldown": 5,
-        "save_alert_frames": true,
-        "models_path": "models/",
-        "data_path": "data/",
-        "videos_path": "data/videos/",
-        "web_host": "127.0.0.1",
-        "web_port": 5000,
-        "web_debug": true
-    }
+  "system": {
+    "debug": true,
+    "models_path": "models",
+    "max_threads": 4
+  },
+  "input": {
+    "webcam_index": 0,
+    "resolution": [640, 480],
+    "fps_target": 15
+  },
+  "model": {
+    "cae_input_shape": [64, 64, 3],
+    "convlstm_sequence_length": 10,
+    "anomaly_threshold": 0.1,
+    "optical_flow_threshold": 50,
+    "convlstm_threshold": 0.1,
+    "cae_threshold": 0.5
+  },
+  "processing": {
+    "optical_flow_method": "farneback",
+    "frame_skip": 2,
+    "roi_enabled": true
+  },
+  "alerts": {
+    "cooldown_seconds": 5,
+    "save_frames": true,
+    "email_enabled": false
+  }
 }
