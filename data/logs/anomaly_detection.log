@@ -11148,3 +11148,33 @@
 2025-08-04 22:20:35 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
 2025-08-04 22:20:35 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
 2025-08-04 22:20:35 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-05 21:42:07 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-05 21:42:08 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-05 21:42:08 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-05 21:42:09 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-05 21:42:09 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-05 21:42:09 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-05 21:49:44 | AnomalyDetection | INFO     | info:90 | OpticalFlowDetector inicializado - método: farneback
+2025-08-05 21:49:44 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-05 21:49:44 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-05 21:49:45 | AnomalyDetection | INFO     | info:90 | Arquitetura ConvLSTM construída
+2025-08-05 21:49:45 | AnomalyDetection | INFO     | info:90 | ConvLSTM inicializado - input shape: (10, 64, 64, 3)
+2025-08-05 21:49:45 | AnomalyDetection | INFO     | info:90 | DeepLearningDetector inicializado
+2025-08-06 06:25:55 | AnomalyDetection | INFO     | info:90 | TrainingAndAnalysisManager inicializado
+2025-08-06 06:25:55 | AnomalyDetection | INFO     | info:90 | 🎯 Iniciando análise completa do sistema...
+2025-08-06 06:25:55 | AnomalyDetection | INFO     | info:90 | 🎬 Carregando dados de treinamento de até 30 vídeos...
+2025-08-06 06:25:55 | AnomalyDetection | INFO     | info:90 | 📁 Encontrados 6 vídeos
+2025-08-06 06:25:56 | AnomalyDetection | INFO     | info:90 | ✅ Vídeo processado: h-1.mp4 - 77 frames
+2025-08-06 06:25:56 | AnomalyDetection | INFO     | info:90 | ✅ Vídeo processado: h-2.mp4 - 107 frames
+2025-08-06 06:25:57 | AnomalyDetection | INFO     | info:90 | ✅ Vídeo processado: h-3.mp4 - 51 frames
+2025-08-06 06:25:57 | AnomalyDetection | INFO     | info:90 | ✅ Vídeo processado: h-4.mp4 - 64 frames
+2025-08-06 06:25:58 | AnomalyDetection | INFO     | info:90 | ✅ Vídeo processado: h-5.mp4 - 81 frames
+2025-08-06 06:25:58 | AnomalyDetection | INFO     | info:90 | ✅ Vídeo processado: h-6.mp4 - 113 frames
+2025-08-06 06:25:58 | AnomalyDetection | INFO     | info:90 | 📊 Dados carregados: 493 frames de 6 vídeos
+2025-08-06 06:25:58 | AnomalyDetection | INFO     | info:90 | 📊 Sequências criadas: 10 sequências de 10 frames
+2025-08-06 06:25:58 | AnomalyDetection | INFO     | info:90 | 🚀 Iniciando treinamento dos modelos...
+2025-08-06 06:25:58 | AnomalyDetection | INFO     | info:90 | 🧠 Treinando Convolutional Autoencoder...
+2025-08-06 06:25:59 | AnomalyDetection | INFO     | info:90 | Arquitetura CAE construída
+2025-08-06 06:25:59 | AnomalyDetection | INFO     | info:90 | CAE inicializado - input shape: [64, 64, 3]
+2025-08-06 06:25:59 | AnomalyDetection | ERROR    | error:101 | ❌ Erro no treinamento do CAE: 'ConvolutionalAutoencoder' object has no attribute 'train'
+2025-08-06 06:25:59 | AnomalyDetection | INFO     | info:90 | 🕐 Treinando ConvLSTM...

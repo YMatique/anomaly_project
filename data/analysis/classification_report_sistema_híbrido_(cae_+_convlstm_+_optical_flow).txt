@@ -1,0 +1,29 @@
+
+=== RELATÓRIO DE CLASSIFICAÇÃO ===
+Data: 2025-08-06 06:26:02
+Modelo: Sistema Híbrido (CAE + ConvLSTM + Optical Flow)
+
+=== MÉTRICAS PRINCIPAIS ===
+Acurácia:               0.702
+Precisão:               0.321
+Recall (Sensibilidade): 0.850
+F1-Score:               0.466
+Especificidade:         0.675
+
+=== TAXAS DE ERRO ===
+Taxa de Falsos Positivos: 0.325
+Taxa de Falsos Negativos: 0.150
+
+=== MATRIZ DE CONFUSÃO ===
+                Predito
+Real        Normal  Anomalia
+Normal         572       275
+Anomalia        23       130
+
+=== ESTATÍSTICAS DETALHADAS ===
+Total de Amostras:        1000
+Verdadeiros Positivos:    130
+Verdadeiros Negativos:    572
+Falsos Positivos:         275
+Falsos Negativos:         23
+        

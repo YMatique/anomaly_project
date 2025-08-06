@@ -557,3 +557,56 @@ def calculate_iou(box1: Tuple[int, int, int, int],
         return 0.0
     
     return intersection / union
+def normalize_batch_fixed(data: np.ndarray, params: Dict = None) -> Tuple[np.ndarray, Dict]:
+    """
+    Função corrigida para normalizar lotes de dados
+    
+    Args:
+        data: Array de dados para normalizar
+        params: Parâmetros de normalização existentes (opcional)
+        
+    Returns:
+        Tuple (dados_normalizados, parâmetros_utilizados)
+    """
+    if params is None:
+        # Calcular novos parâmetros
+        mean = np.mean(data, axis=0, keepdims=True)
+        std = np.std(data, axis=0, keepdims=True)
+        std = np.where(std == 0, 1, std)  # Evitar divisão por zero
+        
+        params = {
+            "mean": mean,
+            "std": std
+        }
+    else:
+        mean = params["mean"]
+        std = params["std"]
+    
+    # Normalizar
+    normalized = (data - mean) / std
+    
+    return normalized, params
+
+def create_sequences_fixed(data: np.ndarray, sequence_length: int, overlap: int = 1) -> np.ndarray:
+    """
+    Cria sequências de frames para treinamento temporal
+    
+    Args:
+        data: Array de frames [num_frames, height, width, channels]
+        sequence_length: Comprimento da sequência desejada
+        overlap: Sobreposição entre sequências consecutivas
+        
+    Returns:
+        Array de sequências [num_sequences, sequence_length, height, width, channels]
+    """
+    if len(data) < sequence_length:
+        return np.array([])
+    
+    sequences = []
+    step = max(1, sequence_length - overlap)
+    
+    for i in range(0, len(data) - sequence_length + 1, step):
+        sequence = data[i:i + sequence_length]
+        sequences.append(sequence)
+    
+    return np.array(sequences)
